@@ -100,3 +100,8 @@ chatgpt-enterprise-academy/
 ```
 
 版权所有：教学内容为独立课程原型。ChatGPT、Codex等名称属于相应权利人。
+## M3 多模态与应用教学闭环（第三批待验收）
+
+从 Prompt、文件与数据、Work、Codex 四个模块进入 `labs/multimedia.html`，学习图片理解、图片生成任务设计、MES数字复核、Goal/Input/Output应用构建及综合项目。含讲师提示、五节导航、学习进度、预制异常登记原型、项目单保存与导出。主站与M3进度独立；所有演示为本地教学，不调用AI API。
+
+下载完整分支ZIP并解压，打开 `index.html` → Prompt Lab → M3教学实验室；验收说明见 `PROMPT_M3_ACCEPTANCE.md`。只下载单个HTML无法带齐样式和脚本。
