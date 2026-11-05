@@ -25,9 +25,8 @@ assert.deepEqual(errors,[]);console.log('PASS M3 navigation, metrics, prompts, v
 const home=new JSDOM(readFileSync('index.html','utf8'),{url:'https://academy.example/#prompt',runScripts:'outside-only'});
 home.window.HTMLElement.prototype.scrollIntoView=()=>{};
 for(const path of ['prompt-lab-m1.js','prompt-lab-m2.js'])home.window.eval(readFileSync(path,'utf8'));
-if(existsSync('prompt-lab-m3.js'))home.window.eval(readFileSync('prompt-lab-m3.js','utf8'));
-const bridge=home.window.document.querySelector('#page-prompt a[href="labs/multimedia.html#vision"]');
-assert.ok(bridge&&!bridge.closest('details'),'M3接续入口不能藏在折叠旧版练习中');home.window.close();
+assert.equal(home.window.document.querySelectorAll('a[href^="labs/multimedia.html"]').length,0,'主站不应再有独立M3入口卡片');home.window.close();
+// Full integrated M1/M2/M3 initialization is covered by inline-course.mjs.
 // Restore across a fresh page, malformed storage, storage denial, and exported bytes.
 for(const mode of ['restore','corrupt','denied']){
 const z=new JSDOM(readFileSync('labs/multimedia.html','utf8'),{url:'https://academy.example/labs/multimedia.html',runScripts:'outside-only'}),v=z.window;

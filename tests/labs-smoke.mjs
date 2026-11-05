@@ -19,7 +19,7 @@ const skill=read('skills/sop-change-review/SKILL.md');
 const schema=read('skills/sop-change-review/references/output-schema.md');
 const old=read('samples/SOP_演示_旧版.md');
 const newer=read('samples/SOP_演示_新版.md');
-assert.ok(skill.startsWith('---\nname: sop-change-review\n'));
+assert.ok(skill.replace(/\r\n/g,'\n').startsWith('---\nname: sop-change-review\n'));
 assert.ok(skill.includes('references/output-schema.md'));
 assert.ok(skill.includes('不自动审批'));
 assert.ok(schema.includes('证据位置')&&schema.includes('变化类型'));

@@ -45,7 +45,7 @@
 ## 上传/发布到 GitHub Pages
 
 1. 新建一个GitHub仓库（例如`chatgpt-enterprise-academy`）。
-2. 将`index.html`及`samples/`整个目录上传到仓库根目录。
+2. 上传完整站点，包括 `index.html`、`prompt-lab-*.js`、`inline-content.js`、`labs/`、`samples/`、`skills/` 和 `examples/`；不要只上传单个 HTML。
 3. `Settings → Pages → Build and deployment → Deploy from a branch`，选择`main`及`/(root)`，保存。
 4. 网站部署后检查相对路径CSV下载、手机访问和所有导航。正式发布之前完成信息安全审查。
 
@@ -127,6 +127,12 @@ chatgpt-enterprise-academy/
 版权所有：教学内容为独立课程原型。ChatGPT、Codex等名称属于相应权利人。
 ## M3 多模态与应用教学闭环（第三批待验收）
 
-从 Prompt、文件与数据、Work、Codex 四个模块进入 `labs/multimedia.html`，学习图片理解、图片生成任务设计、MES数字复核、Goal/Input/Output应用构建及综合项目。含讲师提示、五节导航、学习进度、预制异常登记原型、项目单保存与导出。主站与M3进度独立；所有演示为本地教学，不调用AI API。
+M3作为第三阶段完整嵌入 Prompt Lab，包含图片理解、图片生成任务设计、MES数字复核、Goal/Input/Output应用构建及综合项目。顶部M1/M2/M3导航可快速定位；M3保留五节导航、学习进度、预制异常登记原型、项目单保存与导出，并跟随主站讲师模式和投影字号。主章与M3进度仍独立记录；所有演示为本地教学，不调用AI API。
 
-下载完整分支ZIP并解压，打开 `index.html` → Prompt Lab → M3教学实验室；验收说明见 `PROMPT_M3_ACCEPTANCE.md`。只下载单个HTML无法带齐样式和脚本。
+下载完整分支ZIP并解压，打开 `index.html` → Prompt Lab → M3。业务场景页同页展示原表30项与IE/IT的12项教学扩展示例，顶部提供8个部门的固定快速导航。原案例及优先级不变。
+
+Prompt Lab采用两级联动：M1仅显示01–02，M2仅显示03–06，M3仅显示07–11。阶段切换会同时更新单元导航、当前内容和本阶段进度；每次只显示一个单元，不在页面底部另堆M3。阶段交互检查：`tests/browser-stage-check.js`。
+
+独立 `labs/multimedia.html` 和 `labs/roles.html` 保留用于旧链接兼容。主站不再展示独立跳转卡片。更新实验室HTML或CSS后，运行 `node scripts/build-inline-content.mjs` 同步生成离线内容包；其交互逻辑仍复用原脚本，没有复制维护第二套业务逻辑。
+
+整合回归：`node tests/inline-course.mjs`。真实浏览器检查脚本为 `tests/browser-inline-check.js`，可通过 Playwright CLI 的 `run-code` 执行，需本地预览地址 `http://127.0.0.1:8766`；截图和导出验证文件位于 `output/playwright/`。

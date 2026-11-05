@@ -247,7 +247,8 @@ function lesson(name){
  course.querySelectorAll(".ap4e-panel").forEach(p=>p.hidden=p!==target);
  course.querySelectorAll("[data-ap4e-lesson]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.ap4eLesson===name)));
  course.querySelectorAll('[role="tab"]').forEach(b=>b.tabIndex=b.dataset.ap4eLesson===name?0:-1);
- course.querySelector(".ap4e-rail").scrollIntoView({behavior:"smooth",block:"start"});
+ course.dispatchEvent(new CustomEvent('academy-lesson-change',{detail:name}));
+ course.querySelector(".course-stages, .ap4e-rail").scrollIntoView({behavior:course.querySelector('.course-stages')?'instant':'smooth',block:"start"});
 }
 function finish(i){
  finished[i]=true;

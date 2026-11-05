@@ -2,12 +2,15 @@ name: Academy V1.1 Acceptance
 on:
   push:
     branches:
+      - 'main'
       - 'feat/v1.1-*'
       - 'feat/prompt-lab-m3-*'
   pull_request:
     paths:
       - 'index.html'
       - 'prompt-lab-*.js'
+      - 'inline-content.js'
+      - 'scripts/**'
       - 'scenario_data.json'
       - 'samples/**'
       - 'tests/**'
@@ -32,6 +35,10 @@ jobs:
         run: npm install --no-save --no-package-lock --ignore-scripts jsdom@26
       - name: Browser interaction smoke tests
         run: node tests/browser-smoke.mjs
+      - name: Inline course and department integration
+        run: |
+          node scripts/build-inline-content.mjs --check
+          node tests/inline-course.mjs
       - name: Research, Codex and Skill specialized lab checks
         run: node tests/labs-smoke.mjs
       - name: M3 multimedia and teaching loop checks

@@ -8,7 +8,7 @@ import {JSDOM,VirtualConsole} from 'jsdom';
 const root=join(dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>readFileSync(join(root,p),'utf8');
 const index=read('index.html');
-for(const page of ['labs/work.html','labs/roles.html']){
+for(const page of ['labs/work.html']){
   assert.ok(index.includes('href="'+page+'"'),'主课程缺少入口 '+page);
   assert.ok(existsSync(join(root,page)),'专题页不存在 '+page);
 }

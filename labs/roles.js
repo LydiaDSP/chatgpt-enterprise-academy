@@ -1,5 +1,6 @@
 'use strict';
-const $=id=>document.getElementById(id);
+window.initRoleCases=function(root=document){
+const $=id=>root.getElementById(id);
 const CASES=[
 {id:'ie-01',dept:'IE',title:'标准工时与节拍差异核对',priority:'适合首批练习',target:'识别各工序实际节拍与目标节拍的差距，为改善排序提供依据。',inputs:'模拟工序节拍表、标准工时定义、测量条件和样本量。',chat:'请读取我上传的工序节拍表，先检查字段、测量时间及样本量，按工序比较目标节拍与实测节拍，标出超出目标的工序，列出计算公式、异常记录和待现场复测点。不要凭单次样本推断根因。',agent:'通过授权的时测数据来源自动更新，监测节拍波动、生成待核对清单，由IE确认测量口径后发布。',deliver:'节拍差异表、候选瓶颈清单、复测计划。',verify:'随机抽3道工序复算差值；确认目标节拍单位为秒/件，避免把标准工时等同实测节拍。',risk:'实测工况、设备暂停、工序合并与个人绩效敏感性均需人工确认。',steps:['上传模拟或授权时测表','核对测量条件和秒/件口径','复算差异并列出复测清单'],sample:'../samples/IE_线平衡_模拟.csv'},
 {id:'ie-02',dept:'IE',title:'产线平衡与瓶颈工序分析',priority:'适合首批练习',target:'识别可能限制产能的工序并评估简单的工位调整方案。',inputs:'工序顺序、设备/人员配置、可用工作时间、节拍与工序依赖。',chat:'根据我提供的工序时间和产线约束，计算每道工序节拍，识别候选瓶颈，给出至少2种平衡思路；说明前提、计算过程和安全约束，不直接认定方案可实施。',agent:'定期汇总工位时测与节拍，形成改善候选单，由工艺/IE/安全负责人现场评审。',deliver:'瓶颈排序、平衡方案草案、现场验证指标。',verify:'确认工序先后约束；实际节拍与理论瓶颈节拍不能混用；调整后要核查质量和安全。',risk:'不可因提高节拍而省略防护动作、检验或法定休息安排。',steps:['标记工序顺序及约束','计算瓶颈并比较候选调整','现场测试质量、安全和产量影响'],sample:'../samples/IE_线平衡_模拟.csv'},
@@ -114,17 +115,17 @@ function formatCase(c){
  return c.dept+'｜'+c.title+'\n业务目标：'+c.target+'\n阶段一：Chat人工协作\n准备资料：'+c.inputs+'\n操作步骤：\n'+p.chatSteps.map((x,i)=>(i+1)+'. '+x).join('\n')+'\nChat指令：'+c.chat+'\n交付：'+c.deliver+'\n核验：'+c.verify+'\n\n'+formatAgentPlan(c);
 }
 async function copyText(text){let ok=false;try{if(!navigator.clipboard?.writeText)throw Error('no clipboard');await navigator.clipboard.writeText(text);ok=true}catch{const area=el('textarea');area.value=text;document.body.append(area);area.select();try{ok=document.execCommand('copy')}catch{}area.remove()}$('copyStatus').textContent=ok?'已复制练习内容':'复制受浏览器限制，可从案例详情手动选取文本'}
-function updateChecks(){const boxes=[...document.querySelectorAll('[data-check]')];$('checkStatus').textContent='已确认 '+boxes.filter(x=>x.checked).length+'/'+boxes.length;try{localStorage.setItem('academy.roles.checks',JSON.stringify(boxes.map(x=>x.checked)))}catch{}}
+function updateChecks(){const boxes=[...root.querySelectorAll('[data-check]')];$('checkStatus').textContent='已确认 '+boxes.filter(x=>x.checked).length+'/'+boxes.length;try{localStorage.setItem('academy.roles.checks',JSON.stringify(boxes.map(x=>x.checked)))}catch{}}
 function init(){
  renderCases();renderSelected();
- document.addEventListener('click',e=>{
+ root.addEventListener('click',e=>{
   const tab=e.target.closest('[data-role-tab]');if(tab){const card=tab.closest('[data-role-case]');if(card)setCaseTab(card,tab.dataset.roleTab);return}
   const agentCopy=e.target.closest('[data-copy-agent]');if(agentCopy){const c=CASES.find(x=>x.id===agentCopy.dataset.copyAgent);if(c)copyText(formatAgentPlan(c));return}
   const cp=e.target.closest('[data-copy-case]');if(cp){const c=CASES.find(x=>x.id===cp.dataset.copyCase);if(c)copyText(c.chat);return}
   const add=e.target.closest('[data-add-case]');if(add){selected.add(add.dataset.addCase);renderSelected();$('copyStatus').textContent='已加入个人练习清单';return}
   const remove=e.target.closest('[data-remove-case]');if(remove){selected.delete(remove.dataset.removeCase);renderSelected();return}
  });
- document.addEventListener('keydown',e=>{
+ root.addEventListener('keydown',e=>{
   const tab=e.target.closest?.('[data-role-tab]');if(!tab)return;
   const modes=['chat','agent'];const current=modes.indexOf(tab.dataset.roleTab);
   let next=null;if(e.key==='ArrowRight')next=modes[(current+1)%2];else if(e.key==='ArrowLeft')next=modes[(current+1)%2];else if(e.key==='Home')next='chat';else if(e.key==='End')next='agent';
@@ -133,7 +134,9 @@ function init(){
  $('clearPlan').onclick=()=>{selected.clear();renderSelected();$('copyStatus').textContent='已清空'};
  $('copyPlan').onclick=()=>{if(!selected.size){$('copyStatus').textContent='请先加入一个案例';return}copyText('IE/IT岗位AI学习计划（教学建议）\n\n'+[...selected].map(id=>formatCase(CASES.find(c=>c.id===id))).join('\n\n---\n\n')+'\n\n实际执行须先批准数据访问并复核验收结论。')};
  let prev=[];try{prev=JSON.parse(localStorage.getItem('academy.roles.checks')||'[]')}catch{}
- document.querySelectorAll('[data-check]').forEach((box,i)=>{box.checked=prev[i]===true;box.onchange=updateChecks});updateChecks();
+ root.querySelectorAll('[data-check]').forEach((box,i)=>{box.checked=prev[i]===true;box.onchange=updateChecks});updateChecks();
  const hash=location.hash.slice(1);if(CASES.some(c=>c.id===hash)){const item=$(hash);item.open=true;requestAnimationFrame(()=>item.scrollIntoView?.({block:'start'}))}
 }
-document.addEventListener('DOMContentLoaded',init);
+init();
+};
+document.addEventListener('DOMContentLoaded',()=>{if(document.getElementById('ieCases'))window.initRoleCases();});
