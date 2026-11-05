@@ -45,6 +45,24 @@
 
 > **安全重点：** GitHub Pages通常是公开访问的网站，不是企业内网权限平台。这份培训网站保留了部门未来场景的标题和通用教学改写，因此即便未包含原Excel或真实人员/生产数据，也必须先经企业审查，确认这些场景名称与内部规划允许公开。不要上传原始盘点附件、内部链接、员工信息、客户/供应商敏感数据或真实MES/HR数据。
 
+## V1.1 第二批｜专项教学实验室（独立开发分支）
+
+为了与并行进行的 Prompt Lab 开发互不干扰，本次**没有修改 Prompt Lab 的HTML内容和脚本**。仅在主课程的以下章节增加专题入口，专题本身独立放在 \`labs/\`：
+
+| 入口章节 | 新页面 | 能做什么 |
+| --- | --- | --- |
+| 文件与数据 | \`labs/research.html\` | Deep Research任务单编辑、4步研究计划、3项模拟证据判断、5项报告验收 |
+| Skill/MCP/Plugin | \`labs/skill.html\` | 完整 \`SKILL.md\` 与输出规范、虚构SOP对比、5项变化实操 |
+| Codex | \`labs/codex.html\` | 5轮Codex指令、带异常的CSV批处理、6项真实执行测试 |
+
+公共样式位于 \`labs/lab.css\`，各页的业务逻辑分别位于 \`labs/research.js\`、\`labs/skill.js\`、\`labs/codex.js\`。所有功能默认在本机浏览器执行，不能将其误称为已接入Deep Research/Codex模型或企业数据库。
+
+Skill学习素材在 \`skills/sop-change-review/\`，并配有 \`samples/SOP_演示_旧版.md\` 和 \`samples/SOP_演示_新版.md\`。
+
+验收入口：\`tests/V1.1-PHASE2-ACCEPTANCE.md\`；Codex彩排：\`tests/CODEX-LAB-ACCEPTANCE.md\`；CI校验：\`node tests/labs-smoke.mjs\`（需先安装jsdom@26）。
+
+本批不修改原120分钟课程时长；Deep Research完整执行、Skill安装和Codex实际开发需使用企业批准的账号与环境。
+
 ## 限制与后续可扩展范围
 
 - 网页**没有AI API密钥或后端**。所谓“Agent步骤演练”只是可点击的静态教学流程；如需网页内直接执行模型任务，需另建经企业审批的API服务与登录鉴权。
