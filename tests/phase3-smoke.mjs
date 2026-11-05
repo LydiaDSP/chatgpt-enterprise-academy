@@ -12,7 +12,16 @@ for(const page of ['labs/work.html','labs/roles.html']){
   assert.ok(index.includes('href="'+page+'"'),'主课程缺少入口 '+page);
   assert.ok(existsSync(join(root,page)),'专题页不存在 '+page);
 }
-for(const path of ['labs/work.js','labs/roles.js'])new vm.Script(read(path),{filename:path});
+for(const path of ['labs/work.js','labs/roles-blueprints.js','labs/roles.js'])new vm.Script(read(path),{filename:path});
+const plans=vm.runInNewContext(read('labs/roles-blueprints.js')+'\nROLE_PLANS;');
+assert.equal(Object.keys(plans).length,12,'IE/IT 12个案例必须全部提供独立实施蓝图');
+for(const [id,plan] of Object.entries(plans)){
+  for(const key of ['trigger','source','fields','tooling','guard','failure','output','acceptance','firstPilot'])assert.ok(plan[key]&&plan[key].length>=20,id+' 自动化实施字段不完整：'+key);
+  assert.equal(plan.steps.length,6,id+' 需要六步自动化流程');
+  assert.ok(plan.chatSteps.length>=4,id+' 需要不少于4步可操作Chat指引');
+  assert.ok(new Set(plan.steps).size===plan.steps.length,id+' 步骤有重复');
+}
+console.log('PASS 12个场景均有可执行的Chat步骤和Agent实施字段');
 const backup=JSON.parse(read('scenario_data.json'));
 assert.equal(backup.length,30,'原始30个Excel场景必须保留');
 const inline=JSON.parse(index.match(/const SCENARIOS\s*=\s*(\[[\s\S]*?\]);\s*const /)[1]);
@@ -35,6 +44,7 @@ async function mount(htmlPath,jsPath,hash=''){
   w.scrollTo=()=>{};
   w.HTMLElement.prototype.scrollIntoView=()=>{};
   w.addEventListener('error',e=>errors.push(e.message));
+  if(jsPath==='labs/roles.js')w.eval(read('labs/roles-blueprints.js'));
   w.eval(read(jsPath));
   await new Promise(resolve=>setTimeout(resolve,35));
   return {dom,w,doc:w.document,errors};
@@ -85,8 +95,15 @@ async function mount(htmlPath,jsPath,hash=''){
     assert.equal(agent.hidden,true,card.id+' 默认应隐藏Agent');
     assert.ok(chat.textContent.includes('准备资料')&&chat.textContent.includes('操作路线')&&chat.textContent.includes('Chat Prompt'),card.id+' Chat缺少业务练习');
     assert.ok(!chat.textContent.includes('上线前提 / 技术配套'),card.id+' Agent内容不应混入Chat');
-    assert.ok(agent.textContent.includes('可能的自动化架构')&&agent.textContent.includes('上线前提 / 技术配套'),card.id+' Agent缺少升级条件');
+    assert.ok(agent.textContent.includes('六步自动化实施清单')&&agent.textContent.includes('从哪里获取数据')&&agent.textContent.includes('怎么验证试点成功'),card.id+' Agent缺少具体实施步骤');
+    assert.equal(agent.querySelectorAll('.agent-runbook li').length,6,card.id+' 需要展示6步自动化实施');
+    assert.ok(agent.textContent.includes('什么时候运行')&&agent.textContent.includes('必须具备哪些字段'),card.id+' 缺少触发器或字段');
+    assert.ok(agent.textContent.includes('什么情况要停止')&&agent.textContent.includes('绝不能自动做什么'),card.id+' 缺少异常处理及权限边界');
+    assert.ok(agent.textContent.includes('第一版最小可行试点'),card.id+' 缺少首版实施顺序');
+    assert.equal(agent.querySelectorAll('[data-copy-agent]').length,1,card.id+' 缺少复制Agent方案按钮');
     assert.ok(!agent.textContent.includes('简短实用的Chat Prompt'),card.id+' Chat内容不应混入Agent');
+    assert.ok(card.querySelector('[data-role-tab="chat"]').textContent.includes('Chat人工协作'));
+    assert.ok(card.querySelector('[data-role-tab="agent"]').textContent.includes('Agent流程自动化'));
     assert.equal(card.querySelectorAll('[data-copy-case]').length,1,card.id+' 必须保留复制Chat指令');
   }
   const ie=doc.querySelector('#ie-01'),it=doc.querySelector('#it-01');
@@ -119,6 +136,12 @@ async function mount(htmlPath,jsPath,hash=''){
   assert.equal(doc.querySelectorAll('#selectedCases [data-remove-case]').length,2);
   doc.querySelector('[data-remove-case="it-01"]').click();
   assert.equal(doc.querySelectorAll('#selectedCases [data-remove-case]').length,1);
+  // 两个核心示范应能作为可复现教学案例
+  assert.ok(doc.querySelector('#it-01 [data-role-panel="agent"]').textContent.includes('只读CSV导出'));
+  assert.ok(doc.querySelector('#it-01 [data-role-panel="agent"]').textContent.includes('DEMO-01离线12分钟'));
+  assert.ok(doc.querySelector('#ie-01 [data-role-panel="agent"]').textContent.includes('压合为+8秒/件'));
+  assert.ok(doc.querySelector('#it-04 [data-role-panel="agent"]').textContent.includes('主键'));
+  assert.ok(doc.querySelector('#it-05 [data-role-panel="agent"]').textContent.includes('安全管理员'));
   doc.querySelector('#clearPlan').click();
   assert.equal(doc.querySelectorAll('#selectedCases [data-remove-case]').length,0);
   assert.deepEqual(errors,[]);
