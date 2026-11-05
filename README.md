@@ -63,6 +63,24 @@ Skill学习素材在 `skills/sop-change-review/`，并配有 `samples/SOP_演示
 
 本批不修改原120分钟课程时长；Deep Research完整执行、Skill安装和Codex实际开发需使用企业批准的账号与环境。
 
+## V1.1 第三批｜Work / Computer Use 与 IE / IT岗位扩展（独立验收分支）
+
+在主课程的“Work”和“业务场景指南”章节分别增加两个实验室入口：
+
+| 页面 | 互动内容 | 范围说明 |
+| --- | --- | --- |
+| `labs/work.html` | 三个模拟任务的执行流程；四道权限判定；模拟人工审批状态与事件日志；交付自查 | 不调用真实Work、浏览器或电脑操作能力 |
+| `labs/roles.html` | IE 6个案例、IT 6个案例，可复制Chat任务并加入个人学习清单 | 这12个是新增教学建议，不在原Excel的30个场景内 |
+
+配套文件：
+- `labs/work.js`, `labs/roles.js`
+- `samples/IE_线平衡_模拟.csv`、`samples/IT_设备在线事件_模拟.csv`：均为虚构数据
+- `tests/phase3-smoke.mjs`：场景、权限、审批和回归验证
+- `tests/V1.1-PHASE3-ACCEPTANCE.md`：人工验收单
+- `tests/WORK-LAB-INSTRUCTOR.md`：讲师现场演示流程与安全边界
+
+本批不重写原始30条需求，也不触碰另一个窗口维护的 Prompt Lab 章节或 Prompt任务数据。第三批未验收前不合并到 `main`。
+
 ## 限制与后续可扩展范围
 
 - 网页**没有AI API密钥或后端**。所谓“Agent步骤演练”只是可点击的静态教学流程；如需网页内直接执行模型任务，需另建经企业审批的API服务与登录鉴权。
