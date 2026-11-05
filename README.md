@@ -1,5 +1,9 @@
 # ChatGPT Enterprise Academy · 企业AI实战学习平台
 
+> **产品需求文档**：[完整 PRD（docs/PRD.md）](docs/PRD.md)｜2026-11-05，覆盖课程定位、10章120分钟主线、Prompt M1/M2/M3、6个教学实验室、30+12岗位案例、交互与测试验收。
+>
+> **当前 main 状态说明（2026-11-05）**：Prompt M1/M2/M3、Research/Codex/Skill、Work/Computer Use 和 IE/IT 第三批代码均已合并。下文若出现“某批尚未合并”，属于原验收阶段的历史记录；以 [PRD 第11–13节](docs/PRD.md#11-已实现资产与验收映射基于-2026-11-05-main) 和 main 代码为准。自动化合并不代表真实账号、投影、移动端和企业信息安全验收已完成。
+
 一套面向制造业多部门（FIN、RD、QA、SCM、MFG、HR）的**静态互动教学网站**。提供120分钟讲师培训路径与长期自学内容。第一版设计为无需依赖后端即可打开，不会自行连接ChatGPT、ERP、MES或其他企业系统。
 
 ## 快速使用
