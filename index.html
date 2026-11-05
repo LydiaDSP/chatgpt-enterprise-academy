@@ -33,6 +33,37 @@ body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,b
   
     /* 部门案例详细操作指南：与其他教学模块保持隔离 */
     .case-summary-label{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}.case-status{font-size:11px;border-radius:99px;padding:3px 8px;background:#eaf4ef;color:#276749;white-space:nowrap}.case-status.conditional{background:#fff3df;color:#895b18}.case-status.pilot{background:#f9e9ed;color:#9b3047}.case-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.case-detail-grid>div{border:1px solid var(--line);background:#fff;border-radius:10px;padding:13px}.case-detail-grid h4{margin:0 0 5px}.case-detail-grid p{margin:0}.playbook-steps{margin:8px 0 16px;padding-left:26px;display:grid;gap:10px;color:var(--text);font-size:13px;line-height:1.75}.playbook-steps li{padding-left:3px}.playbook-steps li::marker{font-weight:800;color:var(--red)}.playbook-checks{margin:6px 0 12px;padding-left:21px;color:var(--text);font-size:13px;line-height:1.75}.playbook-checks li{margin:5px 0}.case-feasibility{background:#faf8f6;border:1px solid #e9e1dd;border-radius:10px;padding:14px 16px;margin-bottom:15px}.case-feasibility p{margin:6px 0 0!important}.case-section-label{font-weight:700;font-size:13px;margin:16px 0 6px}.case-panel .case-feature{font-size:13px;color:var(--text);background:#f6f4f1;border-radius:8px;padding:10px 12px;margin-bottom:13px}.case-deliver{background:#f8faf8;border-radius:10px;padding:13px 15px;margin-top:12px}.case-deliver p{margin:5px 0 0!important}@media(max-width:650px){.case-detail-grid{grid-template-columns:1fr}.case summary{flex-wrap:wrap}.case-summary-label{width:100%}}
+
+    /* 业务案例卡片：桌面端三列，中屏两列，移动端单列；展开时占满当前行。 */
+    .department-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:15px;align-items:stretch}
+    .department-cards .case{margin:0;min-width:0;border:1px solid #e8e1e3;border-radius:16px;box-shadow:0 3px 13px rgba(69,39,46,.035);transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+    .department-cards .case:not([open]):hover{border-color:#c8919b;box-shadow:0 9px 22px rgba(113,31,48,.10);transform:translateY(-2px)}
+    .department-cards .case:focus-within{border-color:var(--red)}
+    .department-cards .case[open]{grid-column:1/-1;border-color:#c8919b;box-shadow:0 7px 24px rgba(113,31,48,.07)}
+    .department-cards .case-card-summary{height:100%;min-height:254px;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:19px;cursor:pointer;list-style:none}
+    .department-cards .case-card-summary:focus-visible{outline:3px solid #c65d6f;outline-offset:-4px;border-radius:14px}
+    .case-card-head,.case-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .case-card-head{flex-wrap:wrap}
+    .case-card-number{font-size:11px;color:var(--muted);font-weight:750;letter-spacing:.04em}
+    .case-card-priority{font-size:11px;padding:2px 9px;border-radius:7px}
+    .department-cards .case-card-title{display:block;font-size:17px;font-weight:780;line-height:1.5;color:var(--ink);overflow-wrap:anywhere}
+    .case-card-intro{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:12px;line-height:1.65;color:var(--muted);min-height:39px}
+    .case-card-tools{font-size:12px;line-height:1.6;color:var(--text);background:#f7f5f3;padding:9px 10px;border-radius:9px}
+    .case-card-tools strong{color:#6b4b54}
+    .case-card-bottom{margin-top:auto;flex-wrap:wrap;align-items:flex-end;padding-top:3px}
+    .case-card-state{font-size:11px;color:#4a735e;line-height:1.5;flex:1;min-width:110px}
+    .case-card-state.conditional{color:#916320}.case-card-state.pilot{color:#a23c53}
+    .case-card-action{color:var(--red);font-weight:750;font-size:12px;white-space:nowrap}
+    .case-card-action .when-open{display:none}
+    .department-cards .case[open] .case-card-summary{height:auto;min-height:0;background:#fffafa;gap:8px;padding:16px 20px}
+    .department-cards .case[open] .case-card-intro{display:none}
+    .department-cards .case[open] .case-card-tools{background:transparent;padding:0}
+    .department-cards .case[open] .case-card-bottom{margin-top:0}
+    .department-cards .case[open] .case-card-action .when-open{display:inline}
+    .department-cards .case[open] .case-card-action .when-closed{display:none}
+    @media(max-width:1190px){.department-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:700px){.department-cards{grid-template-columns:1fr;gap:11px}.department-cards .case-card-summary{min-height:0}.case-card-intro{min-height:0}.department-cards .case[open] .case-card-summary{padding:14px 16px}}
+    @media(prefers-reduced-motion:reduce){.department-cards .case{transition:none}.department-cards .case:not([open]):hover{transform:none}}
 </style>
 </head>
 <body>
@@ -128,7 +159,7 @@ body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,b
         <div class="notes" style="margin-top:15px">讲师现场精选：①截图提问，②让AI先问关键问题，③同一对话迭代，④Codex先读后改。总计约10分钟，其他技巧放到自学模式。</div>
       </section>
       <section class="view" id="page-cases">
-        <div class="page-head"><p class="eyebrow">08 · BUSINESS PLAYBOOK</p><h1 class="page-title">30个真实业务需求 · 简体中文操作指南</h1><p class="page-intro">按照原始需求整理六部门30个案例。每个案例均包含实施可行性、数据与权限条件、ChatGPT详细步骤、可选进阶路径、预期成果和验收要点。课堂每部门可挑一个代表案例讲解，其余供课后自行查阅。</p></div>
+        <div class="page-head"><p class="eyebrow">08 · BUSINESS PLAYBOOK</p><h1 class="page-title">30个真实业务需求 · 简体中文操作指南</h1><p class="page-intro">按照原始需求整理六部门30个案例。每个案例均包含实施可行性、数据与权限条件、ChatGPT详细步骤、可选进阶路径、预期成果和验收要点。每个部门的案例以卡片展示；点击卡片查看完整实施教程。课堂每部门可挑一个代表案例讲解，其余供课后自行查阅。</p></div>
         <div class="grid3"><div class="kpi"><strong>30</strong><span>原始业务需求</span></div><div class="kpi"><strong>17</strong><span>原表高优先级</span></div><div class="kpi"><strong>6</strong><span>原始需求部门</span></div></div>
         <div class="info gold" style="margin-top:17px">所有“Chat怎么做”“Agent怎么升级”是基于盘点需求提出的<strong>教学方案</strong>，不代表已经验证企业系统连接。为降低公开发布风险，网页不包含原始Excel、内部人员资料、真实生产/人资数据；真实系统使用前必须审批。</div>
         <div class="row" id="deptJump" style="margin-top:20px"></div><div id="departmentSections"></div>
@@ -228,10 +259,10 @@ function renderCases(){
  el('deptJump').innerHTML=DEPARTMENTS.map(d=>`<a href="#dept-${d[0]}" data-dept="${d[0]}" class="btn btn-ghost btn-sm">${esc(d[1])} ↓</a>`).join('');
  el('departmentSections').innerHTML=DEPARTMENTS.map(d=>{
    const cases=SCENARIOS.filter(s=>s.department===d[0]),high=cases.filter(s=>s.priority==='高').length;
-   return `<section class="department" id="dept-${d[0]}"><div class="department-head"><div><h3>${esc(d[1])}</h3><p>${esc(d[2])} · ${cases.length}个案例 · 高优先级${high}个</p></div><span class="pill">部门真实需求</span></div>${cases.map(s=>{
+   return `<section class="department" id="dept-${d[0]}"><div class="department-head"><div><h3>${esc(d[1])}</h3><p>${esc(d[2])} · ${cases.length}个案例 · 高优先级${high}个</p></div><span class="pill">部门真实需求</span></div><div class="department-cards" aria-label="${esc(d[1])}业务案例卡片">${cases.map(s=>{
      const p=guides[s.id],lbl=labels[p?.status]||labels.conditional;
-     if(!p)return `<details class="case" id="${s.id}"><summary><span class="case-title">${esc(s.title)}</span></summary><div class="case-body">操作指南暂缺，请核对资料。</div></details>`;
-     return `<details class="case" id="${s.id}"><summary><span class="pill ${s.priority==='高'?'badge-high':s.priority==='中'?'badge-medium':'badge-low'}">${esc(s.priority)}</span><span class="case-title">${esc(p.t)}</span><span class="case-status ${lbl[1]}">${lbl[0]}</span><span class="case-more">展开 ＋</span></summary>
+     if(!p)return `<details class="case" id="${s.id}"><summary class="case-card-summary"><span class="case-card-head"><span class="case-card-number">案例 ${esc(s.id.slice(-2))}</span><span class="case-card-priority badge-medium">内容待核对</span></span><span class="case-card-title">${esc(s.title)}</span><span class="case-card-action">查看详情 →</span></summary><div class="case-body">操作指南暂缺，请核对资料。</div></details>`;
+     return `<details class="case" id="${s.id}"><summary class="case-card-summary"><span class="case-card-head"><span class="case-card-number">案例 ${esc(s.id.slice(-2))}</span><span class="case-card-priority ${s.priority==='高'?'badge-high':s.priority==='中'?'badge-medium':'badge-low'}">${esc(s.priority)}优先级</span></span><span class="case-card-title">${esc(p.t)}</span><span class="case-card-intro">${esc(p.verdict)}</span><span class="case-card-tools"><strong>推荐功能：</strong>${esc(CASE_FEATURES[s.id]||'对话与文件分析')}</span><span class="case-card-bottom"><span class="case-card-state ${lbl[1]}">${esc(lbl[0])}</span><span class="case-card-action"><span class="when-closed">查看详情 →</span><span class="when-open">收起详情 ↑</span></span></span></summary>
      <div class="case-body"><div class="case-feasibility"><strong>① 实施可行性</strong><p>${esc(p.verdict)}</p><p class="micro">判断：${esc(lbl[0])}。以下操作为教学实施建议，尚不代表已验证企业系统接入。</p></div>
      <div class="case-detail-grid"><div><h4>② 需要的数据和资料</h4><p>${esc(p.data)}</p></div><div><h4>② 需要的权限和系统条件</h4><p>${esc(p.access)}</p></div></div>
      <div class="tabs" role="tablist" aria-label="${esc(p.t)}的实施路径"><button class="selected" data-case-tab="chat" data-case-id="${s.id}">方案A · ChatGPT怎么做</button><button data-case-tab="agent" data-case-id="${s.id}">方案B · 进阶与自动化</button></div>
@@ -242,7 +273,7 @@ function renderCases(){
        <div class="case-deliver"><strong>④ 预期交付成果</strong><p>${esc(p.deliver)}</p></div>
        <div><h4>⑤ 验收与风险控制</h4>${steps(p.check,false)}</div>
        <p class="micro">原始需求编号：${esc(s.id)} · 原始优先级：${esc(s.priority)} · 场景类型：${esc(s.tag)}</p>
-     </div></div></details>`}).join('')}</section>`;
+     </div></div></details>`}).join('')}</div></section>`;
  }).join('');
 }
 function renderResources(){el('resourceGrid').innerHTML=RESOURCES.map((r,i)=>`<div class="resource"><div class="logo">↗</div><div><h3>${esc(r[0])}</h3><p>${esc(r[1])}</p><a rel="noopener" target="_blank" href="${esc(r[2])}">打开官方资料 ↗</a></div></div>`).join('');let done=new Set(safeGet('academy.preflight',[]));el('preflight').innerHTML=PREFLIGHT.map((v,i)=>`<label class="checkline" style="margin:9px 0"><input type="checkbox" data-preflight="${i}" ${done.has(i)?'checked':''}/>${esc(v)}</label>`).join('')}
