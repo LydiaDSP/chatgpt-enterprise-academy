@@ -1,0 +1,29 @@
+name: Academy V1.1 Acceptance
+on:
+  push:
+    branches:
+      - 'feat/v1.1-*'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'scenario_data.json'
+      - 'samples/**'
+      - 'tests/**'
+      - '.github/workflows/acceptance.yml'
+  workflow_dispatch:
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static content, syntax and dataset checks
+        run: node tests/verify.mjs
+      - name: Install isolated browser-simulation test dependency
+        run: npm install --no-save --no-package-lock --ignore-scripts jsdom@26
+      - name: Browser interaction smoke tests
+        run: node tests/browser-smoke.mjs
