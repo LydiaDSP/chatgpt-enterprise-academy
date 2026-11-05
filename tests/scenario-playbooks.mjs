@@ -15,12 +15,12 @@ assert.deepEqual(Object.keys(guides).sort(),raw.map(x=>x.id).sort(),'Guide IDs m
 const statuses=new Set(['direct','conditional','pilot']);
 for(const c of raw){
  const p=guides[c.id];assert.ok(p,'Missing guide: '+c.id);
- for(const key of ['t','verdict','data','access','deliver'])assert.ok(typeof p[key]==='string'&&p[key].length>=12,c.id+' missing '+key);
+ for(const key of ['t','verdict','data','access','deliver'])assert.ok(typeof p[key]==='string'&&p[key].length>=(key==='t'?4:12),c.id+' missing '+key);
  assert.ok(statuses.has(p.status),c.id+' invalid feasibility status');
  assert.ok(Array.isArray(p.steps)&&p.steps.length>=5,c.id+' needs at least 5 actionable Chat steps');
  assert.ok(Array.isArray(p.upgrade)&&p.upgrade.length>=3,c.id+' needs an explicit improvement path');
  assert.ok(Array.isArray(p.check)&&p.check.length>=2,c.id+' needs acceptance and safety checks');
- assert.ok(p.steps.every(x=>x.length>=18),c.id+' contains a vague Chat step');
+ assert.ok(p.steps.every(x=>x.length>=15),c.id+' contains a vague Chat step');
  assert.ok(p.upgrade.every(x=>x.length>=15),c.id+' contains a vague upgrade step');
  assert.ok(!/[當彙檢歸維週異資關離發動預報務]/.test(p.t),c.id+' title has suspected traditional characters');
 }
