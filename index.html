@@ -123,6 +123,55 @@ body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,b
 #page-cases .dept-link.active .dept-nav-count{opacity:.95}
 @media(max-width:700px){#page-cases .department-head{padding:15px 13px;align-items:flex-start}#page-cases .department-head .dept-svg{width:42px;height:42px}#page-cases .dept-svg svg{width:23px;height:23px}#page-cases .department-head h3{font-size:18px}#page-cases .department-head .dept-count{display:none}#page-cases .department-cards .case-card-summary{min-height:0}#page-cases #deptJump{gap:6px}#page-cases #deptJump .dept-link{padding:7px 9px;font-size:11px}}
 @media print{#page-cases #deptJump{position:static;box-shadow:none}#page-cases .department-cards .case{break-inside:avoid}}
+
+/* AI效率技巧库：视觉与课程导航一致的四主题配色；无外部图片依赖。 */
+#page-tips{--tip-ink:#28303d}
+#page-tips .tips-hero{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:25px 28px;margin:2px 0 28px;border-radius:18px;background:linear-gradient(117deg,#81283b 0%,#ae3b52 58%,#c66d78 100%);color:#fff;box-shadow:0 12px 30px rgba(135,42,61,.14)}
+#page-tips .tips-hero:after{content:'';position:absolute;inset:auto -40px -120px auto;width:270px;height:270px;border:1px solid rgba(255,255,255,.23);border-radius:50%;pointer-events:none}
+#page-tips .tips-hero-main{z-index:1;max-width:610px}
+#page-tips .tips-hero-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#ffdee3}
+#page-tips .tips-hero h2{font-size:22px;line-height:1.4;margin:7px 0 8px;color:#fff}
+#page-tips .tips-hero p{font-size:13px;line-height:1.7;margin:0;color:#ffe8ed}
+#page-tips .tips-hero-visual{display:grid;place-items:center;flex:none;z-index:1;width:94px;height:94px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.25);border-radius:23px;transform:rotate(-8deg)}
+#page-tips .tips-hero-visual svg{width:53px;height:53px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transform:rotate(8deg)}
+#page-tips .tip-grid{display:flex;flex-direction:column;gap:33px}
+#page-tips .tip-group{--tip-accent:#a73e53;--tip-bg:#fcedf0;--tip-outline:#eed2d9;scroll-margin-top:95px}
+#page-tips .tip-group[data-category="desktop"]{--tip-accent:#ad4055;--tip-bg:#fbedf0;--tip-outline:#efd2d9}
+#page-tips .tip-group[data-category="prompt"]{--tip-accent:#5e61a7;--tip-bg:#eff0fc;--tip-outline:#d8daf3}
+#page-tips .tip-group[data-category="files"]{--tip-accent:#247e74;--tip-bg:#eaf6f3;--tip-outline:#cbe7df}
+#page-tips .tip-group[data-category="agent"]{--tip-accent:#9f703c;--tip-bg:#fff3e6;--tip-outline:#efddc6}
+#page-tips .tip-group-header{display:flex;align-items:center;gap:14px;margin-bottom:15px;padding:0 2px 13px;border-bottom:1px solid #e9e5e4}
+#page-tips .tip-group-symbol{width:45px;height:45px;flex:none;display:grid;place-items:center;background:var(--tip-bg);border:1px solid var(--tip-outline);border-radius:13px;color:var(--tip-accent)}
+#page-tips .tip-group-symbol svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#page-tips .tip-group-title{margin:0;font-size:20px;line-height:1.35;color:#292c35}
+#page-tips .tip-group-summary{margin:3px 0 0;font-size:12px;line-height:1.6;color:#686d77}
+#page-tips .tip-group-count{margin-left:auto;white-space:nowrap;font-size:12px;font-weight:730;color:var(--tip-accent);background:var(--tip-bg);padding:5px 11px;border-radius:99px}
+#page-tips .tip-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:start}
+#page-tips .tip{background:#fff;border:1px solid var(--tip-outline);border-top:3px solid var(--tip-accent);border-radius:16px;box-shadow:0 7px 23px rgba(37,37,45,.055);padding:19px;display:flex;flex-direction:column;gap:11px;min-height:250px;transition:border-color .2s,box-shadow .2s,transform .2s}
+#page-tips .tip:hover{box-shadow:0 12px 28px rgba(37,37,45,.11);transform:translateY(-2px)}
+#page-tips .tip-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+#page-tips .tip-icon-wrap{width:52px;height:52px;display:grid;place-items:center;flex:none;border:1px solid var(--tip-outline);border-radius:14px;background:var(--tip-bg);color:var(--tip-accent)}
+#page-tips .tip-icon-wrap svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#page-tips .tip-index{font-size:12px;font-weight:800;color:var(--tip-accent);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+#page-tips .tip h3{margin:2px 0 0;font-size:17px;line-height:1.42;color:#292f38}
+#page-tips .tip p.tip-intro{font-size:13px;color:#606978;line-height:1.7;margin:0;min-height:43px;flex:1}
+#page-tips .tip-action{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:11px 12px;border:1px solid var(--tip-outline);border-radius:10px;background:var(--tip-bg);color:var(--tip-accent);font-weight:750;font-size:12px;transition:background .15s,color .15s}
+#page-tips .tip-action:hover{background:var(--tip-accent);border-color:var(--tip-accent);color:#fff}
+#page-tips .tip-action .action-arrow{font-size:16px;line-height:1;transition:transform .2s}
+#page-tips .tip-action[aria-expanded="true"] .action-arrow{transform:rotate(180deg)}
+#page-tips .tip-detail{background:#fbfaf9;border:1px solid var(--tip-outline);border-radius:11px;padding:14px;white-space:normal;color:#393f4a;font-size:12.5px;line-height:1.72}
+#page-tips .tip-detail-block+ .tip-detail-block{margin-top:14px;padding-top:12px;border-top:1px solid #e7e3e2}
+#page-tips .tip-detail-block strong{display:block;color:var(--tip-accent);font-size:12px;margin-bottom:4px}
+#page-tips .tip-detail-block p{margin:0;color:#48505d;font-size:12.5px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere}
+#page-tips .tip-detail .btn{margin-top:14px;border:1px solid var(--tip-outline);background:#fff;color:var(--tip-accent);font-weight:750}
+#page-tips .tip-detail .btn:hover{background:var(--tip-bg)}
+#page-tips .tip-group-footer{color:#77777c;font-size:12px}
+#page-tips .tip:focus-within{border-color:var(--tip-accent)}
+body.large-text #page-tips .tip-group-summary,body.large-text #page-tips .tip p.tip-intro,body.large-text #page-tips .tip-detail-block p{font-size:16px}
+body.large-text #page-tips .tip h3{font-size:19px}
+@media(max-width:1150px){#page-tips .tip-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:690px){#page-tips .tip-group-grid{grid-template-columns:1fr}#page-tips .tip{min-height:0}#page-tips .tip p.tip-intro{min-height:0}#page-tips .tip-group-title{font-size:18px}#page-tips .tip-group-header{gap:10px}#page-tips .tips-hero{padding:20px}#page-tips .tips-hero-visual{width:56px;height:56px;border-radius:14px}#page-tips .tips-hero-visual svg{width:34px;height:34px}#page-tips .tips-hero h2{font-size:19px}}
+@media(prefers-reduced-motion:reduce){#page-tips .tip,#page-tips .tip-action .action-arrow{transition:none}#page-tips .tip:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -251,6 +300,7 @@ body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,b
       </section>
       <section class="view" id="page-tips">
         <div class="page-head"><p class="eyebrow">07 · TIPS & TRICKS</p><h1 class="page-title">15个马上能用的AI效率技巧</h1><p class="page-intro">不需要全部记住。每次学会两到三个，直接带回自己的工作中。点击卡片中的“查看做法”可获得场景、简短指令和注意事项。</p></div>
+        <div class="tips-hero"><div class="tips-hero-main"><div class="tips-hero-eyebrow">AI TOOLKIT / PRACTICAL TIPS</div><h2>选一个小技巧，今天就用起来</h2><p>每张卡片都给出适用场景、可复制的做法和注意事项。按主题选择，比一次记住全部更有价值。</p></div><div class="tips-hero-visual" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="10" y="13" width="44" height="39" rx="7"/><path d="M20 26h22M20 35h12M20 43h22"/><path d="m40 9 2-6 2 6 6 2-6 2-2 6-2-6-6-2z"/></svg></div></div>
         <div class="tip-grid" id="tipsGrid"></div>
         <div class="notes" style="margin-top:15px">讲师现场精选：①截图提问，②让AI先问关键问题，③同一对话迭代，④Codex先读后改。总计约10分钟，其他技巧放到自学模式。</div>
       </section>
