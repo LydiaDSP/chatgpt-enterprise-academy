@@ -40,6 +40,7 @@ try{
  m.getElementById('run-tests').click();assert.match(m.getElementById('test-result').textContent,/6\/6/);
  m.querySelector('[data-copy="build-prompt"]').click();await tick();assert.match(w.copied,/Goal/);
  w.location.hash='#dept-IE';await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));
+ for(const code of ['FIN','RD','QA','SCM','MFG','HR','IE','IT'])assert.equal(w.routeInlineCourse('dept-'+code),true,'All departments use the same routing');
  w.location.hash='#it-01';await tick();assert.ok(r.getElementById('it-01').open);
  r.querySelector('#it-01 [data-role-tab="agent"]').click();assert.equal(r.getElementById('it-01-panel-agent').hidden,false);
  r.querySelector('#it-01 [data-copy-agent]').click();await tick();assert.match(w.copied,/触发条件/);

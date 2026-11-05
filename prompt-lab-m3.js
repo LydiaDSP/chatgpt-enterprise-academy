@@ -104,7 +104,7 @@ window.routeInlineCourse=hash=>{
  let target;
  if(hash.startsWith('prompt-m3-')){go('prompt',{updateHash:false});const name=hash.slice('prompt-m3-'.length);showStage('m3',groups.m3.includes(name)?name:'vision');target=nav;}
  else if(hash==='prompt-m1'||hash==='prompt-m2'){go('prompt',{updateHash:false});const stage=hash.slice(7);showStage(stage,groups[stage][0]);target=nav;}
- else if(hash==='dept-IE'||hash==='dept-IT'){go('cases',{updateHash:false});target=roles.getElementById('role-'+hash.slice(5));}
+ else if(hash.startsWith('dept-')){target=hash==='dept-IE'||hash==='dept-IT'?roles.getElementById('role-'+hash.slice(5)):document.getElementById(hash);if(!target)return false;go('cases',{updateHash:false});}
  else if(/^(ie|it)-0[1-6]$/.test(hash)){go('cases',{updateHash:false});target=roles.getElementById(hash);target.open=true;}
  else return false;
  offsets();requestAnimationFrame(()=>target?.scrollIntoView({block:'start',behavior:'instant'}));return true;
