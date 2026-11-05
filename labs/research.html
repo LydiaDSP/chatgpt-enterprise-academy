@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Deep Research 制造业实战教学实验室：任务单、研究计划、证据判定与验收。">
+<title>Deep Research 实战实验室 | 企业AI学院</title>
+<link rel="stylesheet" href="lab.css">
+<script src="research.js" defer></script>
+</head>
+<body>
+<header class="top"><a href="../index.html#files">← 返回课程 · 文件与数据</a><span class="version">ACADEMY LAB · V1.1 · 本地互动，不调用AI</span></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">RESEARCH LAB · 制造业案例</div><h1>让 AI 做可核查的深度研究</h1><p>不是让AI“写得更长”，而是学会提出研究目标、审阅计划、筛选证据、核查结论。网页仅模拟准备与验证环节；真正的 Deep Research 需在授权的 ChatGPT 环境运行。</p><span class="label">建议课堂展示 6–8 分钟 · 完整研究课后操作</span></section>
+<section aria-label="工具选择">
+<h2>什么时候用哪种方式？</h2>
+<div class="grid three">
+<div class="card"><h3>普通 Chat</h3><p>已有资料明确，想快速理解概念、草拟提纲。</p><span class="pill">快速问答</span></div>
+<div class="card"><h3>搜索 Search</h3><p>查询单一问题、近期动态、一个来源的官网信息。</p><span class="pill">快速核查</span></div>
+<div class="card tint"><h3>Deep Research</h3><p>需要综合多个来源、比较证据、检视争议并形成带来源的报告。</p><span class="pill">多源研究</span></div>
+</div>
+</section>
+<section>
+<h2>一、选择一个制造业研究任务</h2>
+<div class="grid three" id="scenarioChoices" aria-label="场景选项">
+<button class="btn choice" type="button" data-case="vision" aria-pressed="true">视觉检测方案调研 <span>01</span></button>
+<button class="btn choice" type="button" data-case="maintenance" aria-pressed="false">设备预测性维护 <span>02</span></button>
+<button class="btn choice" type="button" data-case="validation" aria-pressed="false">3Q验证资料研究 <span>03</span></button>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>研究边界</h3>
+<div class="formrow"><label for="focus">研究焦点（可以修改）</label><textarea id="focus" rows="4"></textarea></div>
+<div class="formrow"><label for="audience">目标读者</label><select id="audience"><option value="engineering">工程师技术评审</option><option value="manager">部门经理决策</option><option value="pilot">项目试点组</option></select></div>
+<div class="formrow"><label for="sourcePolicy">来源范围</label><select id="sourcePolicy"><option value="public">只查可公开复核的资料</option><option value="upload">公开资料 + 已经授权上传的文件</option></select></div>
+</div>
+<div class="card"><h3>研究任务单</h3><p class="micro">根据场景和选择生成，可复制到真实 Deep Research 中执行。</p><div id="researchPrompt" class="output" aria-live="polite"></div><div class="row" style="margin-top:12px"><button id="copyResearch" class="btn primary" type="button">复制研究任务单</button><button id="resetResearch" class="btn" type="button">恢复示例</button></div><div class="status" id="copyStatus" aria-live="polite"></div></div>
+</div>
+</section>
+<section>
+<h2>二、把研究过程拆成四个检查点</h2>
+<p class="muted small">点击每一步查看讲师操作指引。这里不伪造真实模型行为，也不会自动打开网站。</p>
+<div class="steps" id="researchSteps">
+<button class="step active" data-step="0" type="button">① 明确问题</button>
+<button class="step" data-step="1" type="button">② 审阅计划</button>
+<button class="step" data-step="2" type="button">③ 查证来源</button>
+<button class="step" data-step="3" type="button">④ 验收报告</button>
+</div>
+<div class="card" aria-live="polite"><h3 id="stepTitle">明确问题</h3><div id="stepBody"></div><div class="row between" style="margin-top:15px"><button id="prevStep" class="btn" type="button">← 上一步</button><button id="nextStep" class="btn primary" type="button">下一步 →</button></div></div>
+</section>
+<section>
+<h2>三、证据判定练习</h2>
+<p class="muted small">以下均为模拟材料描述，不是真实供应商报告或标准条款。判断能否作为技术决策依据。</p>
+<div id="evidenceExercises" class="stack"></div>
+<div class="card" style="margin-top:12px"><div class="row between"><strong id="evidenceScore">已判断 0/3</strong><button id="showRationale" class="btn" type="button">显示判定依据</button></div><div class="meter" style="margin-top:13px"><div id="evidenceMeter" style="width:0%"></div></div><div id="rationale" class="info hide" style="margin-top:15px" aria-live="polite"></div></div>
+</section>
+<section>
+<h2>四、研究交付验收</h2>
+<div class="grid"><div class="card"><h3>报告应包含</h3><div id="acceptanceItems">
+<label class="check"><input type="checkbox" data-accept="0">研究范围、对比维度和时间边界明确</label>
+<label class="check"><input type="checkbox" data-accept="1">每个关键结论有可打开的来源链接</label>
+<label class="check"><input type="checkbox" data-accept="2">注明来源发布日期、适用条件和证据等级</label>
+<label class="check"><input type="checkbox" data-accept="3">区分已验证事实、供应商宣称与待验证假设</label>
+<label class="check"><input type="checkbox" data-accept="4">输出面向管理层的建议和试点验证清单</label>
+</div><p id="acceptanceProgress" class="status" aria-live="polite">完成 0/5 项</p></div>
+<div class="card"><h3>现场课堂操作建议</h3><p><b>现场：</b>复制研究任务单，在企业账号中展示如何进入 Deep Research、检查研究计划、限定数据来源。深度研究完成时间不确定，课堂不应依赖实时运行结束。</p><p><b>课后：</b>在真实环境执行研究，抽查3个关键论断的原始证据、日期和上下文，再提交报告。</p><div class="info warn">禁止将未经批准的内部生产、员工、客户或供应商敏感资料上传公开网站。企业账号的功能和连接权限取决于管理员配置。</div><p class="small"><a class="out" href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt" target="_blank" rel="noopener">OpenAI官方：Deep Research 使用说明 ↗</a></p></div>
+</div>
+</section>
+<footer class="footer">教学原型：题目和判断练习为模拟内容。页面在本地浏览器完成选择、勾选与复制，不调用模型、不进行联网检索。<a href="../index.html#files">返回课程</a></footer>
+</main>
+</body>
+</html>

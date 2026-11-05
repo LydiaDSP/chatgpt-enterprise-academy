@@ -9,6 +9,8 @@ on:
       - 'scenario_data.json'
       - 'samples/**'
       - 'tests/**'
+      - 'labs/**'
+      - 'skills/**'
       - '.github/workflows/acceptance.yml'
   workflow_dispatch:
 
@@ -27,3 +29,5 @@ jobs:
         run: npm install --no-save --no-package-lock --ignore-scripts jsdom@26
       - name: Browser interaction smoke tests
         run: node tests/browser-smoke.mjs
+      - name: Research, Codex and Skill specialized lab checks
+        run: node tests/labs-smoke.mjs
