@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Work与Computer Use制造业互动教学：任务规划、权限边界、审批演练和交付验收。"><title>Work & Computer Use 实操实验室｜企业AI学院</title><link rel="stylesheet" href="lab.css"><script src="work.js" defer></script></head>
+<body>
+<header class="top"><a href="../index.html#work">← 返回课程 · Work 与 Computer Use</a><span class="version">ACADEMY LAB · V1.1 · 教学模拟，不访问真实系统</span></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">WORKFLOW & COMPUTER USE LAB</div><h1>让 AI 执行任务，也知道何时必须停下</h1><p>完成一条可审计的模拟任务流程：明确需求、选择工具、识别操作权限、模拟审批、核对交付。所有操作都在本页本地模拟，不会访问网站、连接设备、打开电脑程序或发送信息。</p><span class="label">课堂精选 8–10 分钟 · 课后独立演练</span></section>
+<section>
+<h2>一、先分清三种执行方式</h2>
+<div class="grid three">
+<div class="card"><h3>Work</h3><p>围绕目标协调多步骤研究、文件处理与成果交付。可以利用可用的应用连接和云端工具，关键动作需符合权限和批准要求。</p><span class="pill">面向业务成果</span></div>
+<div class="card"><h3>Browser Use</h3><p>通过受控浏览器读取或操作网页。访问站点、文件上传下载和审批等由产品与组织策略共同限定。</p><span class="pill">面向网页操作</span></div>
+<div class="card"><h3>Computer Use</h3><p>在具备支持、授权及相应策略的环境中操作桌面应用。能操作不等于被授权控制生产设备。</p><span class="pill">面向桌面应用</span></div>
+</div>
+<div class="info warn" style="margin-top:15px">产品功能随企业工作区、客户端、管理员策略和区域配置变化。本页不模拟或证明你的企业账号已经开通相关权限。</div>
+</section>
+<section>
+<h2>二、选择一项教学任务，逐步体验执行过程</h2>
+<div class="grid three" id="scenarioButtons" role="group" aria-label="演练任务">
+<button class="btn choice" data-scenario="logistics" type="button" aria-pressed="true">公开物流资料对比 <span>Work</span></button>
+<button class="btn choice" data-scenario="report" type="button" aria-pressed="false">模拟日报整理 <span>Work + 文件</span></button>
+<button class="btn choice" data-scenario="inspection" type="button" aria-pressed="false">模拟离线设备核查 <span>Computer Use</span></button>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="card">
+<h3 id="scenarioTitle"></h3><p id="scenarioIntro" class="small muted"></p>
+<div class="formrow"><label for="businessGoal">本次任务目标（可编辑）</label><textarea id="businessGoal" rows="4"></textarea></div>
+<div class="row"><button id="copyTask" class="btn primary" type="button">复制真实演示任务</button><button id="resetTask" class="btn" type="button">恢复示例</button></div>
+<p id="copyStatus" class="status" aria-live="polite"></p>
+</div>
+<div class="card">
+<h3>任务执行前必须明确的事</h3>
+<div class="stack" id="scopeList"></div>
+<p class="micro">任务说明可能包含不确定项，需要在真实环境中由用户授权与核对。复制任务不等于实际执行或允许访问企业系统。</p>
+</div>
+</div>
+<div class="steps" id="flowSteps" aria-label="演练步骤"></div>
+<div class="card">
+<div class="row between"><h3 id="flowTitle">第1步</h3><span class="pill" id="flowProgress">1 / 5</span></div>
+<div class="grid"><div><p id="flowDescription"></p><div id="flowObservation" class="info"></div></div><div class="muted-panel"><strong>当前活动／需要的权限</strong><p id="flowAction"></p><p id="flowPermission" class="micro"></p></div></div>
+<div class="row between" style="margin-top:15px"><button id="prevFlow" class="btn" type="button">← 上一步</button><button id="nextFlow" class="btn primary" type="button">下一步 →</button></div>
+</div>
+</section>
+<section>
+<h2>三、权限决策实验：不是每个动作都能放行</h2>
+<p class="small muted">请选择你认为正确的处理动作，系统会按模拟安全规则给予反馈。示例不是真实管理员策略，也不会真正提交审批。</p>
+<div id="permissionCases" class="stack"></div>
+<div class="card" style="margin-top:15px">
+<div class="row between"><strong id="policyProgress">已判断 0/4</strong><button id="showPolicyAnswer" class="btn" type="button">显示判定依据</button></div>
+<div class="meter" style="margin-top:12px"><div id="policyMeter" style="width:0%"></div></div>
+<div id="policyRationale" class="info hide" style="margin-top:14px" aria-live="polite"></div>
+</div>
+</section>
+<section>
+<h2>四、模拟审批与执行日志</h2>
+<div class="grid">
+<div class="card"><h3>尝试一个需要人工确认的动作</h3>
+<p>示例：将“已经由人核实的公开资料对比表”发送给预设的培训接收人。这里仅模拟动作状态，不发送消息或读取真实名单。</p>
+<p id="approvalStatus" class="status" aria-live="polite">状态：尚未请求（模拟）</p>
+<div class="row">
+<button id="requestApproval" class="btn" type="button">1 请求模拟审批</button>
+<button id="approveAction" class="btn" type="button" disabled>2 模拟人工批准</button>
+<button id="executeAction" class="btn primary" type="button" disabled>3 模拟执行</button>
+<button id="resetApproval" class="btn" type="button">重置</button>
+</div>
+<div class="info warn" style="margin-top:15px">点击“模拟人工批准”只改变教学演练状态，绝不代表真实企业授权。真实操作仍必须遵守账号、管理员和业务流程审批。</div>
+</div>
+<div class="card"><h3>教学事件记录</h3><ol id="eventLog" class="small" aria-live="polite"></ol><div class="row"><button id="copyLog" class="btn" type="button">复制模拟日志</button><button id="clearLog" class="btn" type="button">清空日志</button></div><p class="micro">记录只保存在此网页运行内存中。刷新后不保留，也不上传服务器。</p></div>
+</div>
+</section>
+<section>
+<h2>五、业务交付验收</h2>
+<div class="grid">
+<div class="card">
+<h3>实际演示结束后，由学员逐项核对</h3>
+<div id="acceptanceChecks" class="stack">
+<label class="check"><input type="checkbox" data-accept="0">目标、数据来源和适用范围已明确</label>
+<label class="check"><input type="checkbox" data-accept="1">每项关键结论能回溯到证据或原始数据</label>
+<label class="check"><input type="checkbox" data-accept="2">外部操作、写入或发送经过适当人工确认</label>
+<label class="check"><input type="checkbox" data-accept="3">明确记录失败、未知和未授权的环节</label>
+<label class="check"><input type="checkbox" data-accept="4">输出能交给业务同事复核，必要时支持回退</label>
+</div><p id="acceptanceStatus" class="status" aria-live="polite"></p>
+</div>
+<div class="card"><h3>讲师应如何组织真实演示？</h3>
+<ol class="small"><li>先使用公开或虚构任务，在企业测试账号中展示Work的任务计划与成果交付。</li><li>只在经授权的测试环境演示浏览器或电脑操作；明确网站/应用权限与审批时刻。</li><li>准备完整的备用截图或录屏，课堂不依赖现场Agent一定成功。</li><li>不能演示或不具备权限时，仅展示本页静态流程，不声称已经执行真实系统操作。</li></ol>
+<p class="small"><a href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex" target="_blank" rel="noopener">OpenAI：Work / Codex 概览 ↗</a></p><p class="small"><a href="https://help.openai.com/en/articles/20001510-manage-browser-and-computer-use-in-your-enterprise-workspace" target="_blank" rel="noopener">OpenAI：企业浏览器与电脑操作管理 ↗</a></p>
+</div>
+</div>
+</section>
+<footer class="footer">企业AI学院教学模拟页面。无外部API、无模型调用、无真实设备或业务系统连接。<a href="../index.html#work">返回课程</a></footer>
+</main></body></html>
