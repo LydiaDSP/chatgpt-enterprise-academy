@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Skill制造业培训：从一次性Prompt到可复用SOP差异审查方法。"><title>Skill 实操实验室 | 企业AI学院</title><link rel="stylesheet" href="lab.css"><script src="skill.js" defer></script></head>
+<body><header class="top"><a href="../index.html#tools">← 返回课程 · Skill / MCP / Plugin</a><span class="version">ACADEMY LAB · V1.1 · 模拟材料</span></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">REUSABLE WORKFLOW LAB · SOP版本审查</div><h1>把一次性提问，变成可复用的Skill</h1><p>以制造业SOP新旧版本审查为例，理解 Skill 的输入要求、步骤、可追溯输出与安全边界。本页面展示的是教学练习和预制文件，不会调用模型，也不自动审批受控文件。</p><span class="label">课堂建议 8–10 分钟 · 提供完整 SKILL.md 示例</span></section>
+<section>
+<h2>一、Prompt 和 Skill 有什么区别？</h2>
+<div class="grid"><div class="card"><h3>一次性Prompt</h3><p>“帮我比较这两版SOP。”短、方便，但通常不会自动固化版本检查、证据定位、风险声明和输出格式。</p><span class="pill">适合低频任务</span></div><div class="card tint"><h3>可复用Skill</h3><p>把适用条件、输入检查、差异审查步骤、输出字段和不可越权动作写入文件，让同类任务更容易形成一致的执行过程。</p><span class="pill">适合标准化重复任务</span></div></div>
+</section>
+<section>
+<h2>二、点击文件结构，理解Skill如何组成</h2>
+<div class="grid">
+<div class="card"><h3>示例目录</h3><div class="stack" id="skillTree">
+<button class="btn choice" data-file="main" aria-pressed="true" type="button">📄 sop-change-review/SKILL.md <span>主文件</span></button>
+<button class="btn choice" data-file="schema" aria-pressed="false" type="button">📄 references/output-schema.md <span>输出规范</span></button>
+<button class="btn choice" data-file="old" aria-pressed="false" type="button">📄 samples/SOP_演示_旧版.md <span>练习输入</span></button>
+<button class="btn choice" data-file="new" aria-pressed="false" type="button">📄 samples/SOP_演示_新版.md <span>练习输入</span></button>
+</div><p class="micro">点击文件名查看职责；选择下方链接可阅读仓库中的真实文件。</p></div>
+<div class="card"><h3 id="fileTitle"></h3><p id="fileExplain"></p><div id="fileExcerpt" class="code"></div><p><a id="fileLink" href="#" target="_blank" rel="noopener">打开完整文件 ↗</a></p></div>
+</div>
+</section>
+<section>
+<h2>三、SOP差异查找 · 你能找到哪几项变更？</h2>
+<p class="small muted">两份文件均为虚构演示数据；点击前可下载自行对比。这个互动练习使用固定参考答案，不会进行真实PDF、Word或AI文本比较。</p>
+<div class="row"><a class="btn" href="../samples/SOP_演示_旧版.md" download>↓ 下载旧版 V1.0</a><a class="btn" href="../samples/SOP_演示_新版.md" download>↓ 下载新版 V1.1</a></div>
+<div class="grid" style="margin-top:14px"><div class="card">
+<h3>勾选你认为发生变化的控制点</h3><div id="differenceQuiz" class="stack" role="group" aria-label="SOP变更检测练习"></div>
+<div class="row" style="margin-top:15px"><button id="checkDiff" class="btn primary">检查我的判断</button><button id="resetDiff" class="btn">重置</button></div><p class="status" id="quizScore" aria-live="polite"></p></div>
+<div class="card"><h3>参考审查报告摘要</h3><div class="info warn">“潜在影响”只是建议复核项，不能自动推断文件变更一定导致质量问题。所有模拟参数均禁止用于生产。</div><button id="toggleAnswer" class="btn" type="button" style="margin:12px 0">查看参考答案</button><div id="referenceAnswer" class="hide"></div></div></div>
+</section>
+<section>
+<h2>四、把它带到实际工作前要确认什么？</h2>
+<div class="grid"><div class="card">
+<h3>最小可复现操作</h3>
+<ol><li>下载并查看完整 <code>SKILL.md</code> 及 <code>references/output-schema.md</code>。</li><li>在企业允许的 ChatGPT/Agent 环境中，按实际产品的Skill管理流程创建或安装Skill。</li><li>只用两份模拟SOP练习，要求输出证据位置、变化类型、风险假设和待复核项。</li><li>将模型输出与本页参考答案逐项核对，不允许凭空生成法规结论。</li></ol>
+<button id="copySkillTask" class="btn primary">复制测试任务</button><p id="copyStatus" class="status" aria-live="polite"></p>
+</div><div class="card">
+<h3>人工验收要求</h3><div class="stack">
+<label class="check"><input type="checkbox" data-skill-check>正确识别模拟的5项重要变化</label>
+<label class="check"><input type="checkbox" data-skill-check>每项都能定位到旧版、新版的具体段落</label>
+<label class="check"><input type="checkbox" data-skill-check>能区分“证据事实”和“风险假设”</label>
+<label class="check"><input type="checkbox" data-skill-check>标注不确定性，不自动批准或发布</label>
+</div><p id="skillProgress" class="status">已核验 0/4</p><div class="info">即使4项完成，也需按企业文件控制流程由授权人员审批。</div>
+<p class="small"><a href="https://help.openai.com/en/articles/20001066-skills-in-chatgpt" target="_blank" rel="noopener">OpenAI官方Skills文档 ↗</a></p></div>
+</div>
+</section>
+<footer class="footer">Skill和SOP示例为独立的教学素材，所有数值、审批过程均为虚构。<a href="../index.html#tools">返回课程</a></footer>
+</main></body></html>
