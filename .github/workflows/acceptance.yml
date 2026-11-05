@@ -31,3 +31,5 @@ jobs:
         run: node tests/browser-smoke.mjs
       - name: Research, Codex and Skill specialized lab checks
         run: node tests/labs-smoke.mjs
+      - name: Work and IE IT scenario acceptance
+        run: node tests/phase3-smoke.mjs
