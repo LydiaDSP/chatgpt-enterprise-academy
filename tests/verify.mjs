@@ -78,7 +78,7 @@ assert.ok(threeW.includes('支持 MCP 的客户端'), 'MCP 安装不应被描述
 assert.ok(threeW.includes('ChatGPT') && threeW.includes('Codex CLI'), '应区分插件与命令行的操作入口');
 
 const publicStart = course.indexOf('公开推荐 01');
-const customStart = course.indexOf('企业内部自建方向');
+const customStart = course.indexOf('企业内部自建方向', publicStart);
 assert.ok(publicStart >= 0 && customStart > publicStart, '公开推荐和企业自建必须分为不同区块');
 const publicCatalog = course.slice(publicStart, customStart);
 const publicGroups = [...publicCatalog.matchAll(/<div class="grid3 tool-catalog" data-public-catalog="true">/g)];
