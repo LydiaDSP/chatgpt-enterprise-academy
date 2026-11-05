@@ -4,20 +4,20 @@
 分支：`feat/enrich-skills-mcp-plugin-training`  
 目标 PR：#11
 
-## 0. 最新迭代：用 What / Why / How 先讲清四个概念（2026-11-06）
+## 0. 最新迭代：What / Why / How to Use / How to Build（2026-11-06）
 
-在章节最前面把原有过于简短的四个定义卡片升级为 4 张 3W 入门卡。遵循“先理解 → 再看公开推荐 → 最后认识企业自建”的教学顺序。
+在章节最前面将四张基础卡升级为“是什么、为什么、怎么用、如何开发”四问教学。针对普通学员突出使用，针对 AI 先锋/IT 增加开发入口；保持“先理解 → 再看公开推荐 → 最后认识企业自建”的教学顺序。
 
-| 对象 | What（是什么） | Why（为什么用） | How（从哪里入手） |
-| --- | --- | --- | --- |
-| Skill | AI 的可复用工作手册 | 标准化高频任务 | ChatGPT：Plugins → Skills；或使用 Skill Creator。公开的 Claude Skill 必须在兼容平台使用。 |
-| MCP | AI 客户端与外部工具的标准协议 | 帮 AI 调用已授权工具 | 选支持 MCP 的客户端，配置官方 MCP Server 并用公开数据测试。 |
-| Plugin / App | 可安装的能力入口，封装 Skill / 外部连接 | 无需重造现成集成 | ChatGPT Plugins 搜索 → 查看权限 → 安装/授权 → 测试。 |
-| CLI | 通过命令操作程序 | 批量处理、测试与自动化 | 进入练习目录，使用已安装的 Codex CLI 等工具运行并核查结果。 |
+| 对象 | How to Use（使用现成能力） | How to Build（自主开发） |
+| --- | --- | --- |
+| Skill | Plugins → Skills → 安装或使用共享 Skill → 运行示例任务 | 选任务和规则 → 使用 Skill Creator 或编写 `SKILL.md` → 测试与共享 |
+| MCP | 找到兼容的 MCP 客户端 → 配置现成 Server → 授权并测试 | 用官方 Python/TypeScript SDK 注册工具 → 测试权限、参数与异常 → 部署 |
+| Plugin / App | Plugins 搜索 → 查看权限 → 安装连接 → 调用 | 用 Plugin Creator 组合 Skill 和 App → 测试 → 经批准共享 |
+| CLI | 安装 CLI → 在终端进入练习目录 → 运行命令并检查结果 | 需要时才编写自定义 CLI，如 Python argparse / Node 命令程序 → 测试分发 |
 
-每张卡均包含简短应用例子。这里的示例不是新增“公开 Skill 推荐”，内部 SOP/质量/MES 等自建需求仍与 16 项可获得的公开工具推荐严格分开。
+每张卡保留 What / Why、提供两组独立的 How 步骤及简短应用例子。这里的示例不是新增“公开 Skill 推荐”，内部 SOP/质量/MES 等自建需求仍与 16 项可获得的公开工具推荐严格分开。
 
-**本次验收项**：4 个概念、各有 What / Why / How / 体验示例；原 16 项公开目录不变；原 SOP 实验室及课程结构不变；移动端和投影模式无重大排版问题。
+**本次验收项**：4 个概念、各有 What / Why / How to Use / How to Build / 体验示例；原 16 项公开目录不变；原 SOP 实验室及课程结构不变；移动端和投影模式无重大排版问题。
 
 ## 1. 关键纠正（修订版）
 
@@ -89,3 +89,9 @@
 - [Context7 MCP](https://github.com/upstash/context7)
 
 > 选型原则：**公开推荐只列真实可获取的工具；企业场景归入内部自建需求。** 二者不能混在同一个“推荐插件/Skill/MCP”清单中。
+
+### 使用和开发的权威参考
+
+- [OpenAI Skills：创建、安装与共享](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)
+- [OpenAI Plugins：Plugin Creator 创建与组合](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt)
+- [MCP 官方教程：Build an MCP server](https://modelcontextprotocol.io/docs/develop/build-server)
