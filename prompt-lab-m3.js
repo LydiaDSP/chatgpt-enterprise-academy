@@ -79,33 +79,22 @@ course.addEventListener('click',refreshStageProgress);
 units.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;const buttons=[...units.querySelectorAll('button')].filter(b=>!b.hidden);const i=buttons.indexOf(e.target);if(i<0)return;e.preventDefault();e.stopImmediatePropagation();const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:buttons.length-1))%buttons.length;buttons[next].click();buttons[next].focus();},true);
 showStage('m1','expert');
 const roadmap=course.querySelector('.ap4e-roadmap');if(roadmap){roadmap.replaceChildren();const a=document.createElement('a');a.href='#prompt-m3-vision';a.textContent='继续 M3 · 图片、数据与应用 →';roadmap.append(a);}
-const cases=document.getElementById('page-cases');
-const roles=mount('extended-cases','roles',document.getElementById('departmentSections'));
-window.initRoleCases(roles);
-roles.querySelectorAll('a[href^="../"]').forEach(a=>a.setAttribute('href',a.getAttribute('href').slice(3)));
-roles.querySelectorAll('[id^="role-"]').forEach(section=>section.style.removeProperty('scroll-margin-top'));
-roles.querySelectorAll('[data-role-case]').forEach(card=>{card.style.padding='0';card.style.margin='0';const target=card.querySelector(':scope > p');if(target)target.hidden=true;const body=card.querySelector(':scope > .stack');body.style.padding='0 20px 20px';card.querySelector('summary').style.padding='18px 20px';});
-const jump=document.getElementById('deptJump');jump.setAttribute('role','navigation');jump.setAttribute('aria-label','八部门案例快速导航');
-for(const [code,title] of [['IE','IE 工业工程'],['IT','IT 信息技术']]){const a=document.createElement('a');a.className='btn btn-ghost btn-sm';a.href='#dept-'+code;a.dataset.dept=code;a.textContent=title+' ↓';jump.append(a);}
-cases.querySelector('.page-title').textContent='业务场景指南 · 42个案例';
-cases.querySelector('.page-intro').textContent='FIN、RD、QA、SCM、MFG、HR保留原表30项需求及优先级；IE、IT各6项为教学扩展示例，不代表已部署或已验证。';
-const label=document.querySelector('[data-page="cases"]');for(const node of label.childNodes)if(node.nodeType===3)node.textContent='业务场景指南';
-cases.querySelector('.notes').textContent='讲师时间约10分钟：选取1个场景演示Chat与Agent两条路径；全部42个案例可按部门选学。';
-document.querySelectorAll('.hero-chip').forEach(x=>{if(x.textContent.includes('30个'))x.textContent='42个业务场景'});
+// Additional demonstration cases are not part of the original 30 requests.
+const jump=document.getElementById('deptJump');
+jump.setAttribute('role','navigation');
+jump.setAttribute('aria-label','六部门案例快速导航');
 function syncSettings(){
  const teacher=document.body.classList.contains('teacher'),large=document.body.classList.contains('large-text');
  multimedia.getElementById('teacher').checked=teacher;multimedia.getElementById('teacher').onchange();
- multimedia.host.classList.toggle('large',large);roles.host.classList.toggle('large',large);
+ multimedia.host.classList.toggle('large',large);
 }
 new MutationObserver(syncSettings).observe(document.body,{attributes:true,attributeFilter:['class']});syncSettings();
-function offsets(){const top=document.querySelector('.topbar').getBoundingClientRect().height;document.documentElement.style.setProperty('--academy-top',top+'px');const margin=top+jump.getBoundingClientRect().height+20;document.documentElement.style.setProperty('--academy-anchor',margin+'px');roles.host.style.setProperty('--academy-anchor',margin+'px');}
+function offsets(){const top=document.querySelector('.topbar').getBoundingClientRect().height;document.documentElement.style.setProperty('--academy-top',top+'px');const margin=top+jump.getBoundingClientRect().height+20;document.documentElement.style.setProperty('--academy-anchor',margin+'px');}
 new ResizeObserver(offsets).observe(document.querySelector('.topbar'));new ResizeObserver(offsets).observe(jump);offsets();
 window.routeInlineCourse=hash=>{
  let target;
  if(hash.startsWith('prompt-m3-')){go('prompt',{updateHash:false});const name=hash.slice('prompt-m3-'.length);showStage('m3',groups.m3.includes(name)?name:'vision');target=nav;}
  else if(hash==='prompt-m1'||hash==='prompt-m2'){go('prompt',{updateHash:false});const stage=hash.slice(7);showStage(stage,groups[stage][0]);target=nav;}
- else if(hash.startsWith('dept-')){target=hash==='dept-IE'||hash==='dept-IT'?roles.getElementById('role-'+hash.slice(5)):document.getElementById(hash);if(!target)return false;go('cases',{updateHash:false});}
- else if(/^(ie|it)-0[1-6]$/.test(hash)){go('cases',{updateHash:false});target=roles.getElementById(hash);target.open=true;}
  else return false;
  offsets();requestAnimationFrame(()=>target?.scrollIntoView({block:'start',behavior:'instant'}));return true;
 };
