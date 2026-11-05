@@ -18,6 +18,23 @@ try{
  assert.equal(m.querySelector('[data-panel="data"]').hidden,false);
  assert.equal(d.querySelectorAll('#deptJump a').length,6);
  assert.equal(d.querySelectorAll('details.case').length,30);
+ const departments=[...d.querySelectorAll('#departmentSections > .department')];
+ assert.equal(departments.length,6,'Only six original departments are visible');
+ assert.equal(d.querySelectorAll('.department-cards').length,6,'Each department needs a card grid');
+ assert.equal(d.querySelectorAll('.department-cards > details.case').length,30,'All original cases must be cards');
+ const finance=d.getElementById('dept-FIN');
+ assert.equal(finance.querySelectorAll(':scope > .department-cards > details.case').length,3,'Finance needs three side-by-side cards');
+ const financeSecond=finance.querySelector('#case-02');
+ assert.match(financeSecond.querySelector('summary').textContent,/推荐功能/);
+ assert.match(financeSecond.querySelector('summary').textContent,/数据分析/);
+ assert.equal(financeSecond.open,false,'Cards should start collapsed');
+ financeSecond.querySelector('summary').click();
+ assert.equal(financeSecond.open,true,'Clicking a card must show its full guide');
+ assert.match(financeSecond.querySelector('.case-body').textContent,/实施可行性/);
+ financeSecond.querySelector('summary').click();
+ assert.equal(financeSecond.open,false,'Clicking again must collapse the card');
+ assert.match(read('index.html'),/\\.department-cards\\{display:grid;grid-template-columns:repeat\\(3,minmax\\(0,1fr\\)\\)/,'Desktop card layout needs three columns');
+ assert.match(read('index.html'),/max-width:700px\\)\\{\\.department-cards\\{grid-template-columns:1fr/,'Mobile layout needs one column');
  assert.equal(d.getElementById('extended-cases'),null,'Additional IE/IT demonstrations must not mount in the main training page');
  assert.equal(d.querySelectorAll('a[href^="labs/multimedia.html"],a[href="labs/roles.html"]').length,0);
  assert.equal(d.querySelectorAll('iframe').length,0);
@@ -52,5 +69,5 @@ try{
  first.querySelector('[data-copy-case]').click();await tick();assert.ok(w.copied.length>20);
  for(const a of m.querySelectorAll('a[href]')){const href=a.getAttribute('href');if(!/^(https?:|#)/.test(href))assert.ok(existsSync(new URL('../'+href.split('#')[0],import.meta.url)),href);}
  assert.deepEqual(errors,[]);
- console.log('PASS inline M3, 30 original cases, 6 departments, step-by-step guides and hidden supplementary cases');
+ console.log('PASS inline M3, 30 original cards in 6 departments, responsive grid, click-to-expand and hidden supplementary cases');
 }finally{w.close();}
