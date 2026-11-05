@@ -27,12 +27,16 @@
 
 - **10个课程章节**：桌面端/企业版、Prompt Lab、文件与数据、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI使用小技巧、部门未来场景、学习资源。
 - **120分钟授课路线**：可从主页直接跳转课堂章节。
-- **Prompt Lab**：三种业务任务、三种Prompt层级、自由编辑、简易文字检查、复制追问提示。注意：文字检查不是模型回答评分。
+- **Prompt Lab 2.0（M1 / M2 已合并）**：六节互动课，涵盖新手与高手、模型知识/联网搜索/Deep Research、上下文管理、三轮头脑风暴、避免迎合与Rubric客观评价、渐进式写作；支持讲师提示、课堂互动和本地学习进度。原有三种业务Prompt练习仍保留在可展开区。所有演示为本地模拟，不代表AI实时运行结果。
 - **文件分析**：内置MES模拟日报数据，可本地计算产量、达成率、直通率和异常分布；提供CSV和真实ChatGPT课堂分析Prompt。
 - **Codex Lab**：提供3份模拟采购订单CSV、Codex自然语言开发Prompt和可运行的CSV合并工具。检查“订单号+料号”重复、缺失交期、非数字数量等，下载结果和异常清单。此工具**是网站内的JavaScript程序**，不代表网页直接调用或控制Codex。
 - **AI效率技巧**：15张卡片，包含场景、可复制指令与注意事项。
 - **30个未来业务场景**：与上传的《部門AIAgent适用場景盤點表.xlsx》一一对应，按原表顺序和优先级组织为6个部门章节。每个场景均提供“现在用Chat怎么做”和“未来Agent如何升级”，以及验证与权限说明。
 - **官方资源**：链接OpenAI、DeepLearning.AI、GitHub官方资料。
+
+## Prompt Lab 2.0 教学预览与验收
+
+正式网站访问 `index.html#prompt` 可查看 M1 + M2 共六节教学单元；另提供单文件 `preview-prompt-m2.html` 供离线讲师预览。模块配有 `PROMPT_M1_ACCEPTANCE.md` 与 `PROMPT_M2_ACCEPTANCE.md` 两份验收清单。教学实验只在网页本地生成或切换示例指令，复制后需在企业允许的 ChatGPT 中实测；并未调用真实 AI API、Deep Research 或生产数据系统。单文件预览不包含 `samples/` 下载素材。
 
 ## 上传/发布到 GitHub Pages
 

@@ -242,9 +242,9 @@ function displayCompare(){
  course.querySelectorAll("[data-ap4e-compare]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.ap4eCompare===compareIndex)));
 }
 function lesson(name){
- const expert=name==="expert";
- byId("ap4e-expert").hidden=!expert;
- byId("ap4e-info").hidden=expert;
+ const target=course.querySelector("#ap4e-"+name);
+ if(!target || !target.classList.contains("ap4e-panel")) return;
+ course.querySelectorAll(".ap4e-panel").forEach(p=>p.hidden=p!==target);
  course.querySelectorAll("[data-ap4e-lesson]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.ap4eLesson===name)));
  course.querySelectorAll('[role="tab"]').forEach(b=>b.tabIndex=b.dataset.ap4eLesson===name?0:-1);
  course.querySelector(".ap4e-rail").scrollIntoView({behavior:"smooth",block:"start"});
@@ -252,8 +252,7 @@ function lesson(name){
 function finish(i){
  finished[i]=true;
  try { localStorage.setItem("academy.prompt.m1.batch1",JSON.stringify(finished)); } catch (_) {}
- byId("ap4e-done-count").textContent=finished.filter(Boolean).length+" / 2";
- byId("ap4e-track-fill").style.width=50*finished.filter(Boolean).length+"%";
+ refreshProgress();
  byId("ap4e-complete-expert").textContent=finished[0]?"✓ 已学本节 · 进入信息获取 →":"学完本节，进入信息获取 →";
  byId("ap4e-complete-info").textContent=finished[1]?"✓ 第一批已完成":"完成本批课程 ✓";
 }
@@ -304,21 +303,24 @@ course.addEventListener("click",event=>{
  }
  if(b.dataset.ap4eStage!==undefined){showStage(+b.dataset.ap4eStage);return;}
  if(b.id==="ap4e-copy-research"){copyValue(researchPrompt);return;}
- if(b.id==="ap4e-complete-info"){finish(1);return;}
+ if(b.id==="ap4e-complete-info"){finish(1);if(course.querySelector("#ap4e-context"))lesson("context");return;}
 });
 course.querySelectorAll('[role="tab"]').forEach(tab=>{
  tab.addEventListener("keydown",e=>{
    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
-   e.preventDefault();const target=tab.dataset.ap4eLesson==="expert"?"info":"expert";lesson(target);byId("ap4e-tab-"+target).focus();
+   e.preventDefault();const tabs=[...course.querySelectorAll("[data-ap4e-lesson]")];const i=tabs.indexOf(tab);const next=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];lesson(next.dataset.ap4eLesson);next.focus();
  });
 });
 displayCompare(); showQuestion(); showStage(0);
 function refreshProgress(){
- const count=finished.filter(Boolean).length;
- byId("ap4e-done-count").textContent=count+" / 2";
- byId("ap4e-track-fill").style.width=(count*50)+"%";
+ let completed=finished.filter(Boolean).length;
+ let total=course.querySelectorAll("[data-ap4e-lesson]").length;
+ if(total>2){try{const extra=JSON.parse(localStorage.getItem("academy.prompt.m2.batch2")||"[]");if(Array.isArray(extra))completed+=extra.filter(Boolean).length;}catch(_){}}
+ byId("ap4e-done-count").textContent=completed+" / "+total;
+ byId("ap4e-track-fill").style.width=(100*completed/Math.max(1,total))+"%";
  byId("ap4e-complete-expert").textContent=finished[0]?"✓ 已学本节 · 进入信息获取 →":"学完本节，进入信息获取 →";
- byId("ap4e-complete-info").textContent=finished[1]?"✓ 第一批已完成":"完成本批课程 ✓";
+ byId("ap4e-complete-info").textContent=finished[1]?"✓ 已学 · 下一节：上下文 →":"学完本节，进入上下文 →";
 }
+window.ap4eRefreshM1Progress=refreshProgress;
 refreshProgress();
 })();
