@@ -14,6 +14,10 @@ const CASES=[
 {id:'it-05',dept:'IT',title:'终端安全拦截日志归因',priority:'进阶',target:'对获授权的安全日志进行事件分类，帮助IT安全人员复核误拦截。',inputs:'脱敏EDR/IOA事件、软件名与版本、策略编号、时间线。',chat:'请分析这份经批准脱敏的安全拦截日志，按事件时间、策略、终端与软件进程归类，列出证据、可能误拦截和待管理员确认项；不要提供绕过安全策略或解除管控的指令。',agent:'在受限权限下汇总安全告警，自动生成分级工单；策略例外须经安全管理员批准。',deliver:'安全事件摘要、异常分类、管理员复核清单。',verify:'核对原始告警与政策版本；未有证据前不判断为误报或恶意软件。',risk:'不得借分析结果关闭防护、绕过端点策略或暴露安全凭证。',steps:['脱敏整理终端告警','核对策略与进程时间线','交安全管理员复核']},
 {id:'it-06',dept:'IT',title:'IT工单知识库与故障复盘',priority:'适合首批练习',target:'从历史处理记录中找相似事件、出处及已有验证步骤。',inputs:'经过授权的脱敏工单、版本化SOP、设备类别与故障标签。',chat:'请在这些脱敏IT工单中查找与“设备状态离线、网关采集失败”相似的已解决案例，按症状、排查证据、处理结果与适用条件归类；每条结论附工单出处，无法证明的步骤标注待核实。',agent:'构建按用户权限检索的IT运维知识Agent，通过知识引用给出只读排查建议，任何变更需要授权。',deliver:'相似案例清单、证据引用、排查步骤草稿。',verify:'随机抽查来源工单，检查适用环境与版本是否一致；避免过时解决方案误用。',risk:'历史工单可能包含账号、内部地址和员工信息，入库前必须脱敏和权限控制。',steps:['整理并脱敏知识来源','验证相似案例和有效期限','形成经审核的故障排查说明']}
 ];
+const ROLE_MVP_FILES={
+ 'ie-01':{label:'查看IE节拍差异离线原型',script:'../examples/role-agent-mvp/ie_cycle_review.py'},
+ 'it-01':{label:'查看IT设备离线配对原型',script:'../examples/role-agent-mvp/it_offline_events.py'}
+};
 const selected=new Set();
 function el(tag,text){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n}
 function makeField(title,text){const wrapper=el('div');const heading=el('strong',title);const p=el('p',text);p.className='small';wrapper.append(heading,p);return wrapper}
@@ -77,7 +81,13 @@ function renderCases(){
    const warning=el('div','以上是基于模拟资料的实施蓝图，尚未连接企业系统。不得把建议架构当作已经部署；真实数据来源、接口、触发频率、阈值和权限须由业务与IT共同确认。'+c.risk);warning.className='info warn';agent.appendChild(warning);
    const agentButtons=el('div');agentButtons.className='row';
    const copyAgent=el('button','复制Agent实施方案');copyAgent.className='btn primary';copyAgent.type='button';copyAgent.dataset.copyAgent=c.id;
-   agentButtons.appendChild(copyAgent);agent.appendChild(agentButtons);
+   agentButtons.appendChild(copyAgent);
+   if(ROLE_MVP_FILES[c.id]){
+    const demo=ROLE_MVP_FILES[c.id];
+    const script=el('a',demo.label+' ↗');script.className='btn';script.href=demo.script;script.target='_blank';script.rel='noopener';agentButtons.appendChild(script);
+    const guide=el('a','按步骤运行离线MVP ↗');guide.className='btn';guide.href='../examples/role-agent-mvp/README.md';guide.target='_blank';guide.rel='noopener';agentButtons.appendChild(guide);
+   }
+   agent.appendChild(agentButtons);
    const after=el('div');after.className='role-shared stack';
    after.appendChild(makeField('结果验证与注意',c.verify));
    const add=el('button','加入我的练习清单');add.className='btn';add.type='button';add.dataset.addCase=c.id;after.appendChild(add);
