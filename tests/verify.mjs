@@ -64,9 +64,14 @@ assert.equal(threeWCards.length, 4, 'Skill / MCP / Plugin / CLI 应各有一张 
 for (const [i, keyword] of ['Skill','MCP','Plugin / App','CLI'].entries()) {
   const card = threeWCards[i][1];
   assert.ok(card.includes(keyword), '3W 教学顺序缺少 ' + keyword);
-  for(const label of ['What｜是什么','Why｜为什么用','How｜怎么用','体验示例']) {
+  for(const label of ['What｜是什么','Why｜为什么用','How to Use｜怎么用','How to Build｜怎么开发','体验示例']) {
     assert.ok(card.includes(label), keyword + ' 缺少 ' + label);
   }
+}
+assert.equal((threeW.match(/How to Use｜怎么用/g) || []).length, 4, '四类技术必须分别介绍使用方法');
+assert.equal((threeW.match(/How to Build｜怎么开发/g) || []).length, 4, '四类技术必须分别介绍开发方法');
+for (const step of ['SKILL.md','Python / TypeScript MCP SDK','Plugin Creator','argparse']) {
+  assert.ok(threeW.includes(step), '缺少可执行的开发入口：' + step);
 }
 assert.ok(threeW.includes('Plugins → Skills'), 'Skill 上手路径必须可操作');
 assert.ok(threeW.includes('选择支持 MCP 的客户端'), 'MCP 安装不应被描述为直接在聊天中完成');
