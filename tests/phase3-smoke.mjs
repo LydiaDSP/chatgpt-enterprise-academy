@@ -74,6 +74,46 @@ async function mount(htmlPath,jsPath,hash=''){
   assert.ok(doc.querySelector('#it-05').textContent.includes('终端安全'));
   assert.equal(doc.querySelector('#countIE').textContent,'6');
   assert.equal(doc.querySelector('#countIT').textContent,'6');
+  // 全部12个IE/IT案例必须是双选项卡，不得把两种路径堆在一个界面
+  const cards=[...doc.querySelectorAll('[data-role-case]')];
+  assert.equal(cards.length,12);
+  for(const card of cards){
+    assert.equal(card.querySelectorAll('[role="tab"]').length,2,card.id+' 缺少Chat或Agent选项卡');
+    assert.equal(card.querySelectorAll('[role="tabpanel"]').length,2,card.id+' 缺少独立面板');
+    const chat=card.querySelector('[data-role-panel="chat"]'),agent=card.querySelector('[data-role-panel="agent"]');
+    assert.equal(chat.hidden,false,card.id+' 默认应展示Chat');
+    assert.equal(agent.hidden,true,card.id+' 默认应隐藏Agent');
+    assert.ok(chat.textContent.includes('准备资料')&&chat.textContent.includes('操作路线')&&chat.textContent.includes('Chat Prompt'),card.id+' Chat缺少业务练习');
+    assert.ok(!chat.textContent.includes('上线前提 / 技术配套'),card.id+' Agent内容不应混入Chat');
+    assert.ok(agent.textContent.includes('可能的自动化架构')&&agent.textContent.includes('上线前提 / 技术配套'),card.id+' Agent缺少升级条件');
+    assert.ok(!agent.textContent.includes('简短实用的Chat Prompt'),card.id+' Chat内容不应混入Agent');
+    assert.equal(card.querySelectorAll('[data-copy-case]').length,1,card.id+' 必须保留复制Chat指令');
+  }
+  const ie=doc.querySelector('#ie-01'),it=doc.querySelector('#it-01');
+  ie.open=true;
+  const ieChat=ie.querySelector('[data-role-panel="chat"]'),ieAgent=ie.querySelector('[data-role-panel="agent"]');
+  const itChat=it.querySelector('[data-role-panel="chat"]'),itAgent=it.querySelector('[data-role-panel="agent"]');
+  ie.querySelector('[data-role-tab="agent"]').click();
+  assert.equal(ieChat.hidden,true,'IE切换Agent后应隐藏Chat');
+  assert.equal(ieAgent.hidden,false,'IE切换Agent后应显示Agent');
+  assert.equal(ie.querySelector('[data-role-tab="agent"]').getAttribute('aria-selected'),'true');
+  assert.equal(itChat.hidden,false,'IE切换不能影响IT默认Chat');
+  assert.equal(itAgent.hidden,true);
+  // Agent与Chat来回切换、键盘切换及独立卡片状态
+  ie.querySelector('[data-role-tab="chat"]').click();
+  assert.equal(ieChat.hidden,false);
+  assert.equal(ieAgent.hidden,true);
+  const keyboard=new dom.window.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true});
+  ie.querySelector('[data-role-tab="chat"]').dispatchEvent(keyboard);
+  assert.ok(keyboard.defaultPrevented,'选项卡键盘导航必须阻止默认滚动');
+  assert.equal(ieChat.hidden,true);
+  assert.equal(ieAgent.hidden,false);
+  it.querySelector('[data-role-tab="agent"]').click();
+  assert.equal(itChat.hidden,true);
+  assert.equal(itAgent.hidden,false);
+  assert.equal(ieAgent.hidden,false,'不同案例选项卡状态应独立');
+  console.log('PASS 全部12个IE/IT案例双模式切换、隐藏与键盘访问');
+
   doc.querySelector('[data-add-case="ie-01"]').click();
   doc.querySelector('[data-add-case="it-01"]').click();
   assert.equal(doc.querySelectorAll('#selectedCases [data-remove-case]').length,2);
