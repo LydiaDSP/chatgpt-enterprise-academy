@@ -46,7 +46,7 @@ description: "对比用户授权提供的制造业SOP/SIP旧版与新版文件�
 5. 待确认项与人工审批提示
 
 ## 随附教学练习
-- 模拟旧版：[../../../samples/SOP_演示_旧版.md](../../../samples/SOP_演示_旧版.md)
-- 模拟新版：[../../../samples/SOP_演示_新版.md](../../../samples/SOP_演示_新版.md)
+- 模拟旧版：[../../samples/SOP_演示_旧版.md](../../samples/SOP_演示_旧版.md)
+- 模拟新版：[../../samples/SOP_演示_新版.md](../../samples/SOP_演示_新版.md)
 
 **演示资料均为虚构参数，仅用于学习，不可用于真实生产或法规判定。**
