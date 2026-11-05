@@ -72,6 +72,57 @@ body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,b
     @media(max-width:1190px){.department-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:700px){.department-cards{grid-template-columns:1fr;gap:11px}.department-cards .case-card-summary{min-height:0}.case-card-intro{min-height:0}.department-cards .case[open] .case-card-summary{padding:14px 16px}}
     @media(prefers-reduced-motion:reduce){.department-cards .case{transition:none}.department-cards .case:not([open]):hover{transform:none}}
+
+/* 六部门专属低饱和强调色：保持品牌红主色，增强卡片可读性与导航反馈。 */
+#page-cases{--case-ink:#29262d}
+#page-cases .department[data-dept-theme="FIN"]{--dept-accent:#af374d;--dept-soft:#fdebf0;--dept-border:#ecc6ce}
+#page-cases .department[data-dept-theme="RD"]{--dept-accent:#5969a1;--dept-soft:#edf0fc;--dept-border:#cdd5f0}
+#page-cases .department[data-dept-theme="QA"]{--dept-accent:#217e76;--dept-soft:#e8f6f2;--dept-border:#bfe0da}
+#page-cases .department[data-dept-theme="SCM"]{--dept-accent:#a86b35;--dept-soft:#fff1e3;--dept-border:#ead2b8}
+#page-cases .department[data-dept-theme="MFG"]{--dept-accent:#36769a;--dept-soft:#eaf3fb;--dept-border:#c5ddec}
+#page-cases .department[data-dept-theme="HR"]{--dept-accent:#876098;--dept-soft:#f4edf9;--dept-border:#dfcdeb}
+#page-cases .department{scroll-margin-top:175px}
+#page-cases .department-head{background:linear-gradient(110deg,var(--dept-soft) 0%,#fff 82%);border-color:var(--dept-border);border-left:5px solid var(--dept-accent);padding:18px 23px}
+#page-cases .department-head .dept-head-main{display:flex;align-items:center;gap:15px}
+#page-cases .department-head .dept-svg{width:54px;height:54px;display:grid;place-items:center;flex:none;color:var(--dept-accent);background:#ffffffce;border:1px solid var(--dept-border);border-radius:15px;box-shadow:0 5px 18px #1a11110a}
+#page-cases .dept-svg svg{width:28px;height:28px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#page-cases .department-head h3{color:var(--case-ink);font-size:21px}
+#page-cases .department-head .dept-count{color:var(--dept-accent);font-weight:700;background:#fff;border:1px solid var(--dept-border);padding:6px 11px;border-radius:999px;font-size:11px}
+#page-cases .department-cards{gap:16px}
+#page-cases .department-cards .case{position:relative;background:linear-gradient(163deg,var(--dept-soft) -45%,#fff 42%,#fff 100%);border-color:var(--dept-border);border-top:4px solid var(--dept-accent);box-shadow:0 8px 28px rgba(42,33,37,.055)}
+#page-cases .department-cards .case:not([open]):hover{border-color:var(--dept-accent);box-shadow:0 14px 30px rgba(41,32,35,.13)}
+#page-cases .department-cards .case[open]{border-color:var(--dept-accent);background:#fff}
+#page-cases .department-cards .case-card-summary{min-height:255px;padding:20px}
+#page-cases .case-card-number{display:inline-flex;align-items:center;gap:7px;color:var(--dept-accent);font-weight:800}
+#page-cases .case-card-number:before{content:'';display:block;width:7px;height:7px;background:var(--dept-accent);border-radius:2px;transform:rotate(45deg)}
+#page-cases .case-card-title{font-weight:780;color:#25262d}
+#page-cases .case-card-intro{color:#5d626e;font-size:12.5px}
+#page-cases .case-card-tools{background:var(--dept-soft);border:1px solid var(--dept-border);color:#434952}
+#page-cases .case-card-tools strong{color:var(--dept-accent)}
+#page-cases .case-card-action{color:var(--dept-accent);display:inline-flex;align-items:center;gap:5px}
+#page-cases .case-card-action:before{content:'↗';font-size:15px}
+#page-cases .case-card-state{font-weight:620}
+#page-cases .case[open] .case-card-summary{background:var(--dept-soft)}
+#page-cases .case[open] .case-body{border-top:1px solid var(--dept-border);background:#fff}
+#page-cases .case-feasibility{background:var(--dept-soft);border-color:var(--dept-border)}
+#page-cases .case-deliver{background:#edf7f4;border-left:3px solid #3c9180}
+#page-cases .case-detail-grid>div{background:#fcfaf9}
+#page-cases #deptJump{background:rgba(252,251,249,.97);padding:14px 1px;box-shadow:0 5px 15px rgba(32,22,26,.035)}
+#page-cases #deptJump .dept-link{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2d8dc;color:#4c4a50;font-weight:740;padding:9px 13px;border-radius:12px;box-shadow:0 3px 10px rgba(40,31,32,.035);transition:background .15s,border-color .15s,color .15s}
+#page-cases #deptJump .dept-link:hover{background:#fceff1;border-color:#d5a4af;color:#8d2d3f}
+#page-cases #deptJump .dept-link.active,#page-cases #deptJump .dept-link[aria-current="location"]{color:#fff;background:var(--red);border-color:var(--red);box-shadow:0 5px 12px #aa27372b}
+#page-cases .dept-nav-dot{width:9px;height:9px;border-radius:3px;display:inline-block;flex:none;background:var(--dot-color,var(--red))}
+#page-cases .dept-link.active .dept-nav-dot{background:#fff}
+#page-cases .dept-nav-dot-FIN{--dot-color:#af374d}
+#page-cases .dept-nav-dot-RD{--dot-color:#5969a1}
+#page-cases .dept-nav-dot-QA{--dot-color:#217e76}
+#page-cases .dept-nav-dot-SCM{--dot-color:#a86b35}
+#page-cases .dept-nav-dot-MFG{--dot-color:#36769a}
+#page-cases .dept-nav-dot-HR{--dot-color:#876098}
+#page-cases .dept-nav-count{font-size:10px;opacity:.75;font-variant-numeric:tabular-nums}
+#page-cases .dept-link.active .dept-nav-count{opacity:.95}
+@media(max-width:700px){#page-cases .department-head{padding:15px 13px;align-items:flex-start}#page-cases .department-head .dept-svg{width:42px;height:42px}#page-cases .dept-svg svg{width:23px;height:23px}#page-cases .department-head h3{font-size:18px}#page-cases .department-head .dept-count{display:none}#page-cases .department-cards .case-card-summary{min-height:0}#page-cases #deptJump{gap:6px}#page-cases #deptJump .dept-link{padding:7px 9px;font-size:11px}}
+@media print{#page-cases #deptJump{position:static;box-shadow:none}#page-cases .department-cards .case{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -280,11 +331,40 @@ async function copyText(s){try{await navigator.clipboard.writeText(String(s));to
 function safeGet(k,def){try{return JSON.parse(localStorage.getItem(k))??def}catch{return def}}
 function safeSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
 let completed=new Set(safeGet('academy.done',[]));let page='home';let teacher=!!safeGet('academy.teacher',false);let largeText=!!safeGet('academy.largeText',false);
-function go(next,options={}){if(!PAGES[next])next='home';page=next;if(options.updateHash!==false&&location.hash!=='#'+next)location.hash=next;document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='page-'+next));document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('active',n.dataset.page===next));el('bread').textContent=PAGES[next];el('sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'instant'});el('completeBtn').textContent=completed.has(next)?'✓ 已学本章':'✓ 完成本章';updateChapterNav()}
+function go(next,options={}){if(!PAGES[next])next='home';page=next;if(options.updateHash!==false&&location.hash!=='#'+next)location.hash=next;document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='page-'+next));document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('active',n.dataset.page===next));el('bread').textContent=PAGES[next];el('sidebar').classList.remove('open');if(!options.preserveScroll)window.scrollTo({top:0,behavior:'instant'});el('completeBtn').textContent=completed.has(next)?'✓ 已学本章':'✓ 完成本章';updateChapterNav()}
 function updateChapterNav(){const keys=Object.keys(PAGES),idx=keys.indexOf(page);el('chapterCount').textContent=(idx+1)+' / '+keys.length;el('prevChapter').disabled=idx<=0;el('nextChapter').disabled=idx<0||idx>=keys.length-1}
 function navigateChapter(delta){const keys=Object.keys(PAGES),idx=keys.indexOf(page),target=keys[idx+delta];if(target)go(target)}
 function setLargeText(value,announce=true){largeText=!!value;document.body.classList.toggle('large-text',largeText);el('presentToggle').setAttribute('aria-pressed',String(largeText));el('presentToggle').innerHTML=largeText?'⊞ <span class="label">退出大字</span>':'⊞ <span class="label">投影大字</span>';safeSet('academy.largeText',largeText);if(announce)toast(largeText?'已开启投影大字模式':'已恢复常规字号')}
-function routeFromHash(){let hash=decodeURIComponent(location.hash.slice(1));if(window.routeInlineCourse?.(hash))return;if((hash.startsWith('dept-')||hash.startsWith('case-'))&&el(hash)){go('cases',{updateHash:false});if(hash.startsWith('case-'))el(hash).open=true;requestAnimationFrame(()=>el(hash)?.scrollIntoView({behavior:'smooth',block:'start'}));return}go(hash||'home',{updateHash:false})}
+let departmentJumpToken=0;
+function setActiveDepartment(code){
+ document.querySelectorAll('#deptJump [data-dept]').forEach(a=>{
+   const active=a.dataset.dept===code;
+   a.classList.toggle('active',active);
+   if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');
+ });
+}
+function navigateToCaseAnchor(id,options={}){
+ const target=el(id);if(!target)return false;
+ const ticket=++departmentJumpToken;
+ go('cases',{updateHash:false,preserveScroll:true});
+ if(id.startsWith('case-'))target.open=true;
+ const code=id.startsWith('dept-')?id.slice(5):SCENARIOS.find(s=>s.id===id)?.department;
+ if(code)setActiveDepartment(code);
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   if(ticket!==departmentJumpToken)return;
+   const topbar=document.querySelector('.topbar')?.getBoundingClientRect().height||0;
+   const nav=el('deptJump')?.getBoundingClientRect().height||0;
+   const position=Math.max(0,window.scrollY+target.getBoundingClientRect().top-topbar-nav-18);
+   window.scrollTo({top:position,behavior:options.smooth?'smooth':'instant'});
+ }));
+ return true;
+}
+function routeFromHash(){
+ const hash=decodeURIComponent(location.hash.slice(1));
+ if(window.routeInlineCourse?.(hash))return;
+ if(/^(dept-(FIN|RD|QA|SCM|MFG|HR)|case-\d{2})$/.test(hash)&&navigateToCaseAnchor(hash,{smooth:false}))return;
+ go(hash||'home',{updateHash:false});
+}
 
 function updateProgress(){safeSet('academy.done',[...completed]);el('progressText').textContent=`${completed.size} / ${Object.keys(PAGES).length} 章`;el('progressFill').style.width=`${100*completed.size/Object.keys(PAGES).length}%`;document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('done',completed.has(n.dataset.page)))}
 function setMode(t){teacher=t;document.body.classList.toggle('teacher',teacher);el('modeToggle').innerHTML=teacher?'☷ <span class="label">切换自学模式</span>':'◫ <span class="label">讲师模式</span>';el('modeSign').hidden=!teacher;safeSet('academy.teacher',teacher);toast(teacher?'已进入讲师模式：显示讲师提示':'已进入自学模式')}
@@ -297,14 +377,23 @@ function renderMes(){const sums=MES_DATA.reduce((a,r)=>{a.plan+=r[2];a.actual+=r
 let workIdx=0;function renderWork(){el('workStepper').innerHTML=WORK_STEPS.map((v,i)=>`<button data-step="${i}" class="${i===workIdx?'active':''}" aria-label="第${i+1}步">${i+1}</button>`).join('');const v=WORK_STEPS[workIdx];el('workStepContent').innerHTML=`<div class="eyebrow">STEP ${workIdx+1} / ${WORK_STEPS.length}</div><h3 style="margin:0 0 10px">${esc(v[0])}</h3><p style="font-size:13px;color:var(--text)">${esc(v[1])}</p><p class="micro">${esc(v[2])}</p>`;el('workPrev').disabled=workIdx===0;el('workNext').textContent=workIdx===WORK_STEPS.length-1?'完成演练 ✓':'下一步 →';}
 function renderTips(){el('tipsGrid').innerHTML=TIP_DATA.map((t,i)=>`<article class="tip"><div class="row between"><span class="tag">${esc(t[1])}</span><span class="micro">${String(i+1).padStart(2,'0')}</span></div><h3>${esc(t[0])}</h3><p>${esc(t[2])}</p><button class="btn btn-ghost btn-sm" data-tip="${i}">查看做法 ↓</button><div class="tip-detail" id="tipd-${i}" hidden><strong>尝试一下</strong>\n${esc(t[3])}\n\n<strong>操作收获</strong>\n${esc(t[4])}\n\n<strong>注意事项</strong>\n${esc(t[5])}<div style="margin-top:12px"><button class="btn btn-soft btn-sm" data-copy-tip="${i}">复制练习</button></div></div></article>`).join('')}
 const CASE_FEATURES=Object.freeze({"case-01":"联网搜索、文件上传、数据分析","case-02":"文件上传、数据分析","case-03":"文件上传、数据分析","case-04":"文件分析、项目/知识整理","case-05":"文件上传、数据分析","case-06":"多文件分析、表格关联","case-07":"文件上传、数据分析","case-08":"文件分析、摘要生成","case-09":"文件分析、结构化审查","case-10":"文件分析、版本差异对比","case-11":"文件分析、可选Codex脚本","case-12":"文件上传、数据分析","case-13":"数据分析、预测回测","case-14":"数据分析、邮件草稿","case-15":"多文件分析、表格关联","case-16":"文件分析、授权物流查询","case-17":"文件分析、数据分析","case-18":"文件分析、原文检索","case-19":"历史数据分析、规则设计","case-20":"多文件分析、数据关联","case-21":"文件分析、趋势图","case-22":"脱敏数据分析、报表生成","case-23":"规则检查、通知草稿","case-24":"联网搜索、Deep Research","case-25":"文件分析、制度检索","case-26":"去标识化数据分析","case-27":"模拟数据分析、可选Codex","case-28":"对话、邮件草稿","case-29":"对话、日历/邮件草稿","case-30":"文件分析、通知草稿"});
+const DEPARTMENT_ICONS={
+ FIN:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 17v-5m5 5V8m5 9v-7"/>',
+ RD:'<path d="M9 3h6m-5 0v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 16h8"/>',
+ QA:'<path d="M12 2 4 5v6c0 5 3.4 8.3 8 11 4.6-2.7 8-6 8-11V5l-8-3ZM9 12l2 2 4-4"/>',
+ SCM:'<path d="M3 6h11v11H3zM14 10h4l3 4v3h-7zM9 19a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM20 19a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>',
+ MFG:'<path d="M3 21V10l6 3V8l6 4V4h5v17H3ZM7 17h2m3 0h2m3 0h2"/>',
+ HR:'<path d="M9 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM3 21v-2a6 6 0 0 1 12 0v2M17 7a3 3 0 0 1 0 6m1 4a5 5 0 0 1 3 4"/>'
+};
+function deptIcon(code){return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+(DEPARTMENT_ICONS[code]||'')+'</svg>';}
 function renderCases(){
  const guides=window.SCENARIO_PLAYBOOKS||{};
  const labels={direct:['可以先用ChatGPT实操','direct'],conditional:['满足数据或权限条件后试做','conditional'],pilot:['需要工程试点验证','pilot']};
  const steps=(items,ordered=true)=>`<${ordered?'ol':'ul'} class="${ordered?'playbook-steps':'playbook-checks'}">${(items||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</${ordered?'ol':'ul'}>`;
- el('deptJump').innerHTML=DEPARTMENTS.map(d=>`<a href="#dept-${d[0]}" data-dept="${d[0]}" class="btn btn-ghost btn-sm">${esc(d[1])} ↓</a>`).join('');
+ el('deptJump').innerHTML=DEPARTMENTS.map(d=>`<a href="#dept-${d[0]}" data-dept="${d[0]}" class="dept-link" aria-label="跳转到${esc(d[1])}案例"><span class="dept-nav-dot dept-nav-dot-${d[0]}" aria-hidden="true"></span>${esc(d[1])}<span class="dept-nav-count">${SCENARIOS.filter(s=>s.department===d[0]).length}</span></a>`).join('');
  el('departmentSections').innerHTML=DEPARTMENTS.map(d=>{
    const cases=SCENARIOS.filter(s=>s.department===d[0]),high=cases.filter(s=>s.priority==='高').length;
-   return `<section class="department" id="dept-${d[0]}"><div class="department-head"><div><h3>${esc(d[1])}</h3><p>${esc(d[2])} · ${cases.length}个案例 · 高优先级${high}个</p></div><span class="pill">部门真实需求</span></div><div class="department-cards" aria-label="${esc(d[1])}业务案例卡片">${cases.map(s=>{
+   return `<section class="department" id="dept-${d[0]}" data-dept-theme="${d[0]}"><div class="department-head"><div class="dept-head-main"><span class="dept-svg">${deptIcon(d[0])}</span><div><h3>${esc(d[1])}</h3><p>${esc(d[2])} · ${cases.length}个案例 · 高优先级${high}个</p></div></div><span class="dept-count">${cases.length} 项业务任务</span></div><div class="department-cards" aria-label="${esc(d[1])}业务案例卡片">${cases.map(s=>{
      const p=guides[s.id],lbl=labels[p?.status]||labels.conditional;
      if(!p)return `<details class="case" id="${s.id}"><summary class="case-card-summary"><span class="case-card-head"><span class="case-card-number">案例 ${esc(s.id.slice(-2))}</span><span class="case-card-priority badge-medium">内容待核对</span></span><span class="case-card-title">${esc(s.title)}</span><span class="case-card-action">查看详情 →</span></summary><div class="case-body">操作指南暂缺，请核对资料。</div></details>`;
      return `<details class="case" id="${s.id}"><summary class="case-card-summary"><span class="case-card-head"><span class="case-card-number">案例 ${esc(s.id.slice(-2))}</span><span class="case-card-priority ${s.priority==='高'?'badge-high':s.priority==='中'?'badge-medium':'badge-low'}">${esc(s.priority)}优先级</span></span><span class="case-card-title">${esc(p.t)}</span><span class="case-card-intro">${esc(p.verdict)}</span><span class="case-card-tools"><strong>推荐功能：</strong>${esc(CASE_FEATURES[s.id]||'对话与文件分析')}</span><span class="case-card-bottom"><span class="case-card-state ${lbl[1]}">${esc(lbl[0])}</span><span class="case-card-action"><span class="when-closed">查看详情 →</span><span class="when-open">收起详情 ↑</span></span></span></summary>
@@ -329,7 +418,7 @@ function downloadCSV(rows,name){let blob=new Blob([encodeCSV(rows)],{type:'text/
 let inputCSVs=[],lastMerge=null;
 function loadCSVs(items){inputCSVs=items;lastMerge=null;el('runMerge').disabled=false;el('sourceStatus').textContent=`已载入 ${items.length} 份CSV：${items.map(f=>f.name).join('、')}`;el('mergeResults').innerHTML='';toast(`已载入${items.length}份文件`) }
 function runMerge(){if(!inputCSVs.length)return;try{let expected=['订单号','料号','数量','交期','供应商'];let data=[],errors=[];inputCSVs.forEach(file=>{let parsed=parseCSV(file.text);if(!parsed.length)return;let head=parsed[0].map(x=>x.trim());for(let h of expected)if(!head.includes(h))throw new Error(`${file.name}缺少必需列：${h}`);parsed.slice(1).forEach((row,idx)=>{let obj={};for(let h of expected)obj[h]=row[head.indexOf(h)]??'';obj['来源文件']=file.name;obj['源行号']=idx+2;data.push(obj)})});let seen=new Map();data.forEach((v,i)=>{let issues=[];let key=v['订单号'].trim()+'|'+v['料号'].trim();if(!v['订单号'].trim()||!v['料号'].trim())issues.push('主键缺失');if(seen.has(key))issues.push(`重复订单（首次见于第${seen.get(key)+1}条）`);else seen.set(key,i);if(!v['交期'].trim())issues.push('交期缺失');if(v['数量'].trim()&&!Number.isFinite(Number(v['数量'])))issues.push('数量非数字');v['检查结果']=issues.join('；')||'正常';if(issues.length)errors.push(v)});lastMerge={data,errors};let head=[...expected,'来源文件','源行号','检查结果'];el('mergeResults').innerHTML=`<div class="metric-row"><div class="metric"><strong>${inputCSVs.length}</strong><span>来源文件</span></div><div class="metric"><strong>${data.length}</strong><span>合并记录</span></div><div class="metric"><strong>${errors.length}</strong><span>异常记录（按行）</span></div></div><div class="row" style="margin:16px 0"><button class="btn btn-primary" id="downloadAll">↓ 下载合并结果</button><button class="btn btn-ghost" id="downloadErrors">↓ 下载异常清单</button></div><div class="table-wrap"><table class="result-table"><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${data.slice(0,18).map(r=>`<tr class="${r['检查结果']!=='正常'?'bad-row':''}">${head.map(h=>`<td>${esc(r[h])}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="micro">仅显示前18行；下载文件包含所有行。本例重复规则为“订单号+料号”完全匹配。重复项不会自动删除，避免误删合法记录。</p>`;el('downloadAll').onclick=()=>downloadCSV([head,...data.map(v=>head.map(h=>v[h]))],'合并结果_模拟.csv');el('downloadErrors').onclick=()=>downloadCSV([head,...errors.map(v=>head.map(h=>v[h]))],'异常清单_模拟.csv');toast('已完成本地合并与异常检查')}catch(e){el('mergeResults').innerHTML=`<div class="info gold">执行失败：${esc(e.message)}</div>`;toast('文件格式检查未通过')}}
-function initHandlers(){window.addEventListener('hashchange',routeFromHash);document.addEventListener('click',e=>{const goBtn=e.target.closest('[data-go]');if(goBtn){location.hash=goBtn.dataset.go;return}const cp=e.target.closest('[data-copy-key]');if(cp){copyText(PROMPTS[cp.dataset.copyKey]);return}const t=e.target.closest('[data-tip]');if(t){let d=el('tipd-'+t.dataset.tip);d.hidden=!d.hidden;t.textContent=d.hidden?'查看做法 ↓':'收起 ↑';return}const ct=e.target.closest('[data-copy-tip]');if(ct){copyText(TIP_DATA[+ct.dataset.copyTip][3]);return}const caseCopy=e.target.closest('[data-copy-case]');if(caseCopy){copyText(SCENARIOS.find(s=>s.id===caseCopy.dataset.copyCase).chatPrompt);return}const caseTab=e.target.closest('[data-case-tab]');if(caseTab){let outer=el(caseTab.dataset.caseId);outer.querySelectorAll('[data-case-tab]').forEach(b=>b.classList.toggle('selected',b===caseTab));outer.querySelectorAll('[data-case-panel]').forEach(p=>p.classList.toggle('active',p.dataset.casePanel===caseTab.dataset.caseTab));return}const prTask=e.target.closest('[data-prompt-task]');if(prTask){selectPrompt(prTask.dataset.promptTask,promptLevel);return}const prLevel=e.target.closest('[data-prompt-level]');if(prLevel){selectPrompt(promptTask,+prLevel.dataset.promptLevel);return}const step=e.target.closest('[data-step]');if(step){workIdx=+step.dataset.step;renderWork();return}const dep=e.target.closest('[data-dept]');if(dep){e.preventDefault();const target='dept-'+dep.dataset.dept;if(location.hash==='#'+target)routeFromHash();else location.hash=target;return}});el('mobileToggle').onclick=()=>el('sidebar').classList.toggle('open');el('modeToggle').onclick=()=>setMode(!teacher);el('presentToggle').onclick=()=>setLargeText(!largeText);el('prevChapter').onclick=()=>navigateChapter(-1);el('nextChapter').onclick=()=>navigateChapter(1);el('completeBtn').onclick=()=>{if(completed.has(page))completed.delete(page);else completed.add(page);updateProgress();go(page);toast('学习进度已更新')};el('resetProgress').onclick=()=>{if(confirm('确定清除当前浏览器中的学习进度吗？')){completed.clear();updateProgress();toast('学习进度已重置')}};el('resetPrompt').onclick=()=>selectPrompt(promptTask,promptLevel);el('promptInput').addEventListener('input',updatePromptChecklist);el('copyPrompt').onclick=()=>copyText(el('promptInput').value);el('copyFollow').onclick=()=>copyText(PROMPT_TASKS[promptTask].follow);el('workPrev').onclick=()=>{workIdx=Math.max(0,workIdx-1);renderWork()};el('workNext').onclick=()=>{if(workIdx===WORK_STEPS.length-1){toast('已完成流程演练，尚未执行真实网站任务');return}workIdx++;renderWork()};el('loadSample').onclick=()=>loadCSVs(DEMO_CSVS);el('runMerge').onclick=runMerge;el('csvInput').addEventListener('change',async e=>{try{let files=[...e.target.files];if(files.length===0)return;if(files.length>20)throw new Error('最多选择20个文件');let loaded=await Promise.all(files.map(async f=>({name:f.name,text:await f.text()})));loadCSVs(loaded)}catch(err){toast(err.message)}});el('preflight').addEventListener('change',e=>{if(e.target.matches('[data-preflight]')){let done=new Set(safeGet('academy.preflight',[]));let i=+e.target.dataset.preflight;e.target.checked?done.add(i):done.delete(i);safeSet('academy.preflight',[...done])}});document.addEventListener('keydown',e=>{if(!teacher||e.target?.matches?.('textarea,input,select,[contenteditable="true"]'))return;if(e.shiftKey&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&(e.key==='PageDown'||e.key==='PageUp')){e.preventDefault();navigateChapter(e.key==='PageDown'?1:-1)}})}
+function initHandlers(){window.addEventListener('hashchange',routeFromHash);document.addEventListener('click',e=>{const goBtn=e.target.closest('[data-go]');if(goBtn){location.hash=goBtn.dataset.go;return}const cp=e.target.closest('[data-copy-key]');if(cp){copyText(PROMPTS[cp.dataset.copyKey]);return}const t=e.target.closest('[data-tip]');if(t){let d=el('tipd-'+t.dataset.tip);d.hidden=!d.hidden;t.textContent=d.hidden?'查看做法 ↓':'收起 ↑';return}const ct=e.target.closest('[data-copy-tip]');if(ct){copyText(TIP_DATA[+ct.dataset.copyTip][3]);return}const caseCopy=e.target.closest('[data-copy-case]');if(caseCopy){copyText(SCENARIOS.find(s=>s.id===caseCopy.dataset.copyCase).chatPrompt);return}const caseTab=e.target.closest('[data-case-tab]');if(caseTab){let outer=el(caseTab.dataset.caseId);outer.querySelectorAll('[data-case-tab]').forEach(b=>b.classList.toggle('selected',b===caseTab));outer.querySelectorAll('[data-case-panel]').forEach(p=>p.classList.toggle('active',p.dataset.casePanel===caseTab.dataset.caseTab));return}const prTask=e.target.closest('[data-prompt-task]');if(prTask){selectPrompt(prTask.dataset.promptTask,promptLevel);return}const prLevel=e.target.closest('[data-prompt-level]');if(prLevel){selectPrompt(promptTask,+prLevel.dataset.promptLevel);return}const step=e.target.closest('[data-step]');if(step){workIdx=+step.dataset.step;renderWork();return}const dep=e.target.closest('#deptJump [data-dept]');if(dep){e.preventDefault();const target='dept-'+dep.dataset.dept;if(!el(target))return;history.pushState(null,'','#'+target);navigateToCaseAnchor(target,{smooth:true});return}});el('mobileToggle').onclick=()=>el('sidebar').classList.toggle('open');el('modeToggle').onclick=()=>setMode(!teacher);el('presentToggle').onclick=()=>setLargeText(!largeText);el('prevChapter').onclick=()=>navigateChapter(-1);el('nextChapter').onclick=()=>navigateChapter(1);el('completeBtn').onclick=()=>{if(completed.has(page))completed.delete(page);else completed.add(page);updateProgress();go(page);toast('学习进度已更新')};el('resetProgress').onclick=()=>{if(confirm('确定清除当前浏览器中的学习进度吗？')){completed.clear();updateProgress();toast('学习进度已重置')}};el('resetPrompt').onclick=()=>selectPrompt(promptTask,promptLevel);el('promptInput').addEventListener('input',updatePromptChecklist);el('copyPrompt').onclick=()=>copyText(el('promptInput').value);el('copyFollow').onclick=()=>copyText(PROMPT_TASKS[promptTask].follow);el('workPrev').onclick=()=>{workIdx=Math.max(0,workIdx-1);renderWork()};el('workNext').onclick=()=>{if(workIdx===WORK_STEPS.length-1){toast('已完成流程演练，尚未执行真实网站任务');return}workIdx++;renderWork()};el('loadSample').onclick=()=>loadCSVs(DEMO_CSVS);el('runMerge').onclick=runMerge;el('csvInput').addEventListener('change',async e=>{try{let files=[...e.target.files];if(files.length===0)return;if(files.length>20)throw new Error('最多选择20个文件');let loaded=await Promise.all(files.map(async f=>({name:f.name,text:await f.text()})));loadCSVs(loaded)}catch(err){toast(err.message)}});el('preflight').addEventListener('change',e=>{if(e.target.matches('[data-preflight]')){let done=new Set(safeGet('academy.preflight',[]));let i=+e.target.dataset.preflight;e.target.checked?done.add(i):done.delete(i);safeSet('academy.preflight',[...done])}});document.addEventListener('keydown',e=>{if(!teacher||e.target?.matches?.('textarea,input,select,[contenteditable="true"]'))return;if(e.shiftKey&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&(e.key==='PageDown'||e.key==='PageUp')){e.preventDefault();navigateChapter(e.key==='PageDown'?1:-1)}})}
 function init(){renderTimeline();renderMes();renderWork();renderTips();renderCases();renderResources();selectPrompt('qa',0);updateProgress();setMode(teacher);setLargeText(largeText,false);initHandlers();routeFromHash()}
 init();
 </script>
