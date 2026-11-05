@@ -33,8 +33,8 @@ try{
  assert.match(financeSecond.querySelector('.case-body').textContent,/实施可行性/);
  financeSecond.querySelector('summary').click();
  assert.equal(financeSecond.open,false,'Clicking again must collapse the card');
- assert.match(read('index.html'),/\\.department-cards\\{display:grid;grid-template-columns:repeat\\(3,minmax\\(0,1fr\\)\\)/,'Desktop card layout needs three columns');
- assert.match(read('index.html'),/max-width:700px\\)\\{\\.department-cards\\{grid-template-columns:1fr/,'Mobile layout needs one column');
+ assert.ok(read('index.html').includes('.department-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))'),'Desktop card layout needs three columns');
+ assert.ok(read('index.html').includes('@media(max-width:700px){.department-cards{grid-template-columns:1fr'),'Mobile layout needs one column');
  assert.equal(d.getElementById('extended-cases'),null,'Additional IE/IT demonstrations must not mount in the main training page');
  assert.equal(d.querySelectorAll('a[href^="labs/multimedia.html"],a[href="labs/roles.html"]').length,0);
  assert.equal(d.querySelectorAll('iframe').length,0);
