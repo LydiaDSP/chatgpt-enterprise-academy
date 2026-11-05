@@ -3,9 +3,11 @@ on:
   push:
     branches:
       - 'feat/v1.1-*'
+      - 'feat/prompt-lab-m3-*'
   pull_request:
     paths:
       - 'index.html'
+      - 'prompt-lab-*.js'
       - 'scenario_data.json'
       - 'samples/**'
       - 'tests/**'
@@ -31,3 +33,5 @@ jobs:
         run: node tests/browser-smoke.mjs
       - name: Research, Codex and Skill specialized lab checks
         run: node tests/labs-smoke.mjs
+      - name: M3 multimedia and teaching loop checks
+        run: node tests/m3-smoke.mjs
