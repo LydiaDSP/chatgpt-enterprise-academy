@@ -186,6 +186,9 @@ body.large-text #page-tips .tip h3{font-size:19px}
     body.large-text .tool-3w-unit strong{font-size:17px}
     body.large-text .tool-3w-unit p,body.large-text .tool-3w-example{font-size:17px!important}
     @media(max-width:850px){.tool-3w-card{min-height:0}}
+    .tool-3w-build{background:#f9f7f4;border:1px solid #ece3dd;border-radius:11px;padding:12px 13px;margin:6px 0 12px}
+    .tool-3w-build strong{color:#6b4c2f}
+    .tool-3w-unit code{background:#f4ecee;color:#7f2b3d;font-size:.92em;padding:2px 5px;border-radius:5px;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -287,40 +290,50 @@ body.large-text #page-tips .tip h3{font-size:19px}
         <div class="card" style="margin-top:21px;border-left:4px solid var(--red)"><div class="row between"><h3>专题互动实验｜Deep Research制造业调研</h3><span class="pill">独立练习页</span></div><p>从调研目标、研究计划、证据质量到报告验收，练习如何识别可信来源；提供视觉检测、预测性维护、3Q验证三个模拟选题。网页不执行真实研究。</p><div class="row" style="margin-top:12px"><a class="btn btn-primary" href="labs/research.html" target="_blank" rel="noopener">进入 Deep Research 实验室 ↗</a></div><div class="notes" style="margin-top:12px">课堂建议：本章节只现场展示“任务单”和“计划审核”约6–8分钟，完整研究交给课后学员，不应在120分钟主课中等待深度研究实时完成。</div></div>
       </section>
       <section class="view" id="page-tools">
-        <div class="page-head"><p class="eyebrow">04 · REUSABLE WORKFLOWS</p><h1 class="page-title">Skill、MCP、Plugin、CLI</h1><p class="page-intro">先用 What、Why、How 三个问题理解 Skill、MCP、Plugin 和 CLI，再探索公开可用的工具推荐以及企业内部可自建的场景。</p></div>
-        <h2 class="section-title">3W 入门｜What · Why · How</h2>
-        <p class="small muted">先讲明白每种工具是什么、为什么值得用、具体从哪里开始。不要求普通学员现场安装开发环境；本页后半部分再介绍已经公开发布、可获取的插件、Skill 和 MCP。</p>
+        <div class="page-head"><p class="eyebrow">04 · REUSABLE WORKFLOWS</p><h1 class="page-title">Skill、MCP、Plugin、CLI</h1><p class="page-intro">先看 What、Why、How to Use 和 How to Build，再探索公开工具推荐与企业内部自建方向。</p></div>
+        <h2 class="section-title">入门四问｜What · Why · Use · Build</h2>
+        <p class="small muted">每种能力先回答四个问题：是什么、为什么要用、现成工具怎么使用、自己如何开发。普通学员重点看使用步骤；AI 先锋和 IT 可按开发步骤进一步实践。</p>
         <div class="grid2 tool-3w-grid">
           <article class="card tool-3w-card">
             <div class="row"><span class="pill">工作方法</span><h3>Skill · AI 的工作手册</h3></div>
             <div class="tool-3w-unit"><strong>What｜是什么</strong><p>把某类任务的步骤、规则、模板和必要脚本整理成可反复使用的“工作手册”，让 AI 知道该按什么标准完成任务。</p></div>
             <div class="tool-3w-unit"><strong>Why｜为什么用</strong><p>适合高频、流程明确的工作，减少重复解释，提高输出格式和处理步骤的一致性。</p></div>
-            <div class="tool-3w-unit"><strong>How｜怎么用</strong><p>ChatGPT：进入 <b>Plugins → Skills</b>，使用已安装或已共享的 Skill；需要自己创建时，可使用 Skill Creator，再用样例测试。外部公开 Skill 要先确认适用平台。</p></div>
+            <div class="tool-3w-unit"><strong>How to Use｜怎么用</strong><p>进入 ChatGPT 的 <b>Plugins → Skills</b> → 安装现成或同事共享的 Skill → 直接描述任务并核对输出。使用其他平台的公开 Skill 前先确认兼容性。</p></div>
+            <div class="tool-3w-unit tool-3w-build"><strong>How to Build｜怎么开发</strong><p>① 选一个重复任务，明确输入和输出；② 用 Skill Creator 生成或自行编写 <code>SKILL.md</code>，写清步骤、规则与样例；③ 用正常与异常样本测试，修订后按权限共享。</p></div>
             <p class="tool-3w-example"><b>体验示例：</b>在兼容的 Claude 环境使用公开 PDF Skill，整理一份公开 PDF 文档。</p>
           </article>
           <article class="card tool-3w-card">
             <div class="row"><span class="pill">工具连接协议</span><h3>MCP · AI 的标准接口</h3></div>
             <div class="tool-3w-unit"><strong>What｜是什么</strong><p>Model Context Protocol 是让 AI 客户端以统一方式接入外部工具和资料的开放协议，可以把它理解为“AI 的通用接口”。</p></div>
             <div class="tool-3w-unit"><strong>Why｜为什么用</strong><p>让 AI 在获得授权后调用现成工具、查询资料或执行操作，而不局限于对话。统一接口也方便不同工具集成。</p></div>
-            <div class="tool-3w-unit"><strong>How｜怎么用</strong><p>选择支持 MCP 的客户端 → 找到公开的 MCP Server → 按官方说明配置连接和权限 → 用公开数据测试调用结果。</p></div>
+            <div class="tool-3w-unit"><strong>How to Use｜怎么用</strong><p>在支持 MCP 的客户端选择一个现成 Server（如 GitHub MCP）→ 按说明配置连接及授权 → 用测试数据尝试调用并检查结果。</p></div>
+            <div class="tool-3w-unit tool-3w-build"><strong>How to Build｜怎么开发</strong><p>① 确认需要开放哪个查询或操作；② 用 Python / TypeScript MCP SDK 编写 Server 并注册工具；③ 在测试客户端验证参数、权限和异常处理，再由 IT 审查与部署。</p></div>
             <p class="tool-3w-example"><b>体验示例：</b>使用 GitHub MCP Server 查询公开项目中的 Issue，或用 Playwright MCP 操作测试网页。</p>
           </article>
           <article class="card tool-3w-card">
             <div class="row"><span class="pill">现成扩展</span><h3>Plugin / App · AI 的功能扩展包</h3></div>
             <div class="tool-3w-unit"><strong>What｜是什么</strong><p>Plugin 将可用能力组织成便于安装的入口。在 ChatGPT 中，插件可以包含 Skills、连接外部服务的 Apps，或两者的组合。</p></div>
             <div class="tool-3w-unit"><strong>Why｜为什么用</strong><p>优先复用已发布的功能，不必每次从零开发；连接外部应用后，可在授权范围内使用已有账号和资料。</p></div>
-            <div class="tool-3w-unit"><strong>How｜怎么用</strong><p>打开 ChatGPT <b>Plugins</b> → 搜索所需插件（如 Google Drive）→ 查看介绍与权限 → 安装并按需连接账号 → 用演示资料试用。</p></div>
+            <div class="tool-3w-unit"><strong>How to Use｜怎么用</strong><p>打开 ChatGPT <b>Plugins</b> → 搜索公开插件（如 Google Drive）→ 查看可用功能和权限 → 安装、按需授权账号后尝试任务。</p></div>
+            <div class="tool-3w-unit tool-3w-build"><strong>How to Build｜怎么开发</strong><p>① 使用 <b>Plugin Creator</b> 描述目标流程；② 组合 Skill、已有 App 或经批准的自建连接；③ 在测试环境验证读取、写入及审批，再按工作区权限共享。</p></div>
             <p class="tool-3w-example"><b>体验示例：</b>利用 Google Drive 插件查找并汇总自己有权限访问的文档。</p>
           </article>
           <article class="card tool-3w-card">
             <div class="row"><span class="pill">执行命令</span><h3>CLI · 通过命令操作程序</h3></div>
             <div class="tool-3w-unit"><strong>What｜是什么</strong><p>CLI 是 Command-Line Interface（命令行界面），通过输入文字命令运行程序、脚本和开发工具。</p></div>
             <div class="tool-3w-unit"><strong>Why｜为什么用</strong><p>适合需要批量处理、重复执行和自动测试的技术工作，执行过程可以记录、复查和重跑。</p></div>
-            <div class="tool-3w-unit"><strong>How｜怎么用</strong><p>打开终端并进入练习文件夹 → 使用已安装的 CLI（例如 Codex CLI）提出任务或运行命令 → 检查输出和测试结果。</p></div>
+            <div class="tool-3w-unit"><strong>How to Use｜怎么用</strong><p>安装所需 CLI（如 Codex CLI）→ 打开终端进入测试目录 → 输入命令并检查程序输出或生成的文件。</p></div>
+            <div class="tool-3w-unit tool-3w-build"><strong>How to Build｜怎么开发</strong><p>通常<b>不必开发 CLI 本身</b>。确需定制时，可用 Python <code>argparse</code> 或 Node.js 编写带参数的命令脚本 → 增加 <code>--help</code> 和错误提示 → 测试后打包给团队。</p></div>
             <p class="tool-3w-example"><b>体验示例：</b>在本地模拟 CSV 文件夹批量检查重复订单，不修改生产数据。</p>
           </article>
         </div>
         <div class="notes" style="margin-top:14px"><b>一句话区分：</b>Skill 负责“怎么做”，MCP 负责“怎么连接工具”，Plugin 负责“把现成能力提供给用户”，CLI 负责“用命令执行”。它们并非每项任务都要同时使用；任何外部连接仍需账号与企业权限。</div>
+                <div class="row" style="margin-top:12px">
+          <a href="https://help.openai.com/en/articles/20001066-skills-in-chatgpt" target="_blank" rel="noopener" class="btn btn-ghost">Skill 创建指南 ↗</a>
+          <a href="https://modelcontextprotocol.io/docs/develop/build-server" target="_blank" rel="noopener" class="btn btn-ghost">MCP Server 开发指南 ↗</a>
+          <a href="https://help.openai.com/en/articles/20001256-plugins-in-chatgpt" target="_blank" rel="noopener" class="btn btn-ghost">Plugin Creator 官方指南 ↗</a>
+        </div>
+        <div class="info neutral" style="margin-top:14px"><b>开发与使用的区别：</b>公开 Skill、MCP、Plugin 优先复用；MES / CAPA / 3Q 等企业专用流程仅作为内部自建需求，不属于下方公开工具推荐。生产数据和系统接入须先经过企业授权。</div>
         <h2 class="section-title">把它们放到同一条工作流中理解</h2><div class="card"><div class="row" style="justify-content:center"><span class="pill">业务需求</span><b>→</b><span class="pill">Agent规划</span><b>→</b><span class="pill">Skill执行规范</span><b>→</b><span class="pill">Plugin / MCP工具</span><b>→</b><span class="pill">成果核验</span></div><p class="small muted" style="text-align:center;margin-top:15px">这是概念关系图，不代表每个任务都必须使用所有组件。</p></div>
         <h2 class="section-title">如何选型？先看任务，再看技术</h2>
         <div class="grid3 tool-choice">
