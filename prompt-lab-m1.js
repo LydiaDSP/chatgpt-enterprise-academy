@@ -312,9 +312,7 @@ course.querySelectorAll('[role="tab"]').forEach(tab=>{
    e.preventDefault();const target=tab.dataset.ap4eLesson==="expert"?"info":"expert";lesson(target);byId("ap4e-tab-"+target).focus();
  });
 });
-displayCompare(); showQuestion(); showStage(0); finish(0===1?0:0); 
-// The previous line initializes the progress display; do not treat viewing the page as course completion.
-finished[0]=false;try{const v=JSON.parse(localStorage.getItem("academy.prompt.m1.batch1")||"null");if(Array.isArray(v)&&v.length===2)finished=v.map(Boolean);}catch(_){}
+displayCompare(); showQuestion(); showStage(0);
 function refreshProgress(){
  const count=finished.filter(Boolean).length;
  byId("ap4e-done-count").textContent=count+" / 2";
