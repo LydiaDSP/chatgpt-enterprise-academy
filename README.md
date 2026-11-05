@@ -1,1 +1,67 @@
-# chatgpt-enterprise-academy
+# ChatGPT Enterprise Academy · 企业AI实战学习平台
+
+一套面向制造业多部门（FIN、RD、QA、SCM、MFG、HR）的**静态互动教学网站**。提供120分钟讲师培训路径与长期自学内容。第一版设计为无需依赖后端即可打开，不会自行连接ChatGPT、ERP、MES或其他企业系统。
+
+## 快速使用
+
+1. 解压整个站点文件夹，双击 `index.html` 可查看课程主体。
+2. 通过左侧导航进入Prompt Lab、文件与数据分析、Skill/MCP/Plugin、Work、Codex、AI技巧或业务场景指南。
+3. 右上角可切换**讲师模式**（额外显示授课提示）和自学模式；讲师模式支持 `Alt + ←` / `Alt + →` 切换章节。
+4. 可复制Prompt、下载 `samples` 里的模拟CSV文件。在Codex部分可点击“载入内置模拟订单”并运行真正的浏览器本地CSV合并/检查工具。
+5. “完成本章”和“课前检查”会使用当前浏览器的`localStorage`保存，不跨设备同步，不作为后台学员记录。
+
+## 已实现的核心功能
+
+- **10个课程章节**：桌面端/企业版、Prompt Lab、文件与数据、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI使用小技巧、部门未来场景、学习资源。
+- **120分钟授课路线**：可从主页直接跳转课堂章节。
+- **Prompt Lab**：三种业务任务、三种Prompt层级、自由编辑、简易文字检查、复制追问提示。注意：文字检查不是模型回答评分。
+- **文件分析**：内置MES模拟日报数据，可本地计算产量、达成率、直通率和异常分布；提供CSV和真实ChatGPT课堂分析Prompt。
+- **Codex Lab**：提供3份模拟采购订单CSV、Codex自然语言开发Prompt和可运行的CSV合并工具。检查“订单号+料号”重复、缺失交期、非数字数量等，下载结果和异常清单。此工具**是网站内的JavaScript程序**，不代表网页直接调用或控制Codex。
+- **AI效率技巧**：15张卡片，包含场景、可复制指令与注意事项。
+- **30个未来业务场景**：与上传的《部門AIAgent适用場景盤點表.xlsx》一一对应，按原表顺序和优先级组织为6个部门章节。每个场景均提供“现在用Chat怎么做”和“未来Agent如何升级”，以及验证与权限说明。
+- **官方资源**：链接OpenAI、DeepLearning.AI、GitHub官方资料。
+
+## 上传/发布到 GitHub Pages
+
+1. 新建一个GitHub仓库（例如`chatgpt-enterprise-academy`）。
+2. 将`index.html`及`samples/`整个目录上传到仓库根目录。
+3. `Settings → Pages → Build and deployment → Deploy from a branch`，选择`main`及`/(root)`，保存。
+4. 网站部署后检查相对路径CSV下载、手机访问和所有导航。正式发布之前完成信息安全审查。
+
+参考：[GitHub官方Pages文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+
+> **安全重点：** GitHub Pages通常是公开访问的网站，不是企业内网权限平台。这份培训网站保留了部门未来场景的标题和通用教学改写，因此即便未包含原Excel或真实人员/生产数据，也必须先经企业审查，确认这些场景名称与内部规划允许公开。不要上传原始盘点附件、内部链接、员工信息、客户/供应商敏感数据或真实MES/HR数据。
+
+## 限制与后续可扩展范围
+
+- 网页**没有AI API密钥或后端**。所谓“Agent步骤演练”只是可点击的静态教学流程；如需网页内直接执行模型任务，需另建经企业审批的API服务与登录鉴权。
+- 浏览器中的CSV小工具只处理具有相同列结构的CSV，不支持直接读取 `.xlsx`；可先在Excel导出CSV。真实使用中还应增强字段校验、异常格式处理、测试覆盖、备份和操作日志。
+- 企业端Skill/Plugin/Browser Use/Computer Use的可用性取决于组织管理员配置。正式授课应使用已获许可的测试环境。
+- 讲师模式尚未接入投影遥控、视频素材或统一学员进度后台。这些可以在后续版本迭代。
+- 对业务场景的实现路径属于**教学推演**，不是企业系统已完成部署或已验证接口的声明。
+
+## 来源与内容维护
+
+- 业务场景标题和优先级来自用户提供的Excel盘点表；本站没有收录原工作表的具体内部痛点叙述或源资料文件。
+- Chat / Work / Codex：[OpenAI官方说明](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
+- Skills：[OpenAI帮助文档](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)
+- Plugins：[OpenAI帮助文档](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt)
+- Browser / Computer Use：[企业管理说明](https://help.openai.com/en/articles/20001510-manage-browser-and-computer-use-in-your-enterprise-workspace)
+- Prompt课程：[AI Prompting for Everyone](https://www.deeplearning.ai/courses/ai-prompting-for-everyone)
+- 内容核对时间：2026年11月5日。
+
+## 目录结构
+
+```text
+chatgpt-enterprise-academy/
+├── index.html                  # 网站主体（HTML/CSS/JS）
+├── README.md                   # 部署与使用说明
+├── scenario_data.json          # 30个场景的教学数据备份（不需要在浏览器中加载）
+└── samples/
+    ├── MES_生产日报_模拟.csv
+    ├── 采购订单_模拟_1.csv
+    ├── 采购订单_模拟_2.csv
+    └── 采购订单_模拟_3.csv
+```
+
+版权所有：教学内容为独立课程原型。ChatGPT、Codex等名称属于相应权利人。
