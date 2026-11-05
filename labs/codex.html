@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Codex制造业AI Coding实操：从需求说明到开发、测试与交付。"><title>Codex AI Coding 实操 | 企业AI学院</title><link rel="stylesheet" href="lab.css"><script src="codex.js" defer></script></head>
+<body>
+<header class="top"><a href="../index.html#codex">← 返回课程 · Codex</a><span class="version">ACADEMY LAB · V1.1 · 浏览器本地运行</span></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">CODEX LAB · NO-CODE TO AI CODING</div><h1>不会写代码，也能提出可验收的开发任务</h1><p>围绕采购订单CSV合并，把真实软件开发拆解为：需求定义 → 安全检查 → 编写工具 → 测试修复 → 交付复用。这里的CSV工具是网页现成代码；真实Codex开发需切换到授权环境执行。</p><span class="label">课堂建议 15–20 分钟 · 5步示范 + 本地真实运行</span></section>
+<section>
+<h2>一、5步Codex现场教学脚本</h2>
+<p class="small muted">依次切换阶段，可复制适合在Codex中逐轮输入的简短工作指令。不要把下面本地程序误称为Codex即时生成。</p>
+<div id="codexStages" class="steps" role="group" aria-label="开发阶段选择">
+<button class="step active" data-stage="0">1 说需求</button>
+<button class="step" data-stage="1">2 看文件</button>
+<button class="step" data-stage="2">3 写程序</button>
+<button class="step" data-stage="3">4 跑测试</button>
+<button class="step" data-stage="4">5 交付</button>
+</div>
+<div class="grid">
+<div class="card"><h3 id="stageTitle"></h3><p id="stageDescription"></p><div class="info" id="stageTeacher"></div><div class="row between" style="margin-top:16px"><button id="stagePrev" class="btn">← 上一步</button><button id="stageNext" class="btn primary">下一步 →</button></div></div>
+<div class="card"><h3>复制这一轮任务指令</h3><div class="code" id="stagePrompt"></div><div class="row" style="margin-top:12px"><button id="stageCopy" class="btn primary">复制给Codex</button><span class="status" id="copyStatus" aria-live="polite"></span></div></div>
+</div>
+</section>
+<section>
+<h2>二、真实可运行：浏览器CSV批处理</h2>
+<p class="muted small">支持相同表头的UTF-8 CSV，读取与合并在当前浏览器完成，不上传服务器；不直接运行Codex。正式处理Excel（.xlsx）或机密数据必须在企业批准的环境中另行验证。</p>
+<div class="grid">
+<div class="card">
+<h3>准备输入数据</h3>
+<div class="row">
+<button class="btn primary" id="loadSample">载入3份标准模拟订单</button>
+<button class="btn" id="loadChallenge">载入带错误的挑战数据</button>
+</div>
+<p class="micro">标准样例：3份CSV、9条记录，其中1条重复订单、1条缺失交期。</p>
+<div class="formrow"><label for="fileInput">或选择自己的CSV（最多12份，单文件不超过2MB）</label><input type="file" id="fileInput" accept=".csv,text/csv" multiple></div>
+<div class="info warn">请使用模拟或批准用于培训的数据。上传控件只是本机读取，不代表可以把企业信息复制到其他软件。</div>
+<div class="row" style="margin-top:13px"><button class="btn primary" id="runMerge" disabled>执行合并与异常检查</button></div>
+<p id="sourceStatus" class="status" aria-live="polite">请载入模拟文件或选择CSV。</p>
+</div>
+<div class="card">
+<h3>如何判断工具有效？</h3>
+<div class="stack small">
+<label class="check"><input type="checkbox" data-criteria="0">输出记录数与原数据一致，且不覆盖源文件</label>
+<label class="check"><input type="checkbox" data-criteria="1">“订单号+料号”重复能够识别并记录源位置</label>
+<label class="check"><input type="checkbox" data-criteria="2">缺失交期、缺失主键、非法数量有明确提示</label>
+<label class="check"><input type="checkbox" data-criteria="3">异常文件能被拦截，不能静默当作正确结果</label>
+<label class="check"><input type="checkbox" data-criteria="4">产出的CSV由业务人员复核后才进入业务系统</label>
+</div><p id="criteriaStatus" class="status" aria-live="polite"></p>
+<div class="info">这五项是业务验收要求，不等于勾选后就证明代码可靠；下方测试会用真实输入执行验证。</div>
+</div>
+</div>
+<div id="mergeResults" aria-live="polite" style="margin-top:16px"></div>
+</section>
+<section>
+<h2>三、运行真正的本地测试（非演示文字）</h2>
+<div class="card">
+<div class="row between"><p class="small muted">测试会调用与页面合并器相同的解析、合并和导出函数，不访问外部系统。</p><button class="btn primary" id="runTests">运行6项测试</button></div>
+<div id="testResults" class="stack" aria-live="polite"><p class="muted">尚未测试。点击右上方按钮。</p></div>
+</div>
+</section>
+<section>
+<h2>四、讲师与学员练习安排</h2>
+<div class="grid">
+<div class="card"><h3>讲师真实Codex演示</h3><ol><li>提前准备空白练习目录和3份模拟CSV。</li><li>依次复制上面的5轮指令，展示实际文件、测试执行与修复记录。</li><li>在Codex实际环境中验证输出，而不只展示它的说明。</li><li>真实操作失败时，使用本页可运行的浏览器工具作为备用说明。</li></ol><a class="btn" href="../samples/采购订单_模拟_1.csv" download>下载订单1</a> <a class="btn" href="../samples/采购订单_模拟_2.csv" download>下载订单2</a> <a class="btn" href="../samples/采购订单_模拟_3.csv" download>下载订单3</a></div>
+<div class="card"><h3>真实开发不应忽视</h3><ol><li>在独立工作目录创建工具，先读取而非覆盖业务文件。</li><li>注明字段规则和异常处理。相同订单号不同料号不应误判为重复。</li><li>让Codex展示执行过的测试以及失败和修复的证据。</li><li>未经安全审查，不可直接处理真实订单或接入ERP/MES。</li></ol><p class="small"><a href="https://developers.openai.com/learn/codex" target="_blank" rel="noopener">OpenAI官方Codex教学资源 ↗</a></p><p class="small"><a href="../tests/CODEX-LAB-ACCEPTANCE.md">本实验详细验收与讲师彩排说明</a></p></div>
+</div>
+</section>
+<footer class="footer">本地CSV工具用于教学；它不是Codex服务，也不调用模型API。<a href="../index.html#codex">返回课程</a></footer>
+</main></body></html>

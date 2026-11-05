@@ -27,16 +27,16 @@
 
 - **10个课程章节**：桌面端/企业版、Prompt Lab、文件与数据、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI使用小技巧、部门未来场景、学习资源。
 - **120分钟授课路线**：可从主页直接跳转课堂章节。
-- **Prompt Lab 2.0（开发分支第一、二批）**：六节讲师互动课：新手与高手对比、模型知识/联网搜索/Deep Research、Context 上下文、三轮 Brainstorming、Sycophancy 与 Rubric、渐进式写作；带课件页码、讲师提示、互动题、动态 Prompt 和本地学习进度。原有三种业务任务、三种 Prompt 层级及编辑/复制练习仍保留于折叠区。所有教学示例均为本地模拟，文字检查不是模型回答评分。
+- **Prompt Lab 2.0（M1 / M2 已合并）**：六节互动课，涵盖新手与高手、模型知识/联网搜索/Deep Research、上下文管理、三轮头脑风暴、避免迎合与Rubric客观评价、渐进式写作；支持讲师提示、课堂互动和本地学习进度。原有三种业务Prompt练习仍保留在可展开区。所有演示为本地模拟，不代表AI实时运行结果。
 - **文件分析**：内置MES模拟日报数据，可本地计算产量、达成率、直通率和异常分布；提供CSV和真实ChatGPT课堂分析Prompt。
 - **Codex Lab**：提供3份模拟采购订单CSV、Codex自然语言开发Prompt和可运行的CSV合并工具。检查“订单号+料号”重复、缺失交期、非数字数量等，下载结果和异常清单。此工具**是网站内的JavaScript程序**，不代表网页直接调用或控制Codex。
 - **AI效率技巧**：15张卡片，包含场景、可复制指令与注意事项。
 - **30个未来业务场景**：与上传的《部門AIAgent适用場景盤點表.xlsx》一一对应，按原表顺序和优先级组织为6个部门章节。每个场景均提供“现在用Chat怎么做”和“未来Agent如何升级”，以及验证与权限说明。
 - **官方资源**：链接OpenAI、DeepLearning.AI、GitHub官方资料。
 
-## Prompt Lab 2.0 开发批次的本地预览
+## Prompt Lab 2.0 教学预览与验收
 
-在该开发分支下载 `preview-prompt-m2.html`，使用 Chrome 打开即可单文件查看 M1 + M2 共六节互动课。页面内复制到 ChatGPT 的按钮只负责复制文本，**没有真实 AI API 调用**。此预览没有打包 `samples/`，其他页面的文件下载请使用完整仓库目录。正式合并前请参考 `PROMPT_M1_ACCEPTANCE.md` 和 `PROMPT_M2_ACCEPTANCE.md` 逐项验收。
+正式网站访问 `index.html#prompt` 可查看 M1 + M2 共六节教学单元；另提供单文件 `preview-prompt-m2.html` 供离线讲师预览。模块配有 `PROMPT_M1_ACCEPTANCE.md` 与 `PROMPT_M2_ACCEPTANCE.md` 两份验收清单。教学实验只在网页本地生成或切换示例指令，复制后需在企业允许的 ChatGPT 中实测；并未调用真实 AI API、Deep Research 或生产数据系统。单文件预览不包含 `samples/` 下载素材。
 
 ## 上传/发布到 GitHub Pages
 
@@ -48,6 +48,24 @@
 参考：[GitHub官方Pages文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
 > **安全重点：** GitHub Pages通常是公开访问的网站，不是企业内网权限平台。这份培训网站保留了部门未来场景的标题和通用教学改写，因此即便未包含原Excel或真实人员/生产数据，也必须先经企业审查，确认这些场景名称与内部规划允许公开。不要上传原始盘点附件、内部链接、员工信息、客户/供应商敏感数据或真实MES/HR数据。
+
+## V1.1 第二批｜专项教学实验室（独立开发分支）
+
+为了与并行进行的 Prompt Lab 开发互不干扰，本次**没有修改 Prompt Lab 的HTML内容和脚本**。仅在主课程的以下章节增加专题入口，专题本身独立放在 `labs/`：
+
+| 入口章节 | 新页面 | 能做什么 |
+| --- | --- | --- |
+| 文件与数据 | `labs/research.html` | Deep Research任务单编辑、4步研究计划、3项模拟证据判断、5项报告验收 |
+| Skill/MCP/Plugin | `labs/skill.html` | 完整 `SKILL.md` 与输出规范、虚构SOP对比、5项变化实操 |
+| Codex | `labs/codex.html` | 5轮Codex指令、带异常的CSV批处理、6项真实执行测试 |
+
+公共样式位于 `labs/lab.css`，各页的业务逻辑分别位于 `labs/research.js`、`labs/skill.js`、`labs/codex.js`。所有功能默认在本机浏览器执行，不能将其误称为已接入Deep Research/Codex模型或企业数据库。
+
+Skill学习素材在 `skills/sop-change-review/`，并配有 `samples/SOP_演示_旧版.md` 和 `samples/SOP_演示_新版.md`。
+
+验收入口：`tests/V1.1-PHASE2-ACCEPTANCE.md`；Codex彩排：`tests/CODEX-LAB-ACCEPTANCE.md`；CI校验：`node tests/labs-smoke.mjs`（需先安装jsdom@26）。
+
+本批不修改原120分钟课程时长；Deep Research完整执行、Skill安装和Codex实际开发需使用企业批准的账号与环境。
 
 ## 限制与后续可扩展范围
 
