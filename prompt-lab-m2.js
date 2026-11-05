@@ -138,6 +138,12 @@ panels.innerHTML=`
 <tr><td><strong>维护成本</strong><small>人员/工时</small></td><td>20</td><td>部署、复标、故障处理工时及维护资源</td><td><select data-m2-score="2" aria-label="维护成本证据等级"><option value="-1">待评估</option><option value="0">不支持</option><option value="0.5">部分支持</option><option value="1">充分支持</option></select></td></tr>
 <tr><td><strong>安全合规</strong><small>权限/追溯</small></td><td>20</td><td>权限控制、数据流、审计日志、人工复核流程</td><td><select data-m2-score="3" aria-label="安全合规证据等级"><option value="-1">待评估</option><option value="0">不支持</option><option value="0.5">部分支持</option><option value="1">充分支持</option></select></td></tr>
 </tbody></table></div>
+<details class="m2-intro" style="margin-top:12px"><summary style="cursor:pointer;font-weight:750;color:#862b3d">展开每个维度的具体评分分档标准</summary>
+<p><strong>质量效果（35分）</strong>：充分支持＝通过独立验证，误检/漏检均达到事前约定的门槛且样本与批次覆盖明确；部分支持＝只验证部分产品/班次或缺少关键统计；不支持＝经验证不满足已约定关键门槛；待评估＝没有可用记录。</p>
+<p><strong>运行效率（25分）</strong>：充分支持＝正常、峰值工况及连续运行均通过事前节拍与稳定性标准；部分支持＝只测试正常工况等部分条件；不支持＝记录显示关键工况不达标；待评估＝没有测试记录。</p>
+<p><strong>维护成本（20分）</strong>：充分支持＝部署、运行、故障恢复、人员工时的全周期估算可追溯且满足事前预算；部分支持＝有报价但缺少维护/恢复估算；不支持＝可核算成本超出预先确定的承受范围；待评估＝未测算。</p>
+<p><strong>安全合规（20分）</strong>：充分支持＝权限、敏感数据处理、日志、人工复核和回退均经过实际验证；部分支持＝只有方案文档或部分控制已验证；不支持＝关键控制有已知不满足的项；待评估＝无可核验证据。</p>
+<p class="m2-fact">教学简化：不支持得0分、部分支持得对应权重的50%、充分支持得100%。正式项目还必须定义产品适用门槛、失败一票否决项，不能机械套用此演示权重或分级。</p></details>
 <div class="m2-score" id="m2-score-result" role="status">尚未评价，不能计算总分</div>
 <div class="m2-note" id="m2-score-evidence">先核查每个维度的证据，再根据统一规则评分。权重和分级是课程演示，不是企业批准的正式评价制度。</div>
 <div class="ap4e-action"><button type="button" class="ap4e-btn secondary" id="m2-reset-score">重置评分表</button><button type="button" class="ap4e-btn" id="m2-copy-rubric">复制客观评价 Prompt</button></div>
@@ -175,6 +181,8 @@ roadmap.before(panels);
 roadmap.innerHTML='<span class="current">已开发：M1 新手高手、信息获取 + M2 上下文、头脑风暴、客观评价、渐进写作</span><span>第三批：多模态、数据分析、Work 与 Codex 贯通</span>';
 const hero=course.querySelector(".ap4e-eyebrow");
 if(hero)hero.textContent="PROMPT LAB 2.0 · 第一、二批 / M1 + M2";
+const introduction=course.querySelector(".ap4e-hero > p:not(.ap4e-eyebrow)");
+if(introduction)introduction.textContent="基于吴恩达《AI Prompting for Everyone》：从新手与高手、信息来源选择，到上下文管理、头脑风暴迭代、客观评价与渐进写作。适合讲师现场演示，也支持学员在企业版 ChatGPT 中实测。";
 const currentTab=course.querySelector('[data-ap4e-lesson][aria-selected="true"]');
 if(currentTab) currentTab.setAttribute("aria-selected","true");
 
@@ -267,7 +275,7 @@ function renderScore(){
 }
 function rubricPrompt(){
  return "请用中立、批判性的方式审查所附AI视觉质检项目。先逐项检查证据，再分项给出理由与评分，最后计算总分；不要一开始给总分。\n以下是课堂示范权重，并非公司正式标准：\n"+
- rubric.map(r=>r.name+"（"+r.weight+"分）："+r.criteria+"。请先定义“无支持/部分支持/充分支持”的具体证据门槛，解释每档得分，缺资料标记待评估，不得以假定数据替代。").join("\n")+
+ rubric.map(r=>r.name+"（"+r.weight+"分）："+r.criteria+"。先核对预先批准的量化验收标准、检测工况与原始证据；不支持=经验证不达标，部分支持=只满足部分工况或证据不完整，充分支持=全部约定工况均有独立验证证据。各档按0%、50%、100%权重演示，待评估不计总分，不能编造数据。").join("\n")+
  "\n输出：证据来源、每项得分与扣分原因、总分、反对意见、待验证事项。建议由独立人员或第二模型复核关键结论。";
 }
 
