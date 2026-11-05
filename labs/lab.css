@@ -13,3 +13,17 @@
 .role-panel .role-steps li{padding-left:2px;margin:5px 0}
 .role-shared{border-top:1px solid var(--line);padding-top:13px}
 @media(max-width:600px){.role-tabs{display:grid;grid-template-columns:1fr 1fr}.role-tab{min-width:0;padding:9px 5px;font-size:12px}.role-panel{padding:14px 0 3px}}
+
+/* V1.1 第三批修订：面向普通员工的分阶段操作 / Agent 实施手册 */
+.agent-badge-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:2px 0 6px}
+.agent-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.agent-overview>div{border:1px solid var(--line);background:#fcfbfa;border-radius:11px;padding:14px 16px;min-width:0}
+.agent-overview p,.agent-final-checks p{margin:6px 0 0}
+.agent-process{border:1px solid #e7c9d1;background:#fff8f9;border-radius:13px;padding:18px 19px}
+.agent-process h4{font-size:17px;margin:0 0 10px;color:var(--dark)}
+.agent-runbook{margin:0;padding-left:23px;display:grid;gap:12px}
+.agent-runbook li{line-height:1.8;font-size:14px;padding-left:3px;overflow-wrap:anywhere}
+.agent-runbook li::marker{color:var(--red);font-weight:800}
+.agent-final-checks{border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.agent-final-checks>div{padding:12px 14px;border-left:3px solid #c68d98;background:#fffafa;border-radius:0 9px 9px 0}
+@media(max-width:780px){.agent-overview,.agent-final-checks{grid-template-columns:1fr}.agent-process{padding:15px}}
