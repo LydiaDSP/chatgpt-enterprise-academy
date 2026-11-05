@@ -12,12 +12,13 @@ w.eval([...d.scripts].map(script=>script.src?read(script.getAttribute('src')):sc
 const tick=()=>new Promise(r=>setTimeout(r,40));
 try{
  await tick();
- const m=d.getElementById('prompt-m3').shadowRoot,r=d.getElementById('extended-cases').shadowRoot;
+ const m=d.getElementById('prompt-m3').shadowRoot;
  assert.ok(d.getElementById('page-prompt').classList.contains('active'));
  assert.equal(m.querySelectorAll('[data-panel]').length,5);
  assert.equal(m.querySelector('[data-panel="data"]').hidden,false);
- assert.equal(d.querySelectorAll('#deptJump a').length,8);
- assert.equal(d.querySelectorAll('details.case').length+r.querySelectorAll('[data-role-case]').length,42);
+ assert.equal(d.querySelectorAll('#deptJump a').length,6);
+ assert.equal(d.querySelectorAll('details.case').length,30);
+ assert.equal(d.getElementById('extended-cases'),null,'Additional IE/IT demonstrations must not mount in the main training page');
  assert.equal(d.querySelectorAll('a[href^="labs/multimedia.html"],a[href="labs/roles.html"]').length,0);
  assert.equal(d.querySelectorAll('iframe').length,0);
  const stage=id=>d.querySelector('[data-course-stage="'+id+'"]');
@@ -39,15 +40,17 @@ try{
  assert.match(w.localStorage.getItem('academy.m3.v1'),/DEMO/);
  m.getElementById('run-tests').click();assert.match(m.getElementById('test-result').textContent,/6\/6/);
  m.querySelector('[data-copy="build-prompt"]').click();await tick();assert.match(w.copied,/Goal/);
- w.location.hash='#dept-IE';await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));
- for(const code of ['FIN','RD','QA','SCM','MFG','HR','IE','IT'])assert.equal(w.routeInlineCourse('dept-'+code),true,'All departments use the same routing');
- w.location.hash='#it-01';await tick();assert.ok(r.getElementById('it-01').open);
- r.querySelector('#it-01 [data-role-tab="agent"]').click();assert.equal(r.getElementById('it-01-panel-agent').hidden,false);
- r.querySelector('#it-01 [data-copy-agent]').click();await tick();assert.match(w.copied,/触发条件/);
- r.querySelector('#it-01 [data-add-case]').click();assert.match(r.getElementById('selectedCases').textContent,/设备在线/);
- r.querySelector('[data-check]').click();assert.match(r.getElementById('checkStatus').textContent,/1\/4/);
- w.location.hash='#case-01';await tick();assert.ok(d.getElementById('case-01').open);
- for(const root of [m,r])for(const a of root.querySelectorAll('a[href]')){const href=a.getAttribute('href');if(!/^(https?:|#)/.test(href))assert.ok(existsSync(new URL('../'+href.split('#')[0],import.meta.url)),href);}
+ w.location.hash='#dept-QA';await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));
+ for(const code of ['FIN','RD','QA','SCM','MFG','HR']){w.location.hash='#dept-'+code;await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));}
+ assert.equal(w.routeInlineCourse('dept-IE'),false,'Unrequested IE deep link must not be routed as a main case');
+ assert.equal(w.routeInlineCourse('dept-IT'),false,'Unrequested IT deep link must not be routed as a main case');
+ w.location.hash='#case-01';await tick();const first=d.getElementById('case-01');assert.ok(first.open);
+ assert.match(first.textContent,/实施可行性/);assert.match(first.textContent,/操作步骤|实操步骤/);
+ const tabs=first.querySelectorAll('[data-case-tab]');assert.equal(tabs.length,2);
+ tabs[1].click();assert.ok(first.querySelector('[data-case-panel="agent"]').classList.contains('active'));
+ tabs[0].click();assert.ok(first.querySelector('[data-case-panel="chat"]').classList.contains('active'));
+ first.querySelector('[data-copy-case]').click();await tick();assert.ok(w.copied.length>20);
+ for(const a of m.querySelectorAll('a[href]')){const href=a.getAttribute('href');if(!/^(https?:|#)/.test(href))assert.ok(existsSync(new URL('../'+href.split('#')[0],import.meta.url)),href);}
  assert.deepEqual(errors,[]);
- console.log('PASS inline M3, 42 cases, 8 departments, routes, copy, storage, exercises and local links');
+ console.log('PASS inline M3, 30 original cases, 6 departments, step-by-step guides and hidden supplementary cases');
 }finally{w.close();}
