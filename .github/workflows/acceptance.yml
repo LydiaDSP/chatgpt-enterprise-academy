@@ -43,6 +43,8 @@ jobs:
         run: node tests/labs-smoke.mjs
       - name: M3 multimedia and teaching loop checks
         run: node tests/m3-smoke.mjs
+      - name: Tomorrow training Prompt MVP checks
+        run: node tests/prompt-mvp-smoke.mjs
       - name: Work and IE IT scenario acceptance
         run: node tests/phase3-smoke.mjs
       - name: Offline IE and IT prototype automation tests
