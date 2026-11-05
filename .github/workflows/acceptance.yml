@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'feat/training-mvp-*'
       - 'feat/v1.1-*'
       - 'feat/prompt-lab-m3-*'
   pull_request:
