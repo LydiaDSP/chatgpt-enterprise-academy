@@ -14,20 +14,6 @@ const CASES=[
 {id:'it-05',dept:'IT',title:'终端安全拦截日志归因',priority:'进阶',target:'对获授权的安全日志进行事件分类，帮助IT安全人员复核误拦截。',inputs:'脱敏EDR/IOA事件、软件名与版本、策略编号、时间线。',chat:'请分析这份经批准脱敏的安全拦截日志，按事件时间、策略、终端与软件进程归类，列出证据、可能误拦截和待管理员确认项；不要提供绕过安全策略或解除管控的指令。',agent:'在受限权限下汇总安全告警，自动生成分级工单；策略例外须经安全管理员批准。',deliver:'安全事件摘要、异常分类、管理员复核清单。',verify:'核对原始告警与政策版本；未有证据前不判断为误报或恶意软件。',risk:'不得借分析结果关闭防护、绕过端点策略或暴露安全凭证。',steps:['脱敏整理终端告警','核对策略与进程时间线','交安全管理员复核']},
 {id:'it-06',dept:'IT',title:'IT工单知识库与故障复盘',priority:'适合首批练习',target:'从历史处理记录中找相似事件、出处及已有验证步骤。',inputs:'经过授权的脱敏工单、版本化SOP、设备类别与故障标签。',chat:'请在这些脱敏IT工单中查找与“设备状态离线、网关采集失败”相似的已解决案例，按症状、排查证据、处理结果与适用条件归类；每条结论附工单出处，无法证明的步骤标注待核实。',agent:'构建按用户权限检索的IT运维知识Agent，通过知识引用给出只读排查建议，任何变更需要授权。',deliver:'相似案例清单、证据引用、排查步骤草稿。',verify:'随机抽查来源工单，检查适用环境与版本是否一致；避免过时解决方案误用。',risk:'历史工单可能包含账号、内部地址和员工信息，入库前必须脱敏和权限控制。',steps:['整理并脱敏知识来源','验证相似案例和有效期限','形成经审核的故障排查说明']}
 ];
-const AGENT_REQUIREMENTS={
- 'ie-01':'需要经批准的标准工时与时测数据源、工序唯一标识、量测口径版本、人工复测和发布权限。',
- 'ie-02':'需要可信的工序顺序与工位约束、节拍数据更新机制、工艺安全审核和现场试点确认。',
- 'ie-03':'需要换线事件时间戳、作业步骤分类规则、停机及安全许可条件、改善后复测记录。',
- 'ie-04':'需要对齐的MES/QMS/设备状态字段、OEE指标字典、只读接口和IE审核的规则版本。',
- 'ie-05':'需要经核实的布局图、搬运频次、路线距离、安全约束，以及受控的布局变更审批。',
- 'ie-06':'需要统一收益计算规则、改善台账、财务确认口径、持续成本及复盘审批流程。',
- 'it-01':'需要授权的只读在线状态与日志接口、设备到网关映射、统一时间基准、工单处理责任人。',
- 'it-02':'需要获批的AP/无线网络只读日志、终端与AP关联、时钟同步、变更申请和现场复测机制。',
- 'it-03':'需要经过授权的配置元数据只读采集、设备唯一ID、基线版本、变更记录和差异确认人。',
- 'it-04':'需要已验证的源目标字段映射、业务主键、只读数据接口、延迟窗口与异常工单流程。',
- 'it-05':'需要安全部门许可的脱敏告警数据、策略版本、权限控制、人工研判与例外审批记录。',
- 'it-06':'需要工单脱敏、分级权限、文档版本索引、引用验证和知识更新/失效审核机制。'
-};
 const selected=new Set();
 function el(tag,text){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n}
 function makeField(title,text){const wrapper=el('div');const heading=el('strong',title);const p=el('p',text);p.className='small';wrapper.append(heading,p);return wrapper}
@@ -54,27 +40,44 @@ function renderCases(){
    const target=el('p',c.target);target.className='small muted';
    const body=el('div');body.className='stack';body.style.marginTop='15px';
    const tabs=el('div');tabs.className='role-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label',c.title+' 使用阶段');
-   for(const [mode,label] of [['chat','现在：Chat怎么做'],['agent','未来：Agent怎么升级']]){
+   for(const [mode,label] of [['chat','阶段一：Chat人工协作'],['agent','阶段二：Agent流程自动化']]){
     const button=el('button',label);button.className='role-tab';button.type='button';
     button.id=c.id+'-tab-'+mode;button.dataset.roleTab=mode;
     button.setAttribute('role','tab');button.setAttribute('aria-controls',c.id+'-panel-'+mode);
     tabs.appendChild(button);
    }
+   const plan=ROLE_PLANS[c.id];
+   if(!plan||plan.steps.length!==6||plan.chatSteps.length<3)throw Error('案例实施方案不完整：'+c.id);
    const chat=el('section');chat.className='role-panel stack';chat.id=c.id+'-panel-chat';chat.dataset.rolePanel='chat';chat.setAttribute('role','tabpanel');chat.setAttribute('aria-labelledby',c.id+'-tab-chat');
-   addFields(chat,[['准备资料',c.inputs]]);
-   const route=el('div');route.appendChild(el('strong','操作路线'));
-   const ordered=el('ol');ordered.className='role-steps';c.steps.forEach(t=>ordered.appendChild(el('li',t)));route.appendChild(ordered);chat.appendChild(route);
+   addFields(chat,[['这阶段由谁来执行','员工手动准备文件、发起Chat、逐项核对结果；AI负责辅助分析和撰写，不自动调用企业系统。'],['准备资料',c.inputs]]);
+   const route=el('div');route.appendChild(el('strong','具体操作路线（照着做）'));
+   const ordered=el('ol');ordered.className='role-steps';plan.chatSteps.forEach(t=>ordered.appendChild(el('li',t)));route.appendChild(ordered);chat.appendChild(route);
    const prompt=el('div');prompt.appendChild(el('strong','简短实用的Chat Prompt'));
    const code=el('div',c.chat);code.className='role-prompt';prompt.appendChild(code);chat.appendChild(prompt);
-   addFields(chat,[['预期产物',c.deliver]]);
+   addFields(chat,[['预期产物',c.deliver],['如何人工核对',c.verify]]);
    const chatControls=el('div');chatControls.className='row';
    const copy=el('button','复制此场景Chat Prompt');copy.className='btn primary';copy.type='button';copy.dataset.copyCase=c.id;chatControls.appendChild(copy);
    if(c.sample){const link=el('a','↓ 下载配套模拟CSV');link.className='btn';link.href=c.sample;link.setAttribute('download','');chatControls.appendChild(link)}
    chat.appendChild(chatControls);
    const agent=el('section');agent.className='role-panel stack';agent.id=c.id+'-panel-agent';agent.dataset.rolePanel='agent';agent.setAttribute('role','tabpanel');agent.setAttribute('aria-labelledby',c.id+'-tab-agent');
-   addFields(agent,[['可能的自动化架构',c.agent],['上线前提 / 技术配套',AGENT_REQUIREMENTS[c.id]],['业务验收标准',c.verify]]);
-   const warning=el('div','Agent升级仅为方案设想，实际落地需经过数据安全、权限审核及业务/IT负责人验证。'+c.risk);warning.className='info warn';agent.appendChild(warning);
-   const cross=el('div','建议先在“现在：Chat怎么做”里完成一次模拟数据练习，再评估Agent升级价值。');cross.className='micro';agent.appendChild(cross);
+   const agentLevel=el('div');agentLevel.className='agent-badge-row';
+   const badgeLevel=el('span',plan.level);badgeLevel.className='pill';agentLevel.appendChild(badgeLevel);
+   const reminder=el('span','从已验证的Chat流程逐步固化成可调度、可复核的自动化，不等于使用桌面端。');reminder.className='micro';agentLevel.appendChild(reminder);agent.appendChild(agentLevel);
+   addFields(agent,[['要自动完成什么',c.agent],['第一版最小可行试点（MVP）',plan.firstPilot]]);
+   const overview=el('div');overview.className='agent-overview';
+   addFields(overview,[['① 什么时候运行（触发器）',plan.trigger],['② 从哪里获取数据（只读）',plan.source],['③ 必须具备哪些字段',plan.fields],['④ 用什么搭建（建议技术路线）',plan.tooling]]);
+   agent.appendChild(overview);
+   const process=el('div');process.className='agent-process';
+   process.appendChild(el('h4','⑤ 六步自动化实施清单'));
+   const seq=el('ol');seq.className='agent-runbook';
+   plan.steps.forEach(step=>seq.appendChild(el('li',step)));process.appendChild(seq);agent.appendChild(process);
+   const verify=el('div');verify.className='agent-final-checks';
+   addFields(verify,[['自动生成什么结果',plan.output],['什么情况要停止／转人工',plan.failure],['绝不能自动做什么（审批点）',plan.guard],['怎么验证试点成功',plan.acceptance]]);
+   agent.appendChild(verify);
+   const warning=el('div','以上是基于模拟资料的实施蓝图，尚未连接企业系统。不得把建议架构当作已经部署；真实数据来源、接口、触发频率、阈值和权限须由业务与IT共同确认。'+c.risk);warning.className='info warn';agent.appendChild(warning);
+   const agentButtons=el('div');agentButtons.className='row';
+   const copyAgent=el('button','复制Agent实施方案');copyAgent.className='btn primary';copyAgent.type='button';copyAgent.dataset.copyAgent=c.id;
+   agentButtons.appendChild(copyAgent);agent.appendChild(agentButtons);
    const after=el('div');after.className='role-shared stack';
    after.appendChild(makeField('结果验证与注意',c.verify));
    const add=el('button','加入我的练习清单');add.className='btn';add.type='button';add.dataset.addCase=c.id;after.appendChild(add);
@@ -92,13 +95,21 @@ function renderSelected(){
  if(!selected.size){const p=el('p','暂未加入任务。请展开IE或IT案例，点击“加入我的练习清单”。');p.className='muted small';root.append(p);return}
  [...selected].forEach(id=>{const c=CASES.find(x=>x.id===id);const row=el('div');row.className='row between';const name=el('span',c.dept+' · '+c.title);name.className='small';const remove=el('button','移除');remove.className='btn';remove.dataset.removeCase=id;row.append(name,remove);root.append(row)});
 }
-function formatCase(c){return c.dept+'｜'+c.title+'\n任务：'+c.target+'\n准备：'+c.inputs+'\nChat指令：'+c.chat+'\n交付：'+c.deliver+'\n核验：'+c.verify+'\n安全边界：'+c.risk}
+function formatAgentPlan(c){
+ const p=ROLE_PLANS[c.id];
+ return c.dept+'｜'+c.title+'\n阶段二：Agent流程自动化（待试点）\n自动化目标：'+c.agent+'\n首版MVP：'+p.firstPilot+'\n技术层级：'+p.level+'\n触发条件：'+p.trigger+'\n只读数据来源：'+p.source+'\n必需字段：'+p.fields+'\n技术路线：'+p.tooling+'\n实施步骤：\n'+p.steps.join('\n')+'\n输出结果：'+p.output+'\n异常与回退：'+p.failure+'\n人工审批及安全边界：'+p.guard+'\n试点验收：'+p.acceptance+'\n说明：这是教学建议，具体权限和接口需经企业批准。';
+}
+function formatCase(c){
+ const p=ROLE_PLANS[c.id];
+ return c.dept+'｜'+c.title+'\n业务目标：'+c.target+'\n阶段一：Chat人工协作\n准备资料：'+c.inputs+'\n操作步骤：\n'+p.chatSteps.map((x,i)=>(i+1)+'. '+x).join('\n')+'\nChat指令：'+c.chat+'\n交付：'+c.deliver+'\n核验：'+c.verify+'\n\n'+formatAgentPlan(c);
+}
 async function copyText(text){let ok=false;try{if(!navigator.clipboard?.writeText)throw Error('no clipboard');await navigator.clipboard.writeText(text);ok=true}catch{const area=el('textarea');area.value=text;document.body.append(area);area.select();try{ok=document.execCommand('copy')}catch{}area.remove()}$('copyStatus').textContent=ok?'已复制练习内容':'复制受浏览器限制，可从案例详情手动选取文本'}
 function updateChecks(){const boxes=[...document.querySelectorAll('[data-check]')];$('checkStatus').textContent='已确认 '+boxes.filter(x=>x.checked).length+'/'+boxes.length;try{localStorage.setItem('academy.roles.checks',JSON.stringify(boxes.map(x=>x.checked)))}catch{}}
 function init(){
  renderCases();renderSelected();
  document.addEventListener('click',e=>{
   const tab=e.target.closest('[data-role-tab]');if(tab){const card=tab.closest('[data-role-case]');if(card)setCaseTab(card,tab.dataset.roleTab);return}
+  const agentCopy=e.target.closest('[data-copy-agent]');if(agentCopy){const c=CASES.find(x=>x.id===agentCopy.dataset.copyAgent);if(c)copyText(formatAgentPlan(c));return}
   const cp=e.target.closest('[data-copy-case]');if(cp){const c=CASES.find(x=>x.id===cp.dataset.copyCase);if(c)copyText(c.chat);return}
   const add=e.target.closest('[data-add-case]');if(add){selected.add(add.dataset.addCase);renderSelected();$('copyStatus').textContent='已加入个人练习清单';return}
   const remove=e.target.closest('[data-remove-case]');if(remove){selected.delete(remove.dataset.removeCase);renderSelected();return}
