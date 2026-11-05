@@ -72,7 +72,7 @@ function init(){
  $('approveAction').onclick=()=>setApproval('approved','模拟人工确认（不构成企业授权）');
  $('executeAction').onclick=()=>setApproval('completed','模拟执行完成（未发送任何消息）');
  $('resetApproval').onclick=resetApproval;
- $('copyLog').onclick=async()=>{await copyText(state.events.map((v,i)=>(i+1)+'. '+v).join('\n'),'approvalStatus')};
+ $('copyLog').onclick=async()=>{await copyText(state.events.map((v,i)=>(i+1)+'. '+v).join('\n'),'logCopyStatus')};
  $('clearLog').onclick=()=>{state.events=[];renderLog()};
  let stored=[];try{stored=JSON.parse(localStorage.getItem('academy.work.accept')||'[]')}catch{}
  document.querySelectorAll('[data-accept]').forEach((el,i)=>{el.checked=stored[i]===true;el.addEventListener('change',updateAcceptance)});
