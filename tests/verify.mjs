@@ -55,9 +55,9 @@ const toolsView = html.match(/<section class="view" id="page-tools">([\s\S]*?)<\
 assert.ok(toolsView, '缺少 Skill/MCP/Plugin 课程区块');
 const course = toolsView[1];
 // 3W 首屏教学：四个概念各自具备 What / Why / How 与可体验实例
-const threeWStart = course.indexOf('3W 入门');
+const threeWStart = course.indexOf('入门四问');
 const threeWEnd = course.indexOf('把它们放到同一条工作流中理解');
-assert.ok(threeWStart >= 0 && threeWEnd > threeWStart, '3W 入门应放在课程最前面');
+assert.ok(threeWStart >= 0 && threeWEnd > threeWStart, '四问入门应放在课程最前面');
 const threeW = course.slice(threeWStart, threeWEnd);
 const threeWCards = [...threeW.matchAll(/<article class="card tool-3w-card">([\s\S]*?)<\/article>/g)];
 assert.equal(threeWCards.length, 4, 'Skill / MCP / Plugin / CLI 应各有一张 3W 教学卡');
@@ -74,7 +74,7 @@ for (const step of ['SKILL.md','Python / TypeScript MCP SDK','Plugin Creator','a
   assert.ok(threeW.includes(step), '缺少可执行的开发入口：' + step);
 }
 assert.ok(threeW.includes('Plugins → Skills'), 'Skill 上手路径必须可操作');
-assert.ok(threeW.includes('选择支持 MCP 的客户端'), 'MCP 安装不应被描述为直接在聊天中完成');
+assert.ok(threeW.includes('支持 MCP 的客户端'), 'MCP 安装不应被描述为直接在聊天中完成');
 assert.ok(threeW.includes('ChatGPT') && threeW.includes('Codex CLI'), '应区分插件与命令行的操作入口');
 
 const publicStart = course.indexOf('公开推荐 01');
