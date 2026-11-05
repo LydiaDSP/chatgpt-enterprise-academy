@@ -45,7 +45,7 @@ function checkQuiz(){
 function buildAnswer(){
  const root=$('referenceAnswer');root.replaceChildren();
  const para=document.createElement('p');para.className='micro';para.textContent='参考变化仅来自提供的两份模拟SOP文本；不是AI输出，也不是对实际工艺的风险结论。';root.appendChild(para);
- const wrap=document.createElement('div');wrap.className='table-wrap',table=document.createElement('table');table.className='tbl';
+ const wrap=document.createElement('div'),table=document.createElement('table');wrap.className='table-wrap';table.className='tbl';
  const head=document.createElement('tr');
  ['控制点','变化','旧版证据','新版证据','待确认影响'].forEach(name=>{const x=document.createElement('th');x.textContent=name;head.appendChild(x)});
  const thead=document.createElement('thead');thead.appendChild(head);table.appendChild(thead);
