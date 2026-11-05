@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="ChatGPT Enterprise 企业AI实战学习平台：桌面端、Prompt、Skill、MCP、Work、Codex、AI技巧与制造企业场景指南。" />
+  <title>ChatGPT Enterprise Academy · 企业AI实战学习平台</title>
+  <style>
+    :root {--red:#aa2737;--red-dark:#81202e;--red-light:#fcecef;--ink:#20242c;--text:#39424f;--muted:#747d88;--line:#e9e7e5;--paper:#fcfbf9;--white:#ffffff;--sand:#f6f4f1;--green:#28745b;--gold:#c39131;--shadow:0 12px 38px rgba(31,24,24,.055);--sidebar:266px;--radius:16px}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6} button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none} a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #e7aeb5;outline-offset:3px}
+    .layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.sidebar{background:#211d20;color:#eee6e8;position:sticky;top:0;height:100vh;overflow-y:auto;padding:27px 17px;z-index:20}.brand{display:flex;gap:11px;align-items:center;padding:3px 10px 25px;border-bottom:1px solid #42393e;margin-bottom:19px}.brand-emblem{width:36px;height:36px;border-radius:11px;background:linear-gradient(140deg,#e95264,#9e2033);display:grid;place-items:center;font-size:21px;color:#fff;font-weight:800}.brand strong{display:block;color:#fff;font-size:14px;line-height:1.1}.brand small{display:block;color:#ae9fa5;letter-spacing:1.3px;font-size:10px;margin-top:5px}.nav-caption{font-size:10px;letter-spacing:1.6px;color:#9b8a92;text-transform:uppercase;padding:10px 13px;margin-top:8px}.nav-link{display:flex;align-items:center;gap:11px;color:#c7bdc1;padding:12px 13px;border-radius:10px;font-size:13px;transition:.2s;margin:2px 0;position:relative}.nav-link:hover{background:#373035;color:#fff}.nav-link.active{background:#4a2931;color:#fff}.nav-link.active:before{position:absolute;content:'';left:0;top:9px;bottom:9px;width:3px;background:#f16473;border-radius:2px}.nav-link .ico{font-size:16px;width:20px;text-align:center}.nav-link .nav-done{margin-left:auto;font-size:11px;color:#84d0aa;display:none}.nav-link.done .nav-done{display:inline}.sidebar-foot{border-top:1px solid #42393e;padding:19px 9px 2px;margin-top:25px;color:#b4a7ad;font-size:11px;line-height:1.8}.mobile-toggle{display:none!important}
+    .main{min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:10;background:rgba(252,251,249,.94);border-bottom:1px solid var(--line);padding:15px clamp(22px,4vw,66px);backdrop-filter:blur(15px)}.breadcrumb{font-size:12px;color:var(--muted)}.breadcrumb b{font-weight:700;color:var(--text)}.top-actions{display:flex;align-items:center;gap:9px}.btn{display:inline-flex;gap:7px;align-items:center;justify-content:center;border:1px solid transparent;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:700;transition:background .15s,border .15s;white-space:normal}.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{background:var(--red-dark)}.btn-ghost{background:#fff;border-color:var(--line);color:#45434a}.btn-ghost:hover{background:#f8f1f2}.btn-soft{background:#faedef;color:var(--red-dark)}.btn-sm{padding:7px 10px;font-size:11px}.content{max-width:1350px;padding:38px clamp(22px,4vw,66px) 100px;margin:0 auto}.view{display:none;animation:enter .28s ease}.view.active{display:block}@keyframes enter{from{opacity:.25;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.2px;color:var(--red);text-transform:uppercase;margin:0 0 12px}.page-head{margin-bottom:26px}.page-title{font-size:clamp(26px,3.1vw,42px);line-height:1.2;letter-spacing:-1px;margin:0 0 13px}.page-intro{max-width:790px;color:var(--muted);font-size:15px;margin:0}.section-title{font-size:22px;letter-spacing:-.4px;margin:30px 0 14px}.muted{color:var(--muted)}.small{font-size:12px}.micro{font-size:11px;color:var(--muted)}.pill{display:inline-block;border-radius:999px;background:#f2edf0;color:#6e3c49;font-size:11px;font-weight:700;padding:5px 10px}.pill.warn{background:#fff5dc;color:#78561f}.pill.good{background:#e6f4ed;color:#256344}.tag{border:1px solid #e5e0e1;background:#fff;padding:4px 9px;border-radius:9px;color:#777078;font-size:11px}.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);box-shadow:var(--shadow);padding:23px}.card h3{margin:0 0 8px;font-size:17px}.card p{margin:6px 0;color:var(--text);font-size:13px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.kpi{padding:18px;border:1px solid var(--line);border-radius:14px;background:#fff}.kpi strong{display:block;font-size:31px;line-height:1.2;color:var(--red)}.kpi span{color:var(--muted);font-size:12px}.divider{height:1px;background:var(--line);margin:25px 0}.info{padding:15px 17px;border-left:3px solid var(--red);background:#fdf3f4;border-radius:0 9px 9px 0;color:#62414a;font-size:13px}.info.neutral{border-color:#7295a7;background:#f1f7f9;color:#47616f}.info.gold{border-color:#d5ac56;background:#fff8eb;color:#685833}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{justify-content:space-between}.stack{display:grid;gap:15px}.codebox{border-radius:12px;background:#27252a;color:#f5f1f4;padding:17px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;white-space:pre-wrap;line-height:1.8;overflow-x:auto}.lesson{padding:17px 18px;border:1px solid #eae6e7;background:#fff;border-radius:14px}.lesson .lesson-step{color:var(--red);font-size:12px;font-weight:800}.lesson h3{margin:4px 0 6px;font-size:16px}.lesson p{margin:0;font-size:13px;color:var(--muted)}.notes{padding:13px 16px;border-radius:12px;border:1px dashed #cdb6ba;background:#fffaf9;font-size:12px;color:#725762;display:none}.teacher .notes{display:block}.mode-sign{font-size:11px;color:var(--red-dark);border:1px solid #edc7cc;background:#fdf1f2;border-radius:99px;padding:5px 9px;font-weight:700}.teacher-only{display:none}.teacher .teacher-only{display:block}
+    .hero{min-height:335px;background:linear-gradient(117deg,#8b1e30 0%,#b22d43 57%,#d64b58 100%);color:#fff;border-radius:22px;padding:40px clamp(23px,4vw,50px);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;box-shadow:0 14px 40px #ae26412c}.hero:before{content:'';position:absolute;right:-82px;top:-165px;width:490px;height:490px;border:60px solid rgba(255,255,255,.075);border-radius:50%}.hero:after{content:'';position:absolute;right:100px;bottom:-180px;width:350px;height:350px;border:1px solid rgba(255,255,255,.12);border-radius:50%}.hero > *{position:relative;z-index:1}.hero .eyebrow{color:#ffd5db}.hero h1{font-size:clamp(31px,4.6vw,56px);line-height:1.1;margin:1px 0 17px;letter-spacing:-1.7px;max-width:720px}.hero p{max-width:600px;margin:0 0 22px;color:#f9dce2;font-size:15px}.hero .btn{width:max-content;background:#fff;color:#962035}.hero-chip{display:inline-block;border:1px solid rgba(255,255,255,.32);padding:5px 10px;border-radius:9px;font-size:11px;color:#fce9eb;margin-right:6px;margin-bottom:7px}.timeline{display:grid;gap:2px}.timeline-row{display:grid;grid-template-columns:95px minmax(0,1fr) 58px;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding:14px 8px}.timeline-row:last-child{border:0}.timeline-row .time{font-size:12px;font-weight:700;color:var(--red)}.timeline-row strong{font-size:13px}.timeline-row small{display:block;color:var(--muted);margin-top:2px}.timeline-row button{font-size:11px}.checkline{display:flex;align-items:center;gap:10px;font-size:12px}.checkline input{accent-color:var(--red)}.meter{height:7px;border-radius:9px;background:#ebe5e5;overflow:hidden}.meter-fill{height:100%;width:0;background:linear-gradient(90deg,#a5273a,#e06a75);transition:width .35s}
+    .compare{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.compare .block{padding:21px;border:1px solid var(--line);border-radius:14px;background:#fff}.compare .block h3{font-size:18px;margin:6px 0}.compare .block p{font-size:12px;color:var(--muted);margin:0}.compare .block .symbol{font-size:25px}.checklist{list-style:none;padding:0;margin:0;display:grid;gap:7px}.checklist li{display:flex;gap:9px;align-items:flex-start;color:var(--text);font-size:13px}.checklist li:before{content:'✓';flex:none;color:var(--green);font-weight:900}
+    textarea{width:100%;min-height:122px;border-radius:12px;border:1px solid #dcd7d7;padding:14px;color:#30323b;background:#fff;resize:vertical;font-size:13px;line-height:1.8}input[type=file]{font-size:12px;max-width:100%}input[type=checkbox]{accent-color:var(--red);transform:scale(1.05)}.field{display:flex;align-items:center;gap:8px}.tabs{display:flex;gap:5px;background:#f5f1f1;padding:5px;border-radius:11px;flex-wrap:wrap}.tabs button{border:0;border-radius:8px;padding:9px 13px;background:transparent;color:#75686c;font-weight:700;font-size:12px}.tabs button.selected{background:#fff;color:var(--red-dark);box-shadow:0 2px 8px #0000000c}.prompt-preview{background:#fff;border:1px dashed #d8c5cb;border-radius:12px;padding:15px;white-space:pre-wrap;font-size:13px;min-height:82px}.stepper{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.stepper button{width:31px;height:31px;border:1px solid #ded9db;background:#fff;border-radius:50%;font-weight:800;font-size:11px;color:#786e71}.stepper button.active{background:var(--red);color:#fff;border-color:var(--red)}.demo-frame{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.demo-header{padding:10px 15px;background:#f7f5f4;border-bottom:1px solid var(--line);display:flex;gap:7px;align-items:center}.dot{width:8px;height:8px;border-radius:50%;background:#e5b7be}.dot:first-child{background:#ef908c}.dot:nth-child(2){background:#dfbb77}.dot:nth-child(3){background:#7db498}.demo-body{padding:18px;min-height:165px}
+    .department{margin:28px 0 38px;scroll-margin-top:90px}.department-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 21px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(100deg,#fff,#faf3f4)}.department-head h3{font-size:20px;margin:0}.department-head p{font-size:12px;color:var(--muted);margin:2px 0 0}.case{border:1px solid #e9e4e5;border-radius:13px;background:#fff;margin-top:11px;overflow:hidden}.case summary{padding:16px 19px;cursor:pointer;display:flex;align-items:center;gap:10px;list-style:none}.case summary::-webkit-details-marker{display:none}.case summary .case-title{flex:1;min-width:0;font-size:14px;font-weight:700}.case .case-body{border-top:1px solid var(--line);padding:18px 20px 23px}.case .case-inner{display:grid;gap:13px}.case .case-panel{display:none}.case .case-panel.active{display:block}.case-panel h4{font-size:13px;margin:0 0 5px}.case-panel p{font-size:13px;color:var(--text);margin:0 0 12px}.case-prompt{background:#faf5f5;border:1px solid #f0e3e5;padding:13px 15px;border-radius:12px;white-space:pre-wrap;font-size:12px;line-height:1.8}.case-prompt button{float:right}.case-more{display:flex;gap:5px;align-items:center;color:var(--muted);font-size:11px}.badge-high{background:#fae5e8;color:#a02b3c}.badge-medium{background:#fff3df;color:#9c6b21}.badge-low{background:#f0f0f0;color:#70747a}
+    .tip-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tip{display:flex;flex-direction:column;gap:10px;padding:18px;border:1px solid var(--line);background:#fff;border-radius:14px}.tip h3{margin:0;font-size:15px}.tip p{font-size:12px;line-height:1.7;color:var(--muted);margin:0;flex:1}.tip button{align-self:flex-start}.tip-detail{background:#fffaf9;border:1px solid #eedadd;border-radius:12px;padding:13px;font-size:12px;white-space:pre-wrap;color:#573f47}.footer{font-size:11px;color:#9a9295;margin-top:38px;border-top:1px solid var(--line);padding-top:19px;line-height:2}.result-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff}.result-table th{background:#f5f2f2;font-weight:700;text-align:left}.result-table th,.result-table td{border-bottom:1px solid #ece8e9;padding:9px 10px}.result-table th{position:sticky;top:0}.table-wrap{max-width:100%;overflow:auto;border-radius:11px;border:1px solid #e7e1e2;max-height:320px}.bad-row{background:#fff2ef}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{border-radius:12px;background:#f8f4f4;padding:16px}.metric strong{font-size:26px;color:var(--red);display:block}.metric span{font-size:11px;color:var(--muted)}.bar{height:9px;border-radius:20px;background:#f0e9e9;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--red);border-radius:20px}.resource{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);padding:16px;border-radius:12px;background:#fff}.resource .logo{width:34px;height:34px;border-radius:10px;background:#f9e8ea;color:var(--red);display:grid;place-items:center;flex:none;font-size:17px}.resource h3{font-size:14px;margin:0 0 3px}.resource p{font-size:12px;color:var(--muted);margin:0 0 6px}.resource a{font-size:12px;color:var(--red);font-weight:700}.toast{position:fixed;right:23px;bottom:24px;z-index:100;background:#222326;color:#fff;padding:12px 17px;border-radius:11px;font-size:12px;box-shadow:0 12px 30px #0002;opacity:0;transform:translateY(15px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translateY(0)}.preline{white-space:pre-wrap}
+    .top-actions button:disabled{opacity:.4;cursor:not-allowed}
+body.large-text{font-size:18px;line-height:1.75}
+body.large-text .page-intro,body.large-text .hero p{font-size:20px}
+body.large-text .card p,body.large-text .lesson p,body.large-text .compare .block p,body.large-text .case-panel p,body.large-text .department-head p,body.large-text .tip p,body.large-text .resource p,body.large-text .prompt-preview,body.large-text .info,body.large-text .notes{font-size:17px}
+body.large-text .timeline-row strong,body.large-text .timeline-row small,body.large-text .case-title,body.large-text .lesson h3,body.large-text .tip h3,body.large-text .checklist li{font-size:17px}
+body.large-text .small,body.large-text .micro,body.large-text .eyebrow,body.large-text .pill,body.large-text .tag,body.large-text .btn,body.large-text .nav-link{font-size:15px}
+body.large-text .page-title{font-size:clamp(32px,3.6vw,50px)}
+body.large-text textarea,body.large-text .codebox,body.large-text .case-prompt,body.large-text .result-table{font-size:16px}
+@media(max-width:1120px){.top-actions .nav-key .label{display:none}}
+@media(max-width:850px){.top-actions .nav-key{display:none}}
+@media(max-width:1120px){:root{--sidebar:224px}.content{padding-inline:32px}.grid3,.tip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:850px){.mobile-toggle{display:inline-flex!important}.layout{display:block}.sidebar{position:fixed;left:0;top:0;width:270px;height:100vh;transform:translateX(-101%);transition:.25s;box-shadow:12px 0 45px #0002}.sidebar.open{transform:translateX(0)}.mobile-toggle{display:inline-flex}.topbar{padding:12px 20px}.content{padding:25px 20px 70px}.hero{min-height:310px}.grid3,.grid2,.compare{grid-template-columns:1fr}.tip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:560px){.hero h1{font-size:32px}.hero{padding:29px 21px;min-height:300px}.page-title{font-size:28px}.tip-grid,.metric-row{grid-template-columns:1fr}.top-actions .label{display:none}.card{padding:17px}.timeline-row{grid-template-columns:75px 1fr;gap:9px}.timeline-row button{display:none}.case summary{padding:13px}.case .case-body{padding:14px}.department-head{padding:15px}.breadcrumb{display:none}}
+    @media print{.sidebar,.topbar,.no-print,.btn{display:none!important}.layout{display:block}.view{display:block!important;break-after:page}.content{padding:0}.card,.case{box-shadow:none}.notes{display:block}}
+  </style>
+</head>
+<body>
+<div class="layout" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="课程导航">
+    <div class="brand"><div class="brand-emblem">A</div><div><strong>ENTERPRISE AI<br/>ACADEMY</strong><small>企业AI实战学习平台</small></div></div>
+    <div class="nav-caption">COURSE · 课程</div>
+    <a class="nav-link active" href="#home" data-page="home"><span class="ico">⌂</span>学习首页<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#desktop" data-page="desktop"><span class="ico">▣</span>桌面端与Enterprise<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#prompt" data-page="prompt"><span class="ico">✳</span>Prompt Lab<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#files" data-page="files"><span class="ico">▤</span>文件与数据分析<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#tools" data-page="tools"><span class="ico">⚙</span>Skill · MCP · Plugin<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#work" data-page="work"><span class="ico">◈</span>Work · Computer Use<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#codex" data-page="codex"><span class="ico">⌘</span>Codex AI Coding<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#tips" data-page="tips"><span class="ico">✦</span>AI效率技巧库<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#cases" data-page="cases"><span class="ico">▦</span>30个业务场景指南<span class="nav-done">✓</span></a>
+    <a class="nav-link" href="#resources" data-page="resources"><span class="ico">↗</span>资源与部署<span class="nav-done">✓</span></a>
+    <div class="sidebar-foot"><div>课程版本 · v1.1 待验收</div><div>信息核对 · 2026-11-05</div><div>模拟练习 · 不接入企业系统</div><div style="margin-top:12px">学习进度仅保存在当前浏览器。</div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="row"><button id="mobileToggle" class="btn btn-ghost btn-sm mobile-toggle" aria-label="打开导航">☰</button><div class="breadcrumb">AI ACADEMY <span style="padding:0 9px">/</span><b id="bread">学习首页</b></div></div>
+      <div class="top-actions"><span id="chapterCount" class="micro nav-key" aria-live="polite">1 / 10</span><button id="prevChapter" class="btn btn-ghost btn-sm nav-key" aria-label="上一章节" title="上一章（讲师快捷键Shift + PageUp）">← <span class="label">上一章</span></button><button id="nextChapter" class="btn btn-ghost btn-sm nav-key" aria-label="下一章节" title="下一章（讲师快捷键Shift + PageDown）"><span class="label">下一章</span> →</button><button id="presentToggle" class="btn btn-ghost btn-sm" title="切换投影大字模式" aria-pressed="false">⊞ <span class="label">投影大字</span></button><span id="modeSign" class="mode-sign" hidden>讲师模式</span><button class="btn btn-ghost btn-sm" id="modeToggle" title="切换讲师/自学模式">◫ <span class="label">讲师模式</span></button><button class="btn btn-ghost btn-sm" id="completeBtn" title="标记本章已学">✓ <span class="label">完成本章</span></button></div>
+    </header>
+    <div class="content">
+      <section class="view active" id="page-home">
+        <div class="hero"><div class="eyebrow">FROM CHAT TO AGENT · 120 MIN</div><h1>用 ChatGPT<br/>完成真正的工作</h1><p>从高效提问、文件分析，到工具连接、浏览器操作和 Codex AI Coding。面向财务、人资、研发、品保、供应链、制造的互动实战课程。</p><div><span class="hero-chip">讲师 + 自学 双模式</span><span class="hero-chip">30个未来业务场景</span><span class="hero-chip">内置可运行工具</span></div><div style="margin-top:15px"><button class="btn" data-go="desktop">开始学习 →</button></div></div>
+        <div class="grid3" style="margin-top:18px"><div class="kpi"><strong>120<span style="font-size:16px"> 分钟</span></strong><span>现场授课路线</span></div><div class="kpi"><strong>30</strong><span>附件原始场景，逐条覆盖</span></div><div class="kpi"><strong>6</strong><span>部门场景章节</span></div></div>
+        <h2 class="section-title">这门课要带走什么？</h2>
+        <div class="grid3"><div class="card"><span class="pill">01 · 会问</span><h3 style="margin-top:15px">把任务说清楚</h3><p>用短而清晰的指令开始，再通过上下文、追问和验证获得可靠结果。</p></div><div class="card"><span class="pill">02 · 会做</span><h3 style="margin-top:15px">从问答到交付</h3><p>上传文件、分析数据、创建报告，理解Work的多步骤执行能力。</p></div><div class="card"><span class="pill">03 · 会建</span><h3 style="margin-top:15px">用AI创建工具</h3><p>借助Codex生成、运行和测试可复用的业务小工具。</p></div></div>
+        <h2 class="section-title">120分钟讲师路线</h2><div class="card"><div id="timeline" class="timeline"></div></div>
+        <div class="notes" style="margin-top:14px">讲师提示：开场询问学员“你最近一次使用ChatGPT解决了什么工作？” 不逐个点名，可以请2人分享。结束时引导大家选择一个未来业务场景并完成入门练习。</div>
+        <h2 class="section-title">个人学习进度</h2><div class="card"><div class="row between" style="margin-bottom:9px"><strong id="progressText">0 / 10 章</strong><button class="btn btn-ghost btn-sm" id="resetProgress">重置进度</button></div><div class="meter"><div id="progressFill" class="meter-fill"></div></div><p class="small muted">网页将进度保存在浏览器本地。不会上传文件、对话或学员信息到服务器。</p></div>
+      </section>
+      <section class="view" id="page-desktop">
+        <div class="page-head"><p class="eyebrow">01 · CHATGPT DESKTOP</p><h1 class="page-title">认识ChatGPT Enterprise桌面端</h1><p class="page-intro">先看清三种工作体验，再理解企业版的治理、权限与数据边界。桌面端实际菜单和功能取决于应用版本与管理员配置。</p></div>
+        <div class="compare"><div class="block"><span class="symbol">◌</span><h3>Chat</h3><p>快速问答、写作、搜索、脑暴与文件理解。适合“我现在需要一个答案”。</p></div><div class="block"><span class="symbol">◈</span><h3>Work</h3><p>研究、分析、跨步骤执行并交付文档/报告等。适合“请帮我完成这项任务”。</p></div><div class="block"><span class="symbol">⌘</span><h3>Codex</h3><p>读代码、处理本地项目、运行命令、测试并开发工具。适合“请帮我做一个程序”。</p></div></div>
+        <h2 class="section-title">企业版与个人版：培训时重点讲什么？</h2>
+        <div class="grid2"><div class="card"><h3>组织与数据治理</h3><ul class="checklist"><li>工作区、成员角色与管理权限</li><li>企业级数据安全和合规配置</li><li>组织管理Skill、Plugin与应用连接</li><li>特定操作可要求成员授权或管理员批准</li></ul></div><div class="card"><h3>模型选择的小原则</h3><ul class="checklist"><li>日常表达：优先低成本、快速交互的体验</li><li>复杂分析：选择较高思考强度</li><li>需要执行工具：进入Work或Codex</li><li>先确定任务和权限，再考虑模型名称</li></ul></div></div>
+        <h2 class="section-title">桌面端的4个操作技巧</h2><div class="grid2"><div class="lesson"><div class="lesson-step">TIP 01</div><h3>快捷呼出</h3><p>可在桌面端设置快捷入口；注意不同系统、版本及快捷键冲突。</p></div><div class="lesson"><div class="lesson-step">TIP 02</div><h3>截图直接问</h3><p>将软件异常、图表和界面截图交给AI解释；先遮盖敏感资料。</p></div><div class="lesson"><div class="lesson-step">TIP 03</div><h3>用项目承接长期工作</h3><p>让相关文件、历史对话和项目目标保持在相同工作上下文。</p></div><div class="lesson"><div class="lesson-step">TIP 04</div><h3>语音梳理问题</h3><p>复杂的现场问题可先用口述整理再形成可检验的任务描述。</p></div></div>
+        <div class="info gold" style="margin-top:18px">权限检查：讲师课前在实际Enterprise账号中确认Chat、Work、Codex、Skills、Plugins、Browser Use、Computer Use是否开放。不要把某个演示账号看到的能力当作所有人都有。</div>
+        <div class="notes" style="margin-top:12px">讲师操作：现场展示新桌面端Chat/Work切换，再从顶部菜单切到Codex；简要说明Chat和Work历史在Recents中，Codex有独立记录。不要花太多时间解释模型版本号。</div>
+        <div class="row" style="margin-top:18px"><a class="btn btn-ghost" target="_blank" rel="noopener" href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex">OpenAI官方：Chat / Work / Codex ↗</a><a class="btn btn-ghost" target="_blank" rel="noopener" href="https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app">新版桌面端迁移指南 ↗</a></div>
+      </section>
+      <section class="view" id="page-prompt">
+        <div class="page-head"><p class="eyebrow">02 · PROMPT LAB</p><h1 class="page-title">不背模板，学会与AI协作</h1><p class="page-intro">参考吴恩达《AI Prompting for Everyone》的现代提示词理念：清楚表达、提供所需背景、通过对话迭代，并且检查结果。简单任务不需要写得很长。</p></div>
+        <div class="info">核心判断：提示词不是越长越好。任务越复杂、风险越高，越需要交代数据来源、判断标准和验收条件。</div>
+        <h2 class="section-title">一条业务任务，试三种表达方式</h2>
+        <div class="grid2"><div class="card"><div class="row between"><h3>① 选择任务和表达层级</h3><span class="pill">互动实验</span></div><div class="tabs" id="promptTasks"><button class="selected" data-prompt-task="qa">品质异常</button><button data-prompt-task="scm">缺料分析</button><button data-prompt-task="hr">培训计划</button></div><div style="height:12px"></div><div class="tabs" id="promptLevels"><button class="selected" data-prompt-level="0">一句话启动</button><button data-prompt-level="1">增加上下文</button><button data-prompt-level="2">增加验证</button></div><p class="micro" style="margin-top:15px">你可以直接修改下面的Prompt，练习用自己的语言表达。</p><textarea id="promptInput" aria-label="编辑练习Prompt"></textarea><div class="row between" style="margin-top:11px"><button class="btn btn-ghost" id="resetPrompt">恢复当前示例</button><button class="btn btn-primary" id="copyPrompt">复制Prompt ↗</button></div></div>
+        <div class="card"><h3>② 看看这条指令具备什么</h3><p class="small muted">以下是网页本地的文字检查，不是AI模型评分。</p><div id="promptChecklist" class="stack" style="margin-top:18px"></div><div class="divider"></div><h3>③ 下一轮可以怎样追问？</h3><div id="nextPrompt" class="prompt-preview"></div><div style="margin-top:12px"><button class="btn btn-soft" id="copyFollow">复制追问示例</button></div></div></div>
+        <h2 class="section-title">四步就够用</h2><div class="grid2"><div class="lesson"><span class="lesson-step">STEP 1 · 任务</span><h3>直接说目的</h3><p>先问“我要获得什么结果”，而不是先写角色扮演和长篇设定。</p></div><div class="lesson"><span class="lesson-step">STEP 2 · 上下文</span><h3>必要时补资料</h3><p>用业务文件、字段含义、背景、规则给AI足够的判断依据。</p></div><div class="lesson"><span class="lesson-step">STEP 3 · 迭代</span><h3>不满意就继续改</h3><p>把问题指出来，让AI沿着当前工作修正，不必反复从零写Prompt。</p></div><div class="lesson"><span class="lesson-step">STEP 4 · 验证</span><h3>按风险分层复核</h3><p>普通文案重在可读性；财务、质量和合规判断必须回到原始证据。</p></div></div>
+        <h2 class="section-title">借鉴吴恩达课程：AI不只回答问题</h2><div class="grid3"><div class="lesson"><div class="lesson-step">FIND INFORMATION</div><h3>找信息与核实来源</h3><p>区分模型已有知识、联网搜索与Deep Research；追问出处和数据时效。</p></div><div class="lesson"><div class="lesson-step">THOUGHT PARTNER</div><h3>把AI当思考伙伴</h3><p>让AI反驳你的方案、给不同角度，并指出假设中最薄弱的一环。</p></div><div class="lesson"><div class="lesson-step">CREATE & BUILD</div><h3>让AI帮助创造</h3><p>描述需要的成果，利用文本、图表或Codex做原型，再根据实际体验迭代。</p></div></div>
+        <div class="notes" style="margin-top:13px">讲师练习：让全员选择一个工作任务。先用一句话输入ChatGPT，再要求它解释依据或补充条件。请1位学员口头比较“第一次回答”和“第二次回答”的差别。建议14分钟。</div>
+        <div class="row" style="margin-top:17px"><a class="btn btn-ghost" href="https://www.deeplearning.ai/courses/ai-prompting-for-everyone" rel="noopener" target="_blank">吴恩达课程官方页面 ↗</a></div>
+      </section>
+      <section class="view" id="page-files">
+        <div class="page-head"><p class="eyebrow">03 · FILES & DATA</p><h1 class="page-title">从原始文件到业务成果</h1><p class="page-intro">真实使用中，不需要手工把Excel逐行复制给AI。先准备好数据与业务口径，再上传文件、提出目标并核对结果。</p></div>
+        <div class="grid2"><div class="card"><h3>课堂主案例 · MES生产日报</h3><p>通过一份完全模拟的日报，理解产量、达成率、直通率、异常分类。以下数据汇总在网页中真实计算，不是调用ChatGPT。</p><div style="margin-top:15px" class="row"><a class="btn btn-primary" href="samples/MES_生产日报_模拟.csv" download>↓ 下载模拟CSV</a><button class="btn btn-ghost" data-copy-key="mesPrompt">复制ChatGPT分析指令</button></div><div class="notes" style="margin-top:15px">讲师操作：在真正的Enterprise Chat中上传这份CSV，让AI说明数据质量、生成趋势图和报告摘要。要求学员从原文件核对总产量与达成率公式。</div></div><div class="card"><h3>从数据到结论的三个关口</h3><ul class="checklist"><li>先检查缺失、重复、字段名称</li><li>指标要有明确分母和计算口径</li><li>报告结论必须标明依据、未知项和限制</li></ul><div class="info gold" style="margin-top:14px">本页展示的是用内置模拟数据进行的规则计算；不会自动分析学员自己的Excel。实际工作请在批准的ChatGPT环境上传文件。</div></div></div>
+        <h2 class="section-title">模拟日报 · 浏览器即时汇总</h2><div class="card"><div class="metric-row" id="mesMetrics"></div><h3 style="font-size:15px;margin-top:20px">异常类别分布</h3><div id="mesDefects"></div><div class="divider"></div><h3 style="font-size:15px">数据明细</h3><div id="mesTable" class="table-wrap"></div></div>
+        <h2 class="section-title">ChatGPT分析指令</h2><div class="codebox" id="mesPromptCode"></div><div class="row" style="margin-top:12px"><button class="btn btn-primary" data-copy-key="mesPrompt">复制后到ChatGPT使用</button><button class="btn btn-ghost" data-go="codex">下一步：用Codex做可复用工具 →</button></div>
+      </section>
+      <section class="view" id="page-tools">
+        <div class="page-head"><p class="eyebrow">04 · REUSABLE WORKFLOWS</p><h1 class="page-title">Skill、MCP、Plugin、CLI</h1><p class="page-intro">先理解每种能力在业务流程里的位置，不把它们当作同一种东西，也不需要每个同事都学会安装开发环境。</p></div>
+        <div class="grid2"><div class="card"><div class="row"><span class="pill">方法</span><h3>Skill · 可复用SOP</h3></div><p>把“如何做”的步骤、规则、例子和必要脚本封装起来，让未来同类任务遵守相同工作标准。</p><p><b>案例：</b>QA的SCAR/CAPA审查Skill。</p></div><div class="card"><div class="row"><span class="pill">连接</span><h3>MCP · 工具接口协议</h3></div><p>让符合协议的客户端通过工具连接外部服务。不是有MCP就自动拥有企业系统权限。</p><p><b>案例：</b>经批准读取报表或知识资料。</p></div><div class="card"><div class="row"><span class="pill">封装</span><h3>Plugin / App · 成品能力</h3></div><p>插件可组合Skills与已连接应用等功能，具体可用能力受工作区、账户授权和管理员控制。</p><p><b>案例：</b>连接已有服务并完成授权范围内的操作。</p></div><div class="card"><div class="row"><span class="pill">执行</span><h3>CLI · 命令行工具</h3></div><p>通过文本命令执行文件、代码、自动化任务；是Codex等技术工具常用的工作界面。</p><p><b>案例：</b>批量处理本地文件或运行测试。</p></div></div>
+        <h2 class="section-title">把它们放到同一条工作流中理解</h2><div class="card"><div class="row" style="justify-content:center"><span class="pill">业务需求</span><b>→</b><span class="pill">Agent规划</span><b>→</b><span class="pill">Skill执行规范</span><b>→</b><span class="pill">Plugin / MCP工具</span><b>→</b><span class="pill">成果核验</span></div><p class="small muted" style="text-align:center;margin-top:15px">这是概念关系图，不代表每个任务都必须使用所有组件。</p></div>
+        <h2 class="section-title">Skill实战 · SOP差异审查</h2><div class="grid2"><div class="card"><h3>一次性Prompt</h3><div class="prompt-preview">比较上传的两版SOP，列出重要变化。</div><p>优点：足够简单，适合临时分析。限制：不同人员可能使用不同判定规则。</p></div><div class="card"><h3>沉淀为Skill</h3><div class="prompt-preview">输入：新旧SOP。\n步骤：确认版本→逐章比对→重点检查工艺参数与检验标准→标记证据→输出差异清单。\n限制：不得自动批准文件变更。</div><p>适合：高频重复的专业审查任务，且需要一致的输出标准。</p><button class="btn btn-soft" data-copy-key="sopSkill">复制Skill草稿</button></div></div>
+        <div class="notes" style="margin-top:14px">讲师重点：用一句话区分「Skill告诉AI怎么做」「MCP帮助AI调用什么工具」「Plugin把技能和连接组织成可安装能力」「CLI让技术工作通过命令执行」。避免承诺真实系统可直接连接。</div>
+        <div class="row" style="margin-top:16px"><a target="_blank" class="btn btn-ghost" rel="noopener" href="https://help.openai.com/en/articles/20001066-skills-in-chatgpt">官方 Skills 文档 ↗</a><a target="_blank" class="btn btn-ghost" rel="noopener" href="https://help.openai.com/en/articles/20001256-plugins-in-chatgpt">官方 Plugins 文档 ↗</a></div>
+      </section>
+      <section class="view" id="page-work">
+        <div class="page-head"><p class="eyebrow">05 · WORK & COMPUTER USE</p><h1 class="page-title">让AI从回答走向执行</h1><p class="page-intro">这里展示一个逐步执行的Agent任务流程。网页模拟的是教学步骤，不会真的登录网站、访问物流系统或操作电脑。</p></div>
+        <div class="grid2"><div class="card"><div class="row between"><h3>供应链公开资料收集Agent</h3><span class="pill">流程演练</span></div><p>示例任务：收集三家公开物流服务商的服务信息，形成来源可核对的对比表。</p><div class="stepper" id="workStepper"></div><div class="demo-frame"><div class="demo-header"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="micro" style="margin-left:8px">Agent操作过程 · 教学模拟</span></div><div class="demo-body" id="workStepContent"></div></div><div class="row between" style="margin-top:13px"><button class="btn btn-ghost" id="workPrev">← 上一步</button><button class="btn btn-primary" id="workNext">下一步 →</button></div></div><div class="card"><h3>这个任务涉及哪些层次？</h3><ul class="checklist"><li>Work：组织多步骤信息研究和交付</li><li>Browser Use：在授权范围内操作网页</li><li>Computer Use：在授权范围内操作本地桌面应用</li><li>Plugin/MCP：通过具备权限的集成接口调用服务</li><li>人工审批：在发送、修改或高风险动作前确认</li></ul><div class="info gold" style="margin-top:15px">Cloud Browser、桌面内置浏览器、Browser Use和Computer Use各有不同权限边界；功能还受管理员策略及当前产品版本限制。</div><button class="btn btn-soft" style="margin-top:15px" data-copy-key="workPrompt">复制Agent演示Prompt</button></div></div>
+        <div class="notes" style="margin-top:14px">讲师操作建议：用讲师专用的企业测试账号在真实Work里执行一次公开资料收集任务。网站流程演练用于讲解逻辑或现场网络异常时备用。不要现场登录真实MES、ERP或HR系统。</div>
+        <div class="row" style="margin-top:17px"><a target="_blank" rel="noopener" class="btn btn-ghost" href="https://help.openai.com/en/articles/20001510-manage-browser-and-computer-use-in-your-enterprise-workspace">官方：企业浏览器/电脑操作权限 ↗</a></div>
+      </section>
+      <section class="view" id="page-codex">
+        <div class="page-head"><p class="eyebrow">06 · CODEX AI CODING</p><h1 class="page-title">不会写代码，也可以设计实用工具</h1><p class="page-intro">课堂重点不是讲编程语法，而是演示“描述需求 → 理解数据 → 编写工具 → 运行测试 → 修复问题”的完整过程。下面的CSV合并器是一个<strong>真正在浏览器里运行</strong>的程序，不依赖后端。</p></div>
+        <div class="grid2"><div class="card"><h3>从对话到工具 · Codex示范任务</h3><div class="codebox" id="codexPromptCode"></div><div class="row" style="margin-top:12px"><button class="btn btn-primary" data-copy-key="codexPrompt">复制Codex任务Prompt</button></div><div class="divider"></div><h3>现场展示顺序</h3><ol style="font-size:13px;color:var(--text);line-height:2.05;padding-left:20px"><li>打开Codex，选择空白练习目录</li><li>粘贴任务需求，让它先检查样例数据</li><li>观察创建文件、运行测试与修复报错</li><li>在真实目录中运行工具（只用模拟文件）</li><li>再要求生成简易Web页面，观察功能迭代</li></ol></div><div class="card"><h3>准备3份模拟采购订单CSV</h3><p>本例模拟不同人员提交的文件，包含一组重复订单和一项缺失交期。</p><div class="stack" style="margin:15px 0"><a class="btn btn-ghost" href="samples/采购订单_模拟_1.csv" download>↓ 模拟订单 1</a><a class="btn btn-ghost" href="samples/采购订单_模拟_2.csv" download>↓ 模拟订单 2</a><a class="btn btn-ghost" href="samples/采购订单_模拟_3.csv" download>↓ 模拟订单 3</a></div><div class="info neutral">本页演示工具仅支持同一字段结构的CSV（Excel可先另存为CSV）。真实业务需另外处理列名变化、编码、日期格式和数据权限。</div></div></div>
+        <h2 class="section-title">动手体验 · 可运行的CSV批量合并器</h2><div class="card"><div class="row between"><div><h3>Excel批量处理工具 · Browser Demo</h3><p class="micro">真实执行：浏览器本地读取CSV、合并、识别重复键及缺失交期、生成下载文件。文件不会上传服务器。</p></div><span class="pill good">可运行</span></div><div class="row" style="margin:16px 0"><button class="btn btn-primary" id="loadSample">载入内置模拟订单</button><label class="btn btn-ghost" for="csvInput">选择自己的CSV（仅在本机处理）</label><input type="file" id="csvInput" accept=".csv,text/csv" multiple style="position:absolute;left:-9999px"/><button class="btn btn-ghost" id="runMerge" disabled>▶ 运行合并与检查</button></div><div id="sourceStatus" class="micro">尚未加载数据。可先点击“载入内置模拟订单”。</div><div id="mergeResults" style="margin-top:16px"></div><div class="notes" style="margin-top:15px">讲师技巧：先现场运行网页工具，让学员看到真实输入与输出；接着切到Codex，说明“这个可运行的小工具也可以由AI根据自然语言需求帮助实现”。切勿将本地示范脚本说成Codex正在后台生成。</div></div>
+        <h2 class="section-title">代码生成之后，还要验证什么？</h2><div class="grid3"><div class="lesson"><div class="lesson-step">① 数据一致性</div><h3>行数是否正确</h3><p>合并前后行数、列名、重复项数量能否对账。</p></div><div class="lesson"><div class="lesson-step">② 数据安全</div><h3>不要覆盖原始文件</h3><p>工具先输出新文件；正式批处理前应备份、审批、记录日志。</p></div><div class="lesson"><div class="lesson-step">③ 可重复运行</div><h3>测试不同输入</h3><p>加入空值、错误格式和重复项，看工具是否稳健。</p></div></div>
+        <div class="row" style="margin-top:17px"><a target="_blank" rel="noopener" class="btn btn-ghost" href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex">Codex与Work官方说明 ↗</a></div>
+      </section>
+      <section class="view" id="page-tips">
+        <div class="page-head"><p class="eyebrow">07 · TIPS & TRICKS</p><h1 class="page-title">15个马上能用的AI效率技巧</h1><p class="page-intro">不需要全部记住。每次学会两到三个，直接带回自己的工作中。点击卡片中的“查看做法”可获得场景、简短指令和注意事项。</p></div>
+        <div class="tip-grid" id="tipsGrid"></div>
+        <div class="notes" style="margin-top:15px">讲师现场精选：①截图提问，②让AI先问关键问题，③同一对话迭代，④Codex先读后改。总计约10分钟，其他技巧放到自学模式。</div>
+      </section>
+      <section class="view" id="page-cases">
+        <div class="page-head"><p class="eyebrow">08 · BUSINESS PLAYBOOK</p><h1 class="page-title">30个业务场景，从今天到Agent</h1><p class="page-intro">对应附件《部門AIAgent适用場景盤點表.xlsx》，保留原始场景和优先级。这里<strong>不展示当前Chat问答案例筛选器</strong>，而是针对各部门“未来想做什么”，提供可尝试的Chat路径与进一步自动化的条件。</p></div>
+        <div class="grid3"><div class="kpi"><strong>30</strong><span>原始业务需求</span></div><div class="kpi"><strong>17</strong><span>原表高优先级</span></div><div class="kpi"><strong>6</strong><span>部门章节</span></div></div>
+        <div class="info gold" style="margin-top:17px">所有“Chat怎么做”“Agent怎么升级”是基于盘点需求提出的<strong>教学方案</strong>，不代表已经验证企业系统连接。为降低公开发布风险，网页不包含原始Excel、内部人员资料、真实生产/人资数据；真实系统使用前必须审批。</div>
+        <div class="row" id="deptJump" style="margin-top:20px"></div><div id="departmentSections"></div>
+        <div class="notes">讲师时间仅约10分钟：选取制造或品保的1个场景演示“现在做/未来做”两条路径，告诉同事课后访问自学模式查阅全部30个场景。无需在课堂逐个讲完。</div>
+      </section>
+      <section class="view" id="page-resources">
+        <div class="page-head"><p class="eyebrow">09 · RESOURCES & DEPLOYMENT</p><h1 class="page-title">课后资源与发布说明</h1><p class="page-intro">学习资源优先使用官方文档。功能变化快，网页上的产品说明以2026年11月5日可查询的官方资料为基础；正式授课前仍应核对企业工作区。</p></div>
+        <div class="grid2" id="resourceGrid"></div>
+        <h2 class="section-title">上线到GitHub Pages：四步</h2><div class="card"><ol style="line-height:2.25;color:var(--text);font-size:13px;padding-left:22px"><li>在GitHub创建一个仓库，例如 <code>chatgpt-enterprise-academy</code>。</li><li>将 <code>index.html</code> 和 <code>samples/</code> 一起放到仓库根目录。</li><li>进入 <code>Settings → Pages → Build and deployment</code>，选择 <code>Deploy from a branch</code>、<code>main</code>、<code>/(root)</code>。</li><li>发布后通过仓库的Pages地址访问，检查下载链接和所有课程章节。</li></ol><div class="info gold">公开仓库与GitHub Pages并非企业私有内网。发布前确认公司许可，移除任何未经审批的内部信息。若课程需包含非公开数据，应使用企业认可的访问受控平台。</div></div>
+        <h2 class="section-title">讲师上线前检查</h2><div class="card" id="preflight"></div>
+        <div class="footer">本课程是内部培训原型，不隶属于OpenAI或DeepLearning.AI。引用课程名称、产品资料仅用于教学。网站交互在本地浏览器执行，不自动调用ChatGPT API、读取企业系统或操作真实桌面软件。 <br/>Design: 企业AI实战学习平台 v1.1-验收分支 · 2026-11-05</div>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const SCENARIOS = [{"id":"case-01","department":"FIN","departmentLabel":"财务 FIN","title":"當收集歷史5年的匯率資訊等","priority":"高","tag":"财务分析","prep":"公开汇率数据、日期范围、币种与统计口径","chatSteps":"搜索权威来源并核对数据日期；整理时间序列；画趋势图并标注数据缺口","chatPrompt":"请查找近5年指定币种的历史汇率数据，优先使用官方或银行公开来源；统一日期和币种口径，列出来源、缺失日期及趋势摘要。","agent":"连接授权的数据服务，周期性更新历史汇率并生成变化报告","requirements":"数据访问授权、口径统一、异常与缺失处理","validation":"随机抽取5个日期与原始发布机构核对；不得把演示汇率当实时汇率"},{"id":"case-02","department":"FIN","departmentLabel":"财务 FIN","title":"計算複雜線性回歸","priority":"高","tag":"数据分析","prep":"回归数据表、变量说明、业务目的","chatSteps":"上传CSV；明确自变量与目标变量；运行回归并检查残差和假设","chatPrompt":"这份数据需要进行线性回归。先识别因变量和自变量，并向我确认有歧义的字段；输出系数、评价指标、残差检查和限制条件。","agent":"将数据预处理、模型计算与报告输出封装为可复用分析流程","requirements":"稳定数据源、分析环境、模型校验规则","validation":"复核抽样计算；报告变量、样本量与模型限制；不把关联当因果"},{"id":"case-03","department":"FIN","departmentLabel":"财务 FIN","title":"使用AI檢查歸類資料","priority":"高","tag":"数据清洗","prep":"待检查Excel、分类规则、样例和异常判定原则","chatSteps":"上传文件；说明分类标准；输出清洗前后变化与待确认清单","chatPrompt":"请按我提供的分类规则检查这份Excel，找出重复、缺失、格式不一致和无法归类的数据；不要删除原始记录，输出修正建议和异常明细。","agent":"开发批量校验工具或连接来源系统自动更新","requirements":"字段字典、规则版本、输出位置","validation":"核对行数与分类合计；所有修改可追溯"},{"id":"case-04","department":"RD","departmentLabel":"研发 RD","title":"異常履歷與維修經驗查詢","priority":"高","tag":"知识检索","prep":"脱敏维修记录、设备手册、故障分类词典","chatSteps":"按设备和现象检索；汇总相似案例；提供记录出处","chatPrompt":"请在这些维修记录中查找与“设备报警、治具无法复位”相似的故障案例，列出处理步骤、适用条件、原始记录位置和仍需排查的问题。","agent":"构建可授权访问的维修知识检索Agent","requirements":"知识更新机制、文档权限、索引/检索连接","validation":"每条建议能回溯到维修记录；未经验证不能直接控制设备"},{"id":"case-05","department":"RD","departmentLabel":"研发 RD","title":"定期每日、每週、每月匯整各治具直通率","priority":"高","tag":"报表自动化","prep":"从数据库导出的治具测试明细、直通率定义","chatSteps":"上传明细；确认分母和重测口径；生成日周月对比","chatPrompt":"请根据附件治具测试明细，按每日/每周/每月计算直通率并生成趋势图。先确认重测记录与分母处理规则，标注异常波动。","agent":"数据库只读查询 + 排程 + 定期报表","requirements":"SQL只读权限、时间口径、报表模板","validation":"随机抽样与原报表比对，不重复统计重测记录"},{"id":"case-06","department":"RD","departmentLabel":"研发 RD","title":"Pilot run所有資訊及文件串聯","priority":"高","tag":"跨表关联","prep":"模拟试产工单、领料、入库和测试记录","chatSteps":"统一试产批次与工单号；关联多张表；列出缺失项","chatPrompt":"我上传了试产工单、领料和入库表。请按工单号和批次建立关联，输出试产过程摘要、无法匹配的记录和待确认数据。","agent":"连接经授权的研发、文档与业务系统，自动串联试产资料","requirements":"跨系统主键、权限、数据质量校验","validation":"关联行可追溯，不能用模糊匹配替代业务主键"},{"id":"case-07","department":"QA","departmentLabel":"品保 QA","title":"品質數據整理、異常分類及報表摘要","priority":"高","tag":"质量分析","prep":"模拟IQC/IPQC/FT2/OQC检验明细、缺陷分类表","chatSteps":"检查字段；统计不合格率与缺陷分布；生成摘要","chatPrompt":"请分析这份检验记录，说明统计口径，生成缺陷Pareto、工序对比和本周异常摘要，并给出需要人工核实的项目。","agent":"通过受控数据接口获取检验记录，自动计算和成稿","requirements":"质量数据接口、缺陷口径、质量审核","validation":"缺陷数量与批次统计不混用；原始数值可复核"},{"id":"case-08","department":"QA","departmentLabel":"品保 QA","title":"供應商稽核資料整理及稽核重點彙整","priority":"高","tag":"稽核准备","prep":"脱敏历史稽核记录、IQC、SCAR及供应商回复","chatSteps":"按供应商合并资料；找历史未关闭项；整理稽核提纲","chatPrompt":"请汇总附件中的供应商历史稽核与质量异常记录，列出重复问题、未关闭措施、证据缺口，并生成稽核前核查清单。","agent":"构建供应商质量知识库和稽核准备助手","requirements":"资料权限、供应商身份匹配、定期同步","validation":"每个稽核问题附原始依据，不替代正式稽核判定"},{"id":"case-09","department":"QA","departmentLabel":"品保 QA","title":"SCAR／CAPA內容摘要、改善措施及回覆重點整理","priority":"高","tag":"文档审查","prep":"脱敏SCAR/CAPA/8D和回复文件","chatSteps":"抽取问题、原因、措施、验证证据；输出缺口清单","chatPrompt":"请整理这份CAPA，检查问题描述、原因分析、纠正措施和有效性验证证据是否齐全；只指出风险和待确认项，不替我批准关闭。","agent":"建立可复用审阅Skill与审批工作流","requirements":"CAPA标准、文件版本、人工审批","validation":"完整性检查不等于有效性验证；保留审核人"},{"id":"case-10","department":"QA","departmentLabel":"品保 QA","title":"SOP／SIP／規格文件摘要與差異比對","priority":"中","tag":"版本比对","prep":"新旧版本SOP/SIP及规格文件","chatSteps":"逐条比较版本；重点识别参数、判定标准和步骤变化","chatPrompt":"比较这两版SOP，列出新增、删除、修改条款，特别标注参数和检验标准差异；为每一项标注页码与原文依据。","agent":"标准差异审查Skill + 受控文档库","requirements":"版本管理、文档权限、差异确认流程","validation":"对扫描件可能识别不完整；人工确认关键参数"},{"id":"case-11","department":"QA","departmentLabel":"品保 QA","title":"由承辦人定義規則，透過AI進行檢查及修正","priority":"中","tag":"AI Coding","prep":"模拟PDF文件清单、文件命名规范","chatSteps":"先生成命名审核表；必要时让Codex写安全的批处理工具","chatPrompt":"检查这些文件名是否符合“部门_日期_文件类型_版本”规则，列出不合规项和建议新名称，不要直接覆盖或重命名原文件。","agent":"在授权文件夹中由Codex/工具执行批量检查与重命名","requirements":"文件读写权限、规则版本、备份与回滚","validation":"先预览后确认，记录更名前后映射"},{"id":"case-12","department":"SCM","departmentLabel":"供应链 SCM","title":"自動生成MRP分析報表與缺料風險摘要","priority":"高","tag":"缺料分析","prep":"MRP导出表、库存量、需求量、到货日期","chatSteps":"上传MRP；计算缺口；按预计影响时间排序","chatPrompt":"请分析附件MRP数据，按料号计算供需差额，识别缺料风险并输出风险等级、影响时间和需采购确认的项目。","agent":"经授权连接ERP数据，按周期生成缺料预警","requirements":"ERP只读权限、库存与在途口径","validation":"不凭空补齐库存或交期；缺料公式需对账"},{"id":"case-13","department":"SCM","departmentLabel":"供应链 SCM","title":"庫存需求預測與情境模擬分析","priority":"中","tag":"预测模拟","prep":"历史需求、库存、补货周期与安全库存","chatSteps":"建立基础预测和情景对比；说明不确定性","chatPrompt":"基于附件的历史需求与库存数据，建立保守/基准/乐观三个情景，比较缺料概率与库存压力，并说明模型假设。","agent":"自动取数 + 预测模型 + 情景模拟报告","requirements":"长期数据、预测精度跟踪、业务审批","validation":"进行回测；不能把预测值当确定结果"},{"id":"case-14","department":"SCM","departmentLabel":"供应链 SCM","title":"自動生成交期追蹤與催料管理清單","priority":"中","tag":"订单跟催","prep":"采购订单、承诺交期、实收数量","chatSteps":"输出临期/逾期清单；生成跟催邮件草稿","chatPrompt":"请检查这些采购订单，找出已逾期和7天内到期但尚未足量到货的项目，生成优先级清单和给供应商的邮件草稿。","agent":"连接订单系统和授权邮件，审批后发送","requirements":"ERP权限、邮件授权、发送审批","validation":"避免自动发送错误对象或错误数量"},{"id":"case-15","department":"SCM","departmentLabel":"供应链 SCM","title":"出貨報表自動化整合與產出","priority":"低","tag":"报表合并","prep":"模拟出货明细、订单与车间产出表","chatSteps":"多表匹配；汇总订单与出货状态；发现不一致","chatPrompt":"请合并订单、车间产出和出货记录，按订单号核对数量与日期，列出无法匹配或数量不一致的记录。","agent":"RPA/数据接口定期导出并整合","requirements":"跨系统字段字典、输出模板、异常日志","validation":"多表主键不能靠猜测；保留明细追溯"},{"id":"case-16","department":"SCM","departmentLabel":"供应链 SCM","title":"出貨與物流狀態自動追蹤預警","priority":"中","tag":"物流追踪","prep":"测试运单号、物流公开查询结果","chatSteps":"从已取得的信息中整理状态；标注待更新记录","chatPrompt":"请根据附件运单和物流状态记录，识别异常停滞、延迟和缺少轨迹的订单，并生成需要人工核实的清单。","agent":"授权浏览器/物流API定时查询并提醒","requirements":"物流平台权限、查询频率、通知审批","validation":"网站可用性和查询结果可靠性需单独验证"},{"id":"case-17","department":"MFG","departmentLabel":"制造 MFG","title":"每天自動整理報表數據","priority":"高","tag":"生产报表","prep":"模拟MES日报CSV、指标口径","chatSteps":"生成产量、达成率、直通率及异常摘要","chatPrompt":"请分析MES日报，先检查数据完整性，再统计各产线产量、达成率、直通率和异常Top5，输出供生产例会使用的摘要。","agent":"MES只读数据接口 + 定时计算 + 审核后分发","requirements":"MES接口、口径、审批、定时运行环境","validation":"与现有生产报表逐项对账"},{"id":"case-18","department":"MFG","departmentLabel":"制造 MFG","title":"下關鍵字提示詞自動找出對應SOP位置","priority":"高","tag":"知识检索","prep":"受控SOP清单或已授权文件","chatSteps":"按工序设备和关键词定位文档及对应章节","chatPrompt":"请在上传的SOP目录与文件中查找“换线首件确认”相关要求，返回准确文件名、版本、章节及需要确认的信息。","agent":"连接受控文档库，建立权限继承的RAG检索","requirements":"受控文档接入、更新索引、访问授权","validation":"旧版与新版要区分，不能凭印象生成制度"},{"id":"case-19","department":"MFG","departmentLabel":"制造 MFG","title":"生產異常即時預警","priority":"高","tag":"异常预警","prep":"脱敏生产异常历史、异常编码规则","chatSteps":"从历史记录总结风险指标与阈值候选","chatPrompt":"请根据历史生产异常记录，按工序、设备和异常类型归纳规律，并提出可验证的异常预警规则候选，区分事实和假设。","agent":"实时数据采集 + 规则/模型服务 + 告警闭环","requirements":"实时接口、低误报、告警负责人","validation":"历史数据分析不等于实时监控；先评估误报漏报"},{"id":"case-20","department":"MFG","departmentLabel":"制造 MFG","title":"AI彙整資訊、縮短根因分析時間","priority":"高","tag":"根因分析","prep":"批次、工序、设备、参数及缺陷数据","chatSteps":"关联异常批次与过程因素；输出待验证假设","chatPrompt":"请对比异常批次与正常批次的生产数据，寻找差异最大的过程因素，给出有证据的关联和下一步验证建议。","agent":"多源生产数据关联 + 根因辅助模型","requirements":"MES/质量数据联通、标识码、实验验证","validation":"不可把统计相关当成根因结论"},{"id":"case-21","department":"MFG","departmentLabel":"制造 MFG","title":"ESG環境監控結合AI","priority":"高","tag":"环境数据","prep":"模拟温湿度、能耗及监测阈值","chatSteps":"分析趋势和超限点；生成监测日报","chatPrompt":"请分析附件中的环境监测记录，按区域统计温湿度与能耗趋势，找出超限和异常变化时间段，输出待确认清单。","agent":"环境数据持续接入 + 异常监测 + 通知","requirements":"监测设备接口、阈值维护、报警流程","validation":"涉及安全环保问题仍按正式体系处置"},{"id":"case-22","department":"HR","departmentLabel":"人资 HR","title":"自動查詢人资管理系统系統後產出月報","priority":"高","tag":"人资报表","prep":"脱敏人员统计汇总和组织定义","chatSteps":"统计月末人数及变化；说明口径","chatPrompt":"请根据脱敏人员汇总表生成本月人数报告，按部门统计月初、月末和净变化，列出重复与口径不一致的记录。","agent":"授权人资系统取数并自动生成月报","requirements":"敏感数据权限、岗位权限、审计记录","validation":"不上传未经批准的个人敏感信息"},{"id":"case-23","department":"HR","departmentLabel":"人资 HR","title":"自動查詢人资管理系统系統後產出通知單","priority":"高","tag":"通知自动化","prep":"模拟假期余额、截止日期与通知规则","chatSteps":"识别需要提醒的人员并生成通知草稿","chatPrompt":"请根据模拟的假期余额表生成待提醒清单和个性化通知草稿；先检查日期规则，不要发送任何邮件。","agent":"授权获取余额，审批后分批发送通知","requirements":"HR权限、消息授权、审批和留痕","validation":"真实余额和人员信息须依法合规处理"},{"id":"case-24","department":"HR","departmentLabel":"人资 HR","title":"薪資市場行情分析、HR案例分析","priority":"中","tag":"外部研究","prep":"公开政府统计数据、岗位职级定义","chatSteps":"检索权威来源；比较样本和时间范围","chatPrompt":"请收集公开的目标地区同类岗位薪酬统计资料，标注机构、发布时间、样本口径和适用范围，避免把网帖当官方统计。","agent":"定期公开信息收集 + 内部审核报告","requirements":"公开数据源、岗位口径、发布审核","validation":"薪资参考不直接决定个人薪酬"},{"id":"case-25","department":"HR","departmentLabel":"人资 HR","title":"HR工作規章及制度查詢","priority":"中","tag":"制度问答","prep":"已批准发布的HR规章制度","chatSteps":"上传现行制度；按条款查找和引用","chatPrompt":"请在当前有效的HR制度文件中查找年假申请流程，给出文件名、版本、章节引用；如没有依据请直接说明。","agent":"建立有权限控制的制度知识问答助手","requirements":"受控文件库、版本更新、访问权限","validation":"不得将失效制度作为现行规定"},{"id":"case-26","department":"HR","departmentLabel":"人资 HR","title":"員工離職原因分析","priority":"中","tag":"趋势分析","prep":"脱敏离职原因编码和时间维度","chatSteps":"分类原因与趋势；避免个人标签化","chatPrompt":"请对脱敏的离职原因记录做主题分类，按月份/部门聚合趋势，说明样本局限，避免推断任何个人动机。","agent":"授权接入HR分析数据，周期性更新报告","requirements":"脱敏、最小权限、统计阈值","validation":"不根据少量信息推断个体特征"},{"id":"case-27","department":"HR","departmentLabel":"人资 HR","title":"優化薪資報表與流程","priority":"中","tag":"敏感报表","prep":"模拟薪资汇总表和计算规则","chatSteps":"核对列字段、汇总公式与异常项","chatPrompt":"请检查这份模拟薪资报表的字段和公式一致性，列出疑似异常及需要人工核实的项目；不做工资发放决定。","agent":"经授权的报表处理程序 + 双人复核","requirements":"严格权限、加密存储、审批与审计","validation":"敏感真实薪资不进入公开演示或公共网页"},{"id":"case-28","department":"HR","departmentLabel":"人资 HR","title":"自動於報到前發送郵件","priority":"中","tag":"流程提醒","prep":"模拟入职日期、部门及通知模板","chatSteps":"生成待发送通知草稿；检查时间与对象","chatPrompt":"请根据模拟入职清单生成报到前通知草稿，列出收件人、发送日期和需核实字段，先不要发送。","agent":"连接授权日历和邮件，按规则提醒","requirements":"邮件/日历授权、隐私与发送审批","validation":"发送前核对身份、日期和收件人"},{"id":"case-29","department":"HR","departmentLabel":"人资 HR","title":"自動發送會議通知","priority":"中","tag":"会议自动化","prep":"读书会时间表、成员名单（模拟）","chatSteps":"检查冲突、生成议程和邀请文案","chatPrompt":"请根据这份读书会安排表整理未来四周活动，生成会议通知与议程，并标记信息不完整的场次。","agent":"连接日历和通知系统，按确认后的计划创建邀请","requirements":"日历权限、会议冲突与确认机制","validation":"避免重复发送和错误取消会议"},{"id":"case-30","department":"HR","departmentLabel":"人资 HR","title":"自動發送通知提醒負責單位安排教育訓練","priority":"中","tag":"培训管理","prep":"年度培训计划、负责人和节点","chatSteps":"识别临期项、生成提醒清单","chatPrompt":"请根据年度教育训练计划识别未来14天应准备的事项，按负责人输出提醒清单和通知草稿，标注缺失信息。","agent":"连接计划台账与授权通知渠道，定期提醒","requirements":"状态数据源、消息权限、触发与日志","validation":"提醒不能替代完成确认；逾期判定要用业务规则"}];
+const DEPARTMENTS=[['FIN','财务 FIN','公开信息检索 / 数据处理'],['RD','研发 RD','工程知识 / 试产数据'],['QA','品保 QA','质量文件 / 风险审查'],['SCM','供应链 SCM','计划 / 采购 / 物流'],['MFG','制造 MFG','MES / 现场过程'],['HR','人资 HR','制度 / 报表 / 提醒']];
+const PAGES={home:'学习首页',desktop:'桌面端与Enterprise',prompt:'Prompt Lab',files:'文件与数据分析',tools:'Skill · MCP · Plugin',work:'Work · Computer Use',codex:'Codex AI Coding',tips:'AI效率技巧库',cases:'业务场景指南',resources:'资源与部署'};
+const LESSONS=[['00–08','企业版能力全景','认识Chat、Work、Codex','desktop'],['08–20','桌面端与模型选择','工作区、权限和功能入口','desktop'],['20–34','Prompt Lab','一句话→上下文→迭代→验证','prompt'],['34–49','文件与数据分析','上传CSV、分析、复核成果','files'],['49–61','Skill、MCP、Plugin、CLI','看懂规范、连接、工具','tools'],['61–76','Work与Computer Use','Agent任务步骤和权限边界','work'],['76–96','Codex AI Coding','动手运行CSV小工具','codex'],['96–106','AI效率技巧','截图、追问、先读后改','tips'],['106–116','部门未来场景指南','从Chat走向Agent','cases'],['116–120','总结与课后任务','下一步动手练习','resources']];
+const PROMPTS={
+ mesPrompt:'请分析我上传的MES模拟生产日报。先检查数据完整性，再按产线统计计划产量、实际产量、达成率，以及投入数与合格数形成的直通率；列出异常类别、主要问题和需要现场核实的事项。请明确指标口径，提供表格、简要图表和管理摘要，不要把相关性误判为根因。',
+ sopSkill:'Skill：SOP版本差异审查\n适用范围：对比两版已授权的SOP/SIP文件。\n输入：旧版、新版、必要的变更要求。\n步骤：确认文件名及版本→逐章节比对→重点检查参数、检验标准、操作步骤→列出带页码的差异→生成待人工确认项。\n输出：差异表、潜在影响、证据定位、未确认项。\n限制：不得自动批准或发布文件。',
+ workPrompt:'请研究三家公开物流服务商的服务信息，比较其公开服务范围、运输方式与特点。每条结论标注官网来源链接；如网页无法访问请记录“未核实”。不要登录内部系统、填写表单或提交任何请求。最后输出一页对比表和待核实清单。',
+ codexPrompt:'请在当前空白练习目录里开发一个本地CSV批量处理工具。读取多份结构相同的采购订单CSV，合并为一个文件，识别按“订单号+料号”重复的记录及缺失交期。保持原始文件不变，生成“合并结果.csv”和“异常清单.csv”。先检查我提供的样例数据，再实现、运行测试并说明如何使用；不要访问网络或读取其他目录。'
+};
+const TIP_DATA=[
+ ['桌面快捷呼出','桌面效率','常用AI不必总切换浏览器','在桌面端设置快捷入口，并检查是否与其他软件热键冲突。','设置好后练习：打开Excel → 呼出AI → 问一个函数问题。','不同系统与应用版本可能有差异。'],
+ ['截图直接提问','桌面效率','复杂软件界面比文字描述更直观','请看这张截图，解释错误信息，并按“可能原因→安全排查步骤→需要补充的资料”回答。','对截图中的错误定位更高效。','截图前遮盖敏感信息；不要直接执行高风险系统更改。'],
+ ['用语音梳理问题','桌面效率','适合描述现场异常、会议思路','我口述的是一次生产异常，请先整理事件时间线和待确认事实，再生成结构化记录。','减少长篇输入负担。','专业术语和数字仍需人工核对。'],
+ ['用Project管理长期任务','桌面效率','重复项目集中资料，减少背景遗失','请结合这个项目中的文件和我们已经确认的范围，总结当前进展与下一步任务。','更适合跨多次对话的持续工作。','仍要确认具体文件可见性和共享权限。'],
+ ['一句话启动任务','Prompt协作','简单任务不必写长Prompt','把这份会议纪要整理为负责人、待办事项和截止时间表。','适合会议记录、邮件改写等低风险任务。','信息缺失时不要猜测负责人或日期。'],
+ ['让AI先问关键问题','Prompt协作','任务目标不够清晰时避免空泛回答','我想改善设备停机分析流程。先问我最多3个关键问题，确认范围后再提出方案。','把对话当作需求澄清。','对明确的小任务无需强行反问。'],
+ ['不满意继续追问','Prompt协作','沿着对话上下文改进结果','你刚才没有区分计划停机与故障停机。请重新分类，并说明统计口径。','避免每次从零开始。','对话过长或背景变更较大时应主动总结。'],
+ ['复杂任务先列计划','Prompt协作','多步骤任务先对齐方法','先给出完成这个项目所需的数据、实施步骤、风险和验收标准；暂时不要执行。','帮助发现任务缺口。','执行时可能仍需补充数据或授权。'],
+ ['让AI反向审查','Prompt协作','换成质检和评审视角','请严格审阅这份方案，找出逻辑冲突、证据不足和不可执行的步骤，按风险排序。','让AI协助发现遗漏。','AI审查不是最终质量/法规审批。'],
+ ['直接上传文件','文件数据','减少手工复制粘贴','请先确认附件字段和结构，再告诉我哪些地方需要澄清，最后开始分析。','适合Excel、PDF和Word。','真实资料应遵守公司上传政策。'],
+ ['多文件版本比对','文件数据','发现条款变化比全文阅读更快','请对比这两版SOP，重点找出参数、检验标准和操作步骤差异，并附对应页码。','适合规范、合同、供应商资料。','扫描PDF和复杂表格可能提取不完整。'],
+ ['要求交付文件','文件数据','不只要文字回答，也要可复用成果','请根据分析结果输出可以交给主管的摘要，以及可下载的表格或报告文件。','减少再次排版。','导出能力因工作模式不同而异。'],
+ ['让AI复核计算','文件数据','把正确性纳入任务要求','请列出关键指标的计算公式、分子分母和所用行数，与源数据逐项核对。','适合财务、制造和QA分析。','关键数据仍需独立复核。'],
+ ['按任务选择Chat/Work/Codex','Agent Coding','少纠结模型名字，先选任务方式','这个任务是一次性分析还是要持续执行？请建议用Chat、Work或Codex中的哪一个，并说明原因。','一次回答、完整交付、开发工具是不同场景。','可用功能取决于账号和企业权限。'],
+ ['Codex先读后改','Agent Coding','保护已有代码和业务文件','请先阅读项目目录，说明结构、现有功能、风险和修改计划。现阶段不要改动任何文件。','降低AI Coding的误修改风险。','实际执行前确认工作目录和写入权限。']
+];
+const WORK_STEPS=[
+ ['理解任务','确认比较对象、需要提取的服务字段，以及能否访问公开网站。','观察点：是否提出必要澄清？'],
+ ['制定计划','列出资料收集顺序和需要访问的站点，决定何时停止或报告无法访问。','观察点：是否限定公开网页和读取动作？'],
+ ['执行访问','在已授权环境访问公开页面，记录可复核的服务信息和对应URL。','观察点：浏览器权限、访问失败、证据来源。'],
+ ['整理与自检','把信息转换为统一字段对比表，标记无法核实的项目，检查重复与矛盾。','观察点：是否臆造未找到的信息？'],
+ ['交付与确认','输出比较表、引用链接与待核实清单；需要外发/提交时停止并请求审批。','观察点：交付是否可用，是否越权执行？']
+];
+const RESOURCES=[
+ ['新版桌面端 Chat / Work / Codex','OpenAI官方产品使用与权限入口','https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex'],
+ ['迁移到新版 ChatGPT Desktop','OpenAI官方：新旧桌面应用入口差异','https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app'],
+ ['AI Prompting for Everyone','吴恩达课程：搜索、思考伙伴、创作与代码','https://www.deeplearning.ai/courses/ai-prompting-for-everyone'],
+ ['Skills in ChatGPT','OpenAI官方：创建、使用、共享、管理员权限','https://help.openai.com/en/articles/20001066-skills-in-chatgpt'],
+ ['Plugins in ChatGPT','OpenAI官方：Skills与连接应用的插件工作流','https://help.openai.com/en/articles/20001256-plugins-in-chatgpt'],
+ ['企业浏览器与Computer Use','OpenAI官方：网站与桌面应用访问策略','https://help.openai.com/en/articles/20001510-manage-browser-and-computer-use-in-your-enterprise-workspace'],
+ ['GitHub Pages发布源','GitHub官方：Deploy from a branch','https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site']
+];
+const PREFLIGHT=['讲师与学员的Enterprise登录及桌面版本已确认','Work、Codex及插件使用权限已核对','Browser Use与Computer Use管理员规则已确认','培训案例均使用脱敏或模拟数据','本地Codex工作目录与测试文件已准备','所有现场演示都有备用截图或录屏','对外公开的内容已完成公司信息安全审查'];
+const DEMO_CSVS=[
+ {name:'采购订单_模拟_1.csv',text:'订单号,料号,数量,交期,供应商\nPO-001,MAT-A,100,2026-11-07,模拟供应商甲\nPO-002,MAT-B,80,2026-11-09,模拟供应商乙\nPO-003,MAT-C,60,2026-11-10,模拟供应商丙'},
+ {name:'采购订单_模拟_2.csv',text:'订单号,料号,数量,交期,供应商\nPO-004,MAT-A,30,2026-11-12,模拟供应商甲\nPO-002,MAT-B,80,2026-11-09,模拟供应商乙\nPO-005,MAT-D,120,2026-11-14,模拟供应商丁'},
+ {name:'采购订单_模拟_3.csv',text:'订单号,料号,数量,交期,供应商\nPO-006,MAT-B,90,2026-11-18,模拟供应商乙\nPO-007,MAT-C,45,2026-11-20,模拟供应商丙\nPO-008,MAT-E,70,,模拟供应商戊'}
+];
+const MES_DATA=[['2026-10-26','A线',1000,960,990,948,'设备停机'],['2026-10-27','A线',1000,980,1000,976,'无'],['2026-10-28','B线',800,720,760,710,'物料延迟'],['2026-10-29','A线',1000,910,940,900,'换线耗时'],['2026-10-30','B线',800,790,800,782,'无'],['2026-10-31','B线',800,750,775,740,'设备停机']];
+function el(id){return document.getElementById(id)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){const t=el('toast');t.textContent=s;t.classList.add('show');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+async function copyText(s){try{await navigator.clipboard.writeText(String(s));toast('已复制到剪贴板')}catch(e){const ta=document.createElement('textarea');ta.value=String(s);document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('已复制到剪贴板')}catch{toast('复制失败，请手动选择文字')}ta.remove()}}
+function safeGet(k,def){try{return JSON.parse(localStorage.getItem(k))??def}catch{return def}}
+function safeSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+let completed=new Set(safeGet('academy.done',[]));let page='home';let teacher=!!safeGet('academy.teacher',false);let largeText=!!safeGet('academy.largeText',false);
+function go(next,options={}){if(!PAGES[next])next='home';page=next;if(options.updateHash!==false&&location.hash!=='#'+next)location.hash=next;document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='page-'+next));document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('active',n.dataset.page===next));el('bread').textContent=PAGES[next];el('sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'instant'});el('completeBtn').textContent=completed.has(next)?'✓ 已学本章':'✓ 完成本章';updateChapterNav()}
+function updateChapterNav(){const keys=Object.keys(PAGES),idx=keys.indexOf(page);el('chapterCount').textContent=(idx+1)+' / '+keys.length;el('prevChapter').disabled=idx<=0;el('nextChapter').disabled=idx<0||idx>=keys.length-1}
+function navigateChapter(delta){const keys=Object.keys(PAGES),idx=keys.indexOf(page),target=keys[idx+delta];if(target)go(target)}
+function setLargeText(value,announce=true){largeText=!!value;document.body.classList.toggle('large-text',largeText);el('presentToggle').setAttribute('aria-pressed',String(largeText));el('presentToggle').innerHTML=largeText?'⊞ <span class="label">退出大字</span>':'⊞ <span class="label">投影大字</span>';safeSet('academy.largeText',largeText);if(announce)toast(largeText?'已开启投影大字模式':'已恢复常规字号')}
+function routeFromHash(){let hash=decodeURIComponent(location.hash.slice(1));if((hash.startsWith('dept-')||hash.startsWith('case-'))&&el(hash)){go('cases',{updateHash:false});if(hash.startsWith('case-'))el(hash).open=true;requestAnimationFrame(()=>el(hash)?.scrollIntoView({behavior:'smooth',block:'start'}));return}go(hash||'home',{updateHash:false})}
+
+function updateProgress(){safeSet('academy.done',[...completed]);el('progressText').textContent=`${completed.size} / ${Object.keys(PAGES).length} 章`;el('progressFill').style.width=`${100*completed.size/Object.keys(PAGES).length}%`;document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('done',completed.has(n.dataset.page)))}
+function setMode(t){teacher=t;document.body.classList.toggle('teacher',teacher);el('modeToggle').innerHTML=teacher?'☷ <span class="label">切换自学模式</span>':'◫ <span class="label">讲师模式</span>';el('modeSign').hidden=!teacher;safeSet('academy.teacher',teacher);toast(teacher?'已进入讲师模式：显示讲师提示':'已进入自学模式')}
+function renderTimeline(){el('timeline').innerHTML=LESSONS.map(x=>`<div class="timeline-row"><span class="time">${x[0]}</span><span><strong>${esc(x[1])}</strong><small>${esc(x[2])}</small></span><button class="btn btn-ghost btn-sm" data-go="${x[3]}">进入 →</button></div>`).join('')}
+const PROMPT_TASKS={qa:{levels:['分析这份品质异常记录，找出主要问题。','请分析附件的品质异常记录，按工序和缺陷类别统计，找出发生频次最高的5类问题，并生成简短摘要。','分析附件品质异常记录。先检查数据缺失和重复，按工序、缺陷类别和批次统计；明确统计口径，列出Top5问题和对应原始数据，不将相关性直接判定为根因。'],follow:'你刚才的统计是否把同一批次的重复记录当成独立异常？请说明去重规则并给出修正版。'},scm:{levels:['帮我分析这份缺料表。','请根据采购需求、现有库存和在途到货数据，识别未来两周可能缺料的物料，并按影响日期排序。','请先检查MRP数据的字段和缺失项，再按“需求-可用库存-有效在途”计算缺口，输出缺料优先级、公式和待采购确认项目；不推测未知的交期。'],follow:'请随机抽取5个料号列出计算过程，核对缺料数量是否与原表一致。'},hr:{levels:['帮我整理培训计划。','根据附件的培训计划，列出未来14天要开展的课程，按照负责人和截止日期生成提醒清单。','请检查培训计划的日期、负责人和完成状态，按未来14天识别待办事项；生成提醒清单及邮件草稿。缺少关键字段的项目标记待确认，不要自动发送。'],follow:'请核对当前完成状态，避免提醒已经完成或取消的课程。'}};
+let promptTask='qa',promptLevel=0;
+function selectPrompt(task,level){promptTask=task;promptLevel=level;document.querySelectorAll('[data-prompt-task]').forEach(b=>b.classList.toggle('selected',b.dataset.promptTask===task));document.querySelectorAll('[data-prompt-level]').forEach(b=>b.classList.toggle('selected',Number(b.dataset.promptLevel)===level));el('promptInput').value=PROMPT_TASKS[task].levels[level];el('nextPrompt').textContent=PROMPT_TASKS[task].follow;updatePromptChecklist()}
+function updatePromptChecklist(){let val=el('promptInput').value;let len=val.length;let rules=[['任务是否明确',/分析|统计|整理|对比|检查|找出|识别|生成/.test(val),'描述希望AI执行的具体动作'],['是否提供必要背景',/附件|工序|批次|采购|需求|库存|培训|计划|数据|品质/.test(val),'业务字段、文件或处理对象'],['是否提出输出要求',/表|摘要|清单|结论|Top|图|报告|优先级/.test(val),'让结果有明确的交付形态'],['是否要求验证或限制',/核对|原始|缺失|重复|公式|依据|不要|待确认|口径|验证/.test(val),'高风险任务尤其需要依据与限制']];el('promptChecklist').innerHTML=rules.map(([name,ok,hint])=>`<div class="row" style="align-items:flex-start;gap:10px"><span style="color:${ok?'#2e8060':'#bd9945'}">${ok?'✓':'○'}</span><div><strong style="font-size:12px">${esc(name)}</strong><div class="micro">${esc(hint)}</div></div></div>`).join('')+`<p class="micro">当前 ${len} 字。此检查只判断是否出现相关表达，并不评估任务结果好坏；短Prompt完全可以很好。</p>`}
+function renderMes(){const sums=MES_DATA.reduce((a,r)=>{a.plan+=r[2];a.actual+=r[3];a.input+=r[4];a.ok+=r[5];return a},{plan:0,actual:0,input:0,ok:0});const p=n=>`${(n*100).toFixed(1)}%`;el('mesMetrics').innerHTML=`<div class="metric"><strong>${sums.actual.toLocaleString()}</strong><span>实际产量 / 件</span></div><div class="metric"><strong>${p(sums.actual/sums.plan)}</strong><span>计划达成率 = 实际 / 计划</span></div><div class="metric"><strong>${p(sums.ok/sums.input)}</strong><span>直通率 = 合格 / 投入</span></div>`;const freq={};MES_DATA.forEach(r=>{if(r[6]!=='无')freq[r[6]]=(freq[r[6]]||0)+1});const max=Math.max(...Object.values(freq));el('mesDefects').innerHTML=Object.entries(freq).map(([name,n])=>`<div style="margin-bottom:12px"><div class="row between" style="font-size:12px"><span>${esc(name)}</span><b>${n}条</b></div><div class="bar"><i style="width:${n/max*100}%"></i></div></div>`).join('');el('mesTable').innerHTML=`<table class="result-table"><thead><tr>${['日期','产线','计划产量','实际产量','投入数','合格数','异常类别'].map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${MES_DATA.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;el('mesPromptCode').textContent=PROMPTS.mesPrompt;el('codexPromptCode').textContent=PROMPTS.codexPrompt}
+let workIdx=0;function renderWork(){el('workStepper').innerHTML=WORK_STEPS.map((v,i)=>`<button data-step="${i}" class="${i===workIdx?'active':''}" aria-label="第${i+1}步">${i+1}</button>`).join('');const v=WORK_STEPS[workIdx];el('workStepContent').innerHTML=`<div class="eyebrow">STEP ${workIdx+1} / ${WORK_STEPS.length}</div><h3 style="margin:0 0 10px">${esc(v[0])}</h3><p style="font-size:13px;color:var(--text)">${esc(v[1])}</p><p class="micro">${esc(v[2])}</p>`;el('workPrev').disabled=workIdx===0;el('workNext').textContent=workIdx===WORK_STEPS.length-1?'完成演练 ✓':'下一步 →';}
+function renderTips(){el('tipsGrid').innerHTML=TIP_DATA.map((t,i)=>`<article class="tip"><div class="row between"><span class="tag">${esc(t[1])}</span><span class="micro">${String(i+1).padStart(2,'0')}</span></div><h3>${esc(t[0])}</h3><p>${esc(t[2])}</p><button class="btn btn-ghost btn-sm" data-tip="${i}">查看做法 ↓</button><div class="tip-detail" id="tipd-${i}" hidden><strong>尝试一下</strong>\n${esc(t[3])}\n\n<strong>操作收获</strong>\n${esc(t[4])}\n\n<strong>注意事项</strong>\n${esc(t[5])}<div style="margin-top:12px"><button class="btn btn-soft btn-sm" data-copy-tip="${i}">复制练习</button></div></div></article>`).join('')}
+function renderCases(){el('deptJump').innerHTML=DEPARTMENTS.map(d=>`<a href="#dept-${d[0]}" data-dept="${d[0]}" class="btn btn-ghost btn-sm">${d[1]} ↓</a>`).join('');el('departmentSections').innerHTML=DEPARTMENTS.map(d=>{let cases=SCENARIOS.filter(s=>s.department===d[0]);let high=cases.filter(s=>s.priority==='高').length;return `<section class="department" id="dept-${d[0]}"><div class="department-head"><div><h3>${d[1]}</h3><p>${esc(d[2])} · ${cases.length}个场景 · 高优先级${high}个</p></div><span class="pill">业务需求指南</span></div>${cases.map(s=>`<details class="case" id="${s.id}"><summary><span class="pill ${s.priority==='高'?'badge-high':s.priority==='中'?'badge-medium':'badge-low'}">${esc(s.priority)}</span><span class="case-title">${esc(s.title)}</span><span class="tag">${esc(s.tag)}</span><span class="case-more">展开 ＋</span></summary><div class="case-body"><div class="tabs" role="tablist" aria-label="使用阶段"><button class="selected" data-case-tab="chat" data-case-id="${s.id}">现在：Chat怎么做</button><button data-case-tab="agent" data-case-id="${s.id}">未来：Agent怎么升级</button></div><div class="case-inner" style="margin-top:14px"><div class="case-panel active" data-case-panel="chat"><h4>准备资料</h4><p>${esc(s.prep)}</p><h4>操作路线</h4><p>${esc(s.chatSteps)}</p><h4>简短实用的Prompt</h4><div class="case-prompt">${esc(s.chatPrompt)}</div><div class="row" style="margin-top:10px"><button class="btn btn-soft btn-sm" data-copy-case="${s.id}">复制此场景Prompt</button></div></div><div class="case-panel" data-case-panel="agent"><h4>可能的自动化架构</h4><p>${esc(s.agent)}</p><h4>上线前提</h4><p>${esc(s.requirements)}</p><div class="info gold">Agent升级是方案设想；仍需系统权限、数据治理和IT/业务负责人共同验证。</div></div><div class="info neutral"><strong>验证与注意：</strong>${esc(s.validation)}</div></div></div></details>`).join('')}</section>`}).join('')}
+function renderResources(){el('resourceGrid').innerHTML=RESOURCES.map((r,i)=>`<div class="resource"><div class="logo">↗</div><div><h3>${esc(r[0])}</h3><p>${esc(r[1])}</p><a rel="noopener" target="_blank" href="${esc(r[2])}">打开官方资料 ↗</a></div></div>`).join('');let done=new Set(safeGet('academy.preflight',[]));el('preflight').innerHTML=PREFLIGHT.map((v,i)=>`<label class="checkline" style="margin:9px 0"><input type="checkbox" data-preflight="${i}" ${done.has(i)?'checked':''}/>${esc(v)}</label>`).join('')}
+// CSV processing: genuinely executes in the browser; no server/network operation.
+function parseCSV(text){text=String(text).replace(/^\uFEFF/,'');let rows=[],row=[],buf='',inside=false;for(let i=0;i<text.length;i++){let c=text[i];if(c==='"'){if(inside&&text[i+1]==='"'){buf+='"';i++}else inside=!inside}else if(c===','&&!inside){row.push(buf);buf=''}else if((c==='\n'||c==='\r')&&!inside){if(c==='\r'&&text[i+1]==='\n')i++;row.push(buf);if(row.some(x=>String(x).trim()!==''))rows.push(row);row=[];buf=''}else buf+=c}if(inside)throw new Error('CSV双引号未闭合');if(buf!==''||row.length){row.push(buf);if(row.some(x=>String(x).trim()!==''))rows.push(row)}return rows}
+function encodeCSV(rows){return '\uFEFF'+rows.map(r=>r.map(v=>{let s=String(v??'');return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}).join(',')).join('\r\n')}
+function downloadCSV(rows,name){let blob=new Blob([encodeCSV(rows)],{type:'text/csv;charset=utf-8;'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+let inputCSVs=[],lastMerge=null;
+function loadCSVs(items){inputCSVs=items;lastMerge=null;el('runMerge').disabled=false;el('sourceStatus').textContent=`已载入 ${items.length} 份CSV：${items.map(f=>f.name).join('、')}`;el('mergeResults').innerHTML='';toast(`已载入${items.length}份文件`) }
+function runMerge(){if(!inputCSVs.length)return;try{let expected=['订单号','料号','数量','交期','供应商'];let data=[],errors=[];inputCSVs.forEach(file=>{let parsed=parseCSV(file.text);if(!parsed.length)return;let head=parsed[0].map(x=>x.trim());for(let h of expected)if(!head.includes(h))throw new Error(`${file.name}缺少必需列：${h}`);parsed.slice(1).forEach((row,idx)=>{let obj={};for(let h of expected)obj[h]=row[head.indexOf(h)]??'';obj['来源文件']=file.name;obj['源行号']=idx+2;data.push(obj)})});let seen=new Map();data.forEach((v,i)=>{let issues=[];let key=v['订单号'].trim()+'|'+v['料号'].trim();if(!v['订单号'].trim()||!v['料号'].trim())issues.push('主键缺失');if(seen.has(key))issues.push(`重复订单（首次见于第${seen.get(key)+1}条）`);else seen.set(key,i);if(!v['交期'].trim())issues.push('交期缺失');if(v['数量'].trim()&&!Number.isFinite(Number(v['数量'])))issues.push('数量非数字');v['检查结果']=issues.join('；')||'正常';if(issues.length)errors.push(v)});lastMerge={data,errors};let head=[...expected,'来源文件','源行号','检查结果'];el('mergeResults').innerHTML=`<div class="metric-row"><div class="metric"><strong>${inputCSVs.length}</strong><span>来源文件</span></div><div class="metric"><strong>${data.length}</strong><span>合并记录</span></div><div class="metric"><strong>${errors.length}</strong><span>异常记录（按行）</span></div></div><div class="row" style="margin:16px 0"><button class="btn btn-primary" id="downloadAll">↓ 下载合并结果</button><button class="btn btn-ghost" id="downloadErrors">↓ 下载异常清单</button></div><div class="table-wrap"><table class="result-table"><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${data.slice(0,18).map(r=>`<tr class="${r['检查结果']!=='正常'?'bad-row':''}">${head.map(h=>`<td>${esc(r[h])}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="micro">仅显示前18行；下载文件包含所有行。本例重复规则为“订单号+料号”完全匹配。重复项不会自动删除，避免误删合法记录。</p>`;el('downloadAll').onclick=()=>downloadCSV([head,...data.map(v=>head.map(h=>v[h]))],'合并结果_模拟.csv');el('downloadErrors').onclick=()=>downloadCSV([head,...errors.map(v=>head.map(h=>v[h]))],'异常清单_模拟.csv');toast('已完成本地合并与异常检查')}catch(e){el('mergeResults').innerHTML=`<div class="info gold">执行失败：${esc(e.message)}</div>`;toast('文件格式检查未通过')}}
+function initHandlers(){window.addEventListener('hashchange',routeFromHash);document.addEventListener('click',e=>{const goBtn=e.target.closest('[data-go]');if(goBtn){location.hash=goBtn.dataset.go;return}const cp=e.target.closest('[data-copy-key]');if(cp){copyText(PROMPTS[cp.dataset.copyKey]);return}const t=e.target.closest('[data-tip]');if(t){let d=el('tipd-'+t.dataset.tip);d.hidden=!d.hidden;t.textContent=d.hidden?'查看做法 ↓':'收起 ↑';return}const ct=e.target.closest('[data-copy-tip]');if(ct){copyText(TIP_DATA[+ct.dataset.copyTip][3]);return}const caseCopy=e.target.closest('[data-copy-case]');if(caseCopy){copyText(SCENARIOS.find(s=>s.id===caseCopy.dataset.copyCase).chatPrompt);return}const caseTab=e.target.closest('[data-case-tab]');if(caseTab){let outer=el(caseTab.dataset.caseId);outer.querySelectorAll('[data-case-tab]').forEach(b=>b.classList.toggle('selected',b===caseTab));outer.querySelectorAll('[data-case-panel]').forEach(p=>p.classList.toggle('active',p.dataset.casePanel===caseTab.dataset.caseTab));return}const prTask=e.target.closest('[data-prompt-task]');if(prTask){selectPrompt(prTask.dataset.promptTask,promptLevel);return}const prLevel=e.target.closest('[data-prompt-level]');if(prLevel){selectPrompt(promptTask,+prLevel.dataset.promptLevel);return}const step=e.target.closest('[data-step]');if(step){workIdx=+step.dataset.step;renderWork();return}const dep=e.target.closest('[data-dept]');if(dep){e.preventDefault();const target='dept-'+dep.dataset.dept;if(location.hash==='#'+target)routeFromHash();else location.hash=target;return}});el('mobileToggle').onclick=()=>el('sidebar').classList.toggle('open');el('modeToggle').onclick=()=>setMode(!teacher);el('presentToggle').onclick=()=>setLargeText(!largeText);el('prevChapter').onclick=()=>navigateChapter(-1);el('nextChapter').onclick=()=>navigateChapter(1);el('completeBtn').onclick=()=>{if(completed.has(page))completed.delete(page);else completed.add(page);updateProgress();go(page);toast('学习进度已更新')};el('resetProgress').onclick=()=>{if(confirm('确定清除当前浏览器中的学习进度吗？')){completed.clear();updateProgress();toast('学习进度已重置')}};el('resetPrompt').onclick=()=>selectPrompt(promptTask,promptLevel);el('promptInput').addEventListener('input',updatePromptChecklist);el('copyPrompt').onclick=()=>copyText(el('promptInput').value);el('copyFollow').onclick=()=>copyText(PROMPT_TASKS[promptTask].follow);el('workPrev').onclick=()=>{workIdx=Math.max(0,workIdx-1);renderWork()};el('workNext').onclick=()=>{if(workIdx===WORK_STEPS.length-1){toast('已完成流程演练，尚未执行真实网站任务');return}workIdx++;renderWork()};el('loadSample').onclick=()=>loadCSVs(DEMO_CSVS);el('runMerge').onclick=runMerge;el('csvInput').addEventListener('change',async e=>{try{let files=[...e.target.files];if(files.length===0)return;if(files.length>20)throw new Error('最多选择20个文件');let loaded=await Promise.all(files.map(async f=>({name:f.name,text:await f.text()})));loadCSVs(loaded)}catch(err){toast(err.message)}});el('preflight').addEventListener('change',e=>{if(e.target.matches('[data-preflight]')){let done=new Set(safeGet('academy.preflight',[]));let i=+e.target.dataset.preflight;e.target.checked?done.add(i):done.delete(i);safeSet('academy.preflight',[...done])}});document.addEventListener('keydown',e=>{if(!teacher||e.target?.matches?.('textarea,input,select,[contenteditable="true"]'))return;if(e.shiftKey&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&(e.key==='PageDown'||e.key==='PageUp')){e.preventDefault();navigateChapter(e.key==='PageDown'?1:-1)}})}
+function init(){renderTimeline();renderMes();renderWork();renderTips();renderCases();renderResources();selectPrompt('qa',0);updateProgress();setMode(teacher);setLargeText(largeText,false);initHandlers();routeFromHash()}
+init();
+</script>
+<script>
+(function promptLabM1() {
+"use strict";
+const host = document.getElementById("page-prompt");
+if (!host || host.querySelector("#ap4e-course")) return;
+
+const style = document.createElement("style");
+style.id = "ap4e-m1-styles";
+style.textContent = `
+#ap4e-course{--a:#aa2737;--a-deep:#7c2030;--a-rose:#fdf1f2;--a-ink:#272833;--a-muted:#687180;--a-border:#e9e3e5;font-size:14px;color:var(--a-ink)}
+#ap4e-course *{box-sizing:border-box}
+#ap4e-course button{font:inherit;cursor:pointer}
+#ap4e-course .ap4e-hero{background:linear-gradient(125deg,#802034 0%,#aa2737 57%,#ca4555 100%);color:#fff;padding:clamp(22px,4vw,37px);border-radius:20px;position:relative;overflow:hidden}
+#ap4e-course .ap4e-hero:after{content:"";width:280px;height:280px;border:45px solid rgba(255,255,255,.08);border-radius:50%;position:absolute;right:-130px;top:-155px;pointer-events:none}
+#ap4e-course .ap4e-hero>*{position:relative;z-index:1}
+#ap4e-course .ap4e-eyebrow{letter-spacing:2px;font-weight:800;color:#ffe0e3;font-size:11px;margin:0 0 12px}
+#ap4e-course .ap4e-hero h1{font-size:clamp(27px,3vw,42px);line-height:1.22;margin:0 0 13px;letter-spacing:-.6px}
+#ap4e-course .ap4e-hero p{font-size:14px;line-height:1.8;max-width:780px;color:#fbe6e9;margin:0}
+#ap4e-course .ap4e-hero-meta{display:flex;gap:8px;margin:20px 0 0;flex-wrap:wrap}
+#ap4e-course .ap4e-hero-meta span{padding:5px 10px;border:1px solid #ffffff52;border-radius:20px;font-size:11px}
+#ap4e-course .ap4e-rail{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--a-border);border-radius:14px;padding:12px 14px;margin:16px 0 21px;background:#fff;flex-wrap:wrap}
+#ap4e-course .ap4e-rail-left{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#ap4e-course .ap4e-rail button{border:1px solid #e8dde0;border-radius:9px;background:#fff;color:#725d64;padding:9px 14px;font-weight:700;font-size:12px}
+#ap4e-course .ap4e-rail button[aria-selected=true]{background:var(--a-rose);color:var(--a-deep);border-color:#ecc5cc}
+#ap4e-course .ap4e-completion{display:flex;align-items:center;gap:9px;color:var(--a-muted);font-size:12px}
+#ap4e-course .ap4e-track{display:block;width:86px;height:7px;border-radius:9px;background:#efe9eb;overflow:hidden}
+#ap4e-course .ap4e-track i{display:block;height:100%;background:var(--a);width:0;transition:width .2s}
+#ap4e-course .ap4e-panel[hidden]{display:none}
+#ap4e-course .ap4e-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:0 0 17px}
+#ap4e-course .ap4e-kicker{font-size:11px;letter-spacing:1.8px;font-weight:800;color:var(--a);margin:0 0 5px}
+#ap4e-course .ap4e-title{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.5px;line-height:1.3;margin:0 0 7px}
+#ap4e-course .ap4e-lead{margin:0;color:var(--a-muted);font-size:13px;max-width:740px;line-height:1.8}
+#ap4e-course .ap4e-pill{padding:5px 10px;border-radius:20px;background:#f5eeef;color:#815967;font-size:11px;font-weight:800;white-space:nowrap}
+#ap4e-course .ap4e-card{background:#fff;border:1px solid var(--a-border);border-radius:15px;padding:20px;box-shadow:0 9px 25px #33212a07}
+#ap4e-course .ap4e-card h3{font-size:16px;margin:0 0 8px}
+#ap4e-course .ap4e-card p{font-size:13px;line-height:1.75;margin:0;color:#5b626f}
+#ap4e-course .ap4e-card .ap4e-small{font-size:12px;color:var(--a-muted)}
+#ap4e-course .ap4e-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin:15px 0}
+#ap4e-course .ap4e-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+#ap4e-course .ap4e-tabs button{background:#f6f3f3;border:1px solid #e9e4e5;color:#756871;border-radius:9px;padding:9px 12px;font-size:12px;font-weight:700}
+#ap4e-course .ap4e-tabs button[aria-pressed=true]{background:var(--a);color:#fff;border-color:var(--a)}
+#ap4e-course .ap4e-compare-card{border:1px solid #eae3e6;border-radius:13px;padding:19px;background:#fdfcfc;min-height:190px}
+#ap4e-course .ap4e-compare-card.good{background:#faf3f4;border-color:#efd0d5}
+#ap4e-course .ap4e-compare-card .ap4e-label{font-size:11px;letter-spacing:.5px;font-weight:800;color:#8a6673;margin:0 0 11px}
+#ap4e-course .ap4e-compare-card .ap4e-quote{font-size:14px;color:#262c36;line-height:1.8;white-space:pre-wrap;margin:0}
+#ap4e-course .ap4e-compare-card .ap4e-caption{margin-top:12px;padding-top:11px;border-top:1px dashed #e7dbe0;color:#677080;font-size:12px;line-height:1.75}
+#ap4e-course .ap4e-action{display:flex;align-items:center;gap:9px;justify-content:space-between;flex-wrap:wrap;margin-top:15px}
+#ap4e-course .ap4e-btn{background:var(--a);color:#fff;border:1px solid var(--a);border-radius:10px;padding:10px 14px;font-weight:800;font-size:12px}
+#ap4e-course .ap4e-btn:hover{background:var(--a-deep)}
+#ap4e-course .ap4e-btn.secondary{background:#fff;color:var(--a-deep);border-color:#dfcbd0}
+#ap4e-course .ap4e-btn:disabled{opacity:.43;cursor:not-allowed}
+#ap4e-course .ap4e-callout{padding:14px 16px;border-left:3px solid var(--a);background:#fbf3f4;color:#5a4b51;border-radius:0 10px 10px 0;font-size:12px;line-height:1.8;margin:15px 0}
+#ap4e-course .ap4e-callout strong{color:var(--a-deep)}
+#ap4e-course .ap4e-methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+#ap4e-course .ap4e-method{padding:16px;border:1px solid #eae4e6;border-radius:13px;background:#fff}
+#ap4e-course .ap4e-method .ap4e-method-icon{width:36px;height:36px;border-radius:10px;background:#f8e9eb;color:var(--a);display:grid;place-items:center;font-size:18px;margin-bottom:9px}
+#ap4e-course .ap4e-method h3{font-size:14px;margin:0 0 5px}
+#ap4e-course .ap4e-method p{font-size:12px;color:#69717c;line-height:1.7;margin:0}
+#ap4e-course .ap4e-quiz-options{display:grid;gap:10px;margin:16px 0}
+#ap4e-course .ap4e-choice{display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:1px solid #e9e3e5;border-radius:11px;padding:13px 15px;color:#434751}
+#ap4e-course .ap4e-choice:hover{border-color:#c9949d}
+#ap4e-course .ap4e-choice[aria-pressed=true]{border-color:var(--a);background:#fff3f4;color:var(--a-deep)}
+#ap4e-course .ap4e-choice strong{width:25px;height:25px;border-radius:7px;background:#f4ecee;display:grid;place-items:center;font-size:11px;flex:none}
+#ap4e-course .ap4e-choice[aria-pressed=true] strong{background:var(--a);color:#fff}
+#ap4e-course .ap4e-feedback{padding:14px 16px;border-radius:10px;background:#f6f5f3;border:1px solid #e7e4e0;font-size:12px;line-height:1.8;margin:14px 0}
+#ap4e-course .ap4e-feedback strong{color:#315f4a}
+#ap4e-course .ap4e-feedback.is-wrong strong{color:#935b30}
+#ap4e-course .ap4e-counter{font-weight:800;color:var(--a);font-size:12px}
+#ap4e-course .ap4e-workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:15px 0}
+#ap4e-course .ap4e-workflow button{border:1px solid #e8e1e3;background:#fff;color:#605d67;border-radius:10px;padding:11px 7px;font-size:12px;font-weight:800}
+#ap4e-course .ap4e-workflow button[aria-pressed=true]{background:var(--a-rose);color:var(--a-deep);border-color:#dfb7be}
+#ap4e-course .ap4e-workflow button span{display:block;font-size:10px;color:#9b7a82;margin-bottom:3px}
+#ap4e-course .ap4e-stage{padding:15px;border-radius:11px;background:#faf8f7;border:1px solid #ece7e6;font-size:13px;line-height:1.8;min-height:95px}
+#ap4e-course .ap4e-source-list{display:grid;gap:9px}
+#ap4e-course .ap4e-source-list button{text-align:left;border:1px solid #e7e2e4;border-radius:10px;background:#fff;padding:12px 14px;color:#49505e;font-size:12px;line-height:1.7}
+#ap4e-course .ap4e-source-list button[aria-pressed=true]{border-color:var(--a);background:#fff3f4}
+#ap4e-course .ap4e-teacher-notes{display:none;background:#fff9f3;border:1px dashed #dec8ad;border-radius:12px;padding:14px 16px;font-size:12px;line-height:1.85;margin-top:16px;color:#735940}
+body.teacher #ap4e-course .ap4e-teacher-notes{display:block}
+#ap4e-course .ap4e-section-gap{height:18px}
+#ap4e-course .ap4e-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid #eee5e8;margin-top:18px;padding-top:16px}
+#ap4e-course .ap4e-bottom small{color:#7c818b;font-size:11px;max-width:650px}
+#ap4e-course .ap4e-roadmap{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:20px 0 0;color:#88828a;font-size:12px}
+#ap4e-course .ap4e-roadmap span{background:#f6f2f3;border-radius:8px;padding:8px 10px}
+#ap4e-course .ap4e-roadmap .current{background:#f8e3e7;color:#8f2c3e;font-weight:800}
+.ap4e-legacy{margin-top:25px;border:1px solid #e6dcdf;border-radius:13px;background:#fff}
+.ap4e-legacy summary{padding:16px 18px;cursor:pointer;font-size:13px;color:#713c49;font-weight:800}
+.ap4e-legacy .ap4e-legacy-inner{padding:0 18px 20px}
+.ap4e-legacy .page-head{margin-top:12px}
+#ap4e-course button:focus-visible,.ap4e-legacy summary:focus-visible{outline:3px solid #e7aeb5;outline-offset:2px}
+body.large-text #ap4e-course{font-size:18px}body.large-text #ap4e-course .ap4e-card p,body.large-text #ap4e-course .ap4e-hero p,body.large-text #ap4e-course .ap4e-lead,body.large-text #ap4e-course .ap4e-compare-card .ap4e-quote{font-size:18px}
+@media(max-width:900px){#ap4e-course .ap4e-methods{grid-template-columns:1fr}#ap4e-course .ap4e-workflow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){#ap4e-course .ap4e-split{grid-template-columns:1fr}#ap4e-course .ap4e-rail{align-items:stretch}#ap4e-course .ap4e-completion{width:100%}#ap4e-course .ap4e-header{display:block}#ap4e-course .ap4e-pill{display:inline-block;margin-top:11px}#ap4e-course .ap4e-card{padding:15px}}
+`;
+document.head.appendChild(style);
+
+const legacy = document.createElement("details");
+legacy.className = "ap4e-legacy";
+const legacySummary = document.createElement("summary");
+legacySummary.textContent = "展开旧版 Prompt 练习 · 品质异常 / 缺料分析 / 培训计划";
+const legacyInner = document.createElement("div");
+legacyInner.className = "ap4e-legacy-inner";
+Array.from(host.children).forEach(node => legacyInner.appendChild(node));
+legacy.append(legacySummary, legacyInner);
+const course = document.createElement("div");
+course.id = "ap4e-course";
+course.innerHTML = `
+<header class="ap4e-hero">
+  <p class="ap4e-eyebrow">PROMPT LAB 2.0 · 第一批 / M1</p>
+  <h1>从会提问，到真正会用 AI 完成工作</h1>
+  <p>参考吴恩达《AI Prompting for Everyone》M1：先理解 AI 高手与新手的区别，再学会判断何时使用模型已有知识、联网搜索或 Deep Research。通过课堂互动理解方法，不背万能提示词。</p>
+  <div class="ap4e-hero-meta"><span>讲师教学优先</span><span>制造业改编案例</span><span>互动题与示范 Prompt</span><span>无需 API / 不读取企业系统</span></div>
+</header>
+<div class="ap4e-rail" aria-label="教学单元导航">
+  <div class="ap4e-rail-left" role="tablist" aria-label="第一批课程">
+    <button type="button" role="tab" id="ap4e-tab-expert" aria-controls="ap4e-expert" aria-selected="true" data-ap4e-lesson="expert">01 新手 vs 高手</button>
+    <button type="button" role="tab" id="ap4e-tab-info" aria-controls="ap4e-info" aria-selected="false" data-ap4e-lesson="info">02 信息获取</button>
+  </div>
+  <div class="ap4e-completion"><span>已学 <b id="ap4e-done-count">0 / 2</b></span><span class="ap4e-track" aria-hidden="true"><i id="ap4e-track-fill"></i></span></div>
+</div>
+<section class="ap4e-panel" id="ap4e-expert" role="tabpanel" aria-labelledby="ap4e-tab-expert">
+  <div class="ap4e-header">
+    <div><p class="ap4e-kicker">LESSON 01 · M1 P3–9</p><h2 class="ap4e-title">同一个业务问题，AI 高手为什么能获得更大的价值？</h2><p class="ap4e-lead">吴恩达用五组“新手 vs 高手”行为进行对比。切换维度，看差别不在字数，而在任务价值、上下文、独立评价、研究和逐步创作。</p></div>
+    <span class="ap4e-pill">课堂建议 3 分钟</span>
+  </div>
+  <div class="ap4e-card">
+    <h3>实验 A · 选择一个改变结果质量的关键因素</h3>
+    <p>以下是教学用途的制造业改编 Prompt，并非实时 AI 回答。</p>
+    <div class="ap4e-tabs" role="group" aria-label="高手对比维度">
+      <button type="button" data-ap4e-compare="0" aria-pressed="true">复杂任务</button>
+      <button type="button" data-ap4e-compare="1" aria-pressed="false">高质量上下文</button>
+      <button type="button" data-ap4e-compare="2" aria-pressed="false">客观审查</button>
+      <button type="button" data-ap4e-compare="3" aria-pressed="false">研究取证</button>
+      <button type="button" data-ap4e-compare="4" aria-pressed="false">渐进写作</button>
+    </div>
+    <div class="ap4e-split">
+      <div class="ap4e-compare-card"><p class="ap4e-label">常见的新手问法</p><p class="ap4e-quote" id="ap4e-novice"></p><p class="ap4e-caption" id="ap4e-novice-note"></p></div>
+      <div class="ap4e-compare-card good"><p class="ap4e-label">更成熟的 AI 协作方式</p><p class="ap4e-quote" id="ap4e-power"></p><p class="ap4e-caption" id="ap4e-power-note"></p></div>
+    </div>
+    <div class="ap4e-callout"><strong>讲课时要强调：</strong><span id="ap4e-compare-why"></span></div>
+    <div class="ap4e-action"><span class="ap4e-counter" id="ap4e-compare-step">对比 1 / 5</span><div class="row"><button type="button" class="ap4e-btn secondary" id="ap4e-copy-expert">复制高手版 Prompt</button><button type="button" class="ap4e-btn" id="ap4e-next-compare">下一组对比 →</button></div></div>
+  </div>
+  <div class="ap4e-teacher-notes"><strong>讲师提示：</strong>先让学员口头回答：“哪一条更可能帮你解决实际工作问题？为什么？”再切换到上下文、客观审查、研究与渐进写作。强调不是越长越好；小问题一句话即可，复杂任务要提供相关资料并允许多轮协作。来源：M1 p3–9；当前页面案例为制造业教学改编。</div>
+  <div class="ap4e-bottom"><small>来源：AP4E_M1 · The AI novice and the AI power user（第3–9页）</small><button type="button" class="ap4e-btn" id="ap4e-complete-expert">学完本节，进入信息获取 →</button></div>
+</section>
+<section class="ap4e-panel" id="ap4e-info" role="tabpanel" aria-labelledby="ap4e-tab-info" hidden>
+  <div class="ap4e-header">
+    <div><p class="ap4e-kicker">LESSON 02 · M1 P10–41</p><h2 class="ap4e-title">不是所有问题，都应该用同一种方式问 AI</h2><p class="ap4e-lead">课程区分三条主要信息路径：Pretrained Knowledge、Web Search、Deep Research。了解它们的用途、来源局限与人工核验责任。</p></div>
+    <span class="ap4e-pill">课堂建议 7–9 分钟</span>
+  </div>
+  <div class="ap4e-methods">
+    <div class="ap4e-method"><div class="ap4e-method-icon">◎</div><h3>模型已有知识</h3><p>解释通用、相对稳定的概念；不意味着掌握内部资料或最新变化。</p></div>
+    <div class="ap4e-method"><div class="ap4e-method-icon">⌕</div><h3>Web Search 联网搜索</h3><p>查询最新、地区相关、冷门的公开信息；需要核查原始出处与日期。</p></div>
+    <div class="ap4e-method"><div class="ap4e-method-icon">▤</div><h3>Deep Research 深度研究</h3><p>对多个问题和多份证据进行反复研究、权衡、综合；耗时一般更长。</p></div>
+  </div>
+  <div class="ap4e-split">
+    <div class="ap4e-card">
+      <h3>实验 B · 你会怎么选择？</h3>
+      <p>先独立判断，再点击“公布解析”。不要因为题目提到技术标准就自动认为一定要深度研究。</p>
+      <div class="ap4e-section-gap"></div>
+      <span class="ap4e-counter" id="ap4e-question-count">第 1 / 5 题</span>
+      <h3 id="ap4e-question-title" style="margin-top:10px"></h3>
+      <div class="ap4e-quiz-options" role="group" aria-label="选择信息路径">
+        <button type="button" class="ap4e-choice" data-ap4e-answer="0" aria-pressed="false"><strong>A</strong><span>直接利用模型知识</span></button>
+        <button type="button" class="ap4e-choice" data-ap4e-answer="1" aria-pressed="false"><strong>B</strong><span>联网搜索并核实来源</span></button>
+        <button type="button" class="ap4e-choice" data-ap4e-answer="2" aria-pressed="false"><strong>C</strong><span>使用 Deep Research 系统研究</span></button>
+      </div>
+      <div id="ap4e-answer-feedback" class="ap4e-feedback" role="status" hidden></div>
+      <div class="ap4e-action"><button type="button" class="ap4e-btn secondary" id="ap4e-check-answer" disabled>公布解析</button><button type="button" class="ap4e-btn" id="ap4e-next-question">下一题 →</button></div>
+    </div>
+    <div class="ap4e-card">
+      <h3>三种路径的选择原则</h3>
+      <p><strong>先判断任务，而不是先选最强功能。</strong></p>
+      <div class="ap4e-callout" style="margin:13px 0">模型已有知识可能过时或不包含企业专有信息；联网搜索结果不一定是可信、最新或完整的；深度研究的综合结论仍需核验引用。</div>
+      <h3 style="margin-top:18px">搜索时，应该怎么指定来源？</h3>
+      <p>以查询某设备最新公开技术规格为例，选一个优先核查的来源：</p>
+      <div class="ap4e-source-list" style="margin-top:11px">
+        <button type="button" data-ap4e-source="0" aria-pressed="false">论坛中三年前的用户转述</button>
+        <button type="button" data-ap4e-source="1" aria-pressed="false">销售类资讯站的转载文章</button>
+        <button type="button" data-ap4e-source="2" aria-pressed="false">制造商官方最新手册（核对型号、版本、发布日期）</button>
+      </div>
+      <div class="ap4e-feedback" id="ap4e-source-feedback" role="status" hidden></div>
+    </div>
+  </div>
+  <div class="ap4e-card" style="margin-top:15px">
+    <h3>Deep Research · 不是一次搜索，而是多步骤研究</h3>
+    <p>点击四个环节，查看一份 AI 视觉质检方案研究在每个阶段需要做什么。</p>
+    <div class="ap4e-workflow" role="group" aria-label="深度研究四步流程">
+      <button type="button" data-ap4e-stage="0" aria-pressed="true"><span>STEP 01</span>制定计划</button>
+      <button type="button" data-ap4e-stage="1" aria-pressed="false"><span>STEP 02</span>搜索与阅读</button>
+      <button type="button" data-ap4e-stage="2" aria-pressed="false"><span>STEP 03</span>评价证据</button>
+      <button type="button" data-ap4e-stage="3" aria-pressed="false"><span>STEP 04</span>综合与引用</button>
+    </div>
+    <div class="ap4e-stage" id="ap4e-stage-detail"></div>
+    <div class="ap4e-action"><span class="ap4e-counter">课堂演示用模拟研究流程，不会自动联网</span><button type="button" class="ap4e-btn secondary" id="ap4e-copy-research">复制 Deep Research 示范任务</button></div>
+  </div>
+  <div class="ap4e-teacher-notes"><strong>讲师提示：</strong>先请学员判断 OQ、最新设备手册和多方案选型；不要先显示答案。强调 Web Search 可能只扫描页面局部，须打开原链接确认。深度研究是“计划→搜索/阅读→评价来源→综合附引用”的循环过程，不等于任何报告都可靠。来源：M1 p10–41，尤其 p23–32、p39–41。</div>
+  <div class="ap4e-bottom"><small>来源：AP4E_M1 · Pretrained knowledge / Web Search / Web Search sources / Using deep research（第10–41页）</small><button type="button" class="ap4e-btn" id="ap4e-complete-info">完成本批课程 ✓</button></div>
+</section>
+<div class="ap4e-roadmap" aria-label="后续批次路线">
+  <span class="current">第一批已开发：新手 vs 高手 / 信息获取</span>
+  <span>第二批待开发：上下文 / 头脑风暴 / 迎合与评价 / 渐进写作</span>
+  <span>第三批：与文件、Work、Codex 联动</span>
+</div>
+`;
+host.append(course, legacy);
+
+const comparisons = [
+{ novice:"帮我分析一下这个质量问题。", power:"这里有同一工序近四周的缺陷记录、批次信息和工艺变更日志。请先核对数据质量，再分析异常集中在哪些批次或时段，列出至少三种可能解释、各自支持证据与验证计划；不要直接断定根因。", old:"停留在一句通用问题，通常只能得到通用建议。", good:"把真实业务任务交给 AI：分析文件、比较假设、规划验证步骤。", why:"高手会给 AI 更复杂、更有价值的任务，并提供完成任务所需资料，而不是只用它回答常识问题。"},
+{ novice:"帮我写一份试产总结，要专业一点。", power:"请根据我上传的试产数据、异常记录、验证结论和未关闭问题清单，先整理试产总结的事实摘要。无法从资料核实的项目标记“待确认”，不要编造数值或负责人。", old:"没有资料，AI 不知道本次试产实际发生了什么。", good:"提供日志、文件、截图等相关上下文，减少凭空补全。", why:"决定结果质量的往往不是提示词的长度，而是所提供上下文的真实性和相关性。"},
+{ novice:"我们这个 AI 质检项目很成功，你也觉得应该全面推广吧？", power:"请中立评价这个 AI 质检项目是否应扩大试点。分别检查误检率、漏检率、节拍、维护投入、投资回报和数据缺口，给出支持与反对意见，哪些结论尚不能从材料证实？", old:"诱导性提问可能让 AI 倾向于赞同你的观点。", good:"中立描述问题、明确评价标准、要求反面证据。", why:"AI 可能迎合用户。把“你觉得我对吧”改为“有哪些证据支持与反对”，才更有价值。"},
+{ novice:"有哪些 AI 视觉质检方案？", power:"请研究公开可核验的工业视觉质检方案，优先查询制造商官方技术资料和真实实施案例。比较部署方式、接口能力、现场验证要求与潜在成本；标注来源发布日期和未核实信息。", old:"容易得到缺少出处、时效不明的罗列。", good:"针对需要新资料的问题主动检索，并评估证据可靠性。", why:"需要最新或细分领域的信息时，不应仅依赖模型的预训练知识。"},
+{ novice:"直接写一份完整的 3Q 验证报告。", power:"根据上传的设备规格书、URS与测试记录，先提出 IQ/OQ/PQ 报告大纲及缺失证据清单。待我确认章节和试验依据后，再逐章撰写；所有验证结论必须能追溯到实际记录。", old:"一次成稿容易让错误结构或未经证实的内容被放大。", good:"先梳理材料和大纲，再批改结构，分段展开。", why:"先修改高层结构，比事后反复修改整篇报告更高效；验证结果不能凭 AI 生成。"}
+];
+const questions = [
+{title:"什么是设备的 OQ（运行确认）？请先用通俗语言解释。", correct:0, reason:"相对稳定的概念可以从模型知识开始。但如果要据此编制受控的 3Q 验证文件，必须进一步核对企业程序与适用标准。"},
+{title:"查询某品牌视觉检测设备目前公开发布的最新接口规格。", correct:1, reason:"具体产品技术规格可能变化，应该搜索制造商官方资料，核对产品型号、文档版本和发布日期。"},
+{title:"为三条产线比较三种 AI 视觉质检方案的实施条件、投资风险和可维护性，形成选择建议。", correct:2, reason:"涉及多问题、多来源与权衡取舍，适合制定研究计划并多轮获取证据。仍需补充本厂节拍、图像、预算等真实数据。"},
+{title:"查询本周某项公开发布的工业 AI 行业政策更新。", correct:1, reason:"涉及时间变化，必须核实最新的官方发布；发布单位、发布日期和适用范围均应检查。"},
+{title:"系统梳理公开研究，比较不同工艺参数优化方法的证据、适用条件和局限。", correct:2, reason:"需要综合多个研究方向与证据，适合深度研究。需要识别证据等级、实验条件与是否可迁移到本企业。"}
+];
+const stages = [
+"首先明确研究目标：评估 AI 视觉质检的可行性，而非预设“AI 一定更好”。确定产品、检验对象、节拍、质量指标、备选方案、来源范围及交付格式。",
+"检索技术手册、研究论文和案例等多种资料，阅读与任务有关的原始内容。发现材料不足时继续搜索，不能只根据搜索摘要下结论。",
+"比较来源的权威性、时间、适用产品、验证条件与数据口径；对供应商宣传效果和未经复现的指标标记“待核实”。",
+"按部署条件、质量风险、节拍、维护和成本综合整理报告。每个关键结论引用可追溯来源，附上证据缺口、现场试点与验收建议。"
+];
+const researchPrompt = "请对适用于离散制造产线的 AI 视觉质检解决方案开展深度研究。先列出研究计划，覆盖检验任务、技术路线、部署方式、与设备及 MES 的集成条件、质量指标、节拍、维护和投资风险。优先使用制造商官方技术资料、可信的研究论文和可核验的真实案例，并核对发布日期。对每个关键结论给出原始来源链接，区分已证实事实、推断和待验证事项。最后给出可用于试点决策的对比表、数据缺口和验收清单。不要编造未公开的性能或成本数据。";
+let compareIndex=0, questionIndex=0, choiceIndex=-1;
+let finished=[false,false];
+try {
+ const saved=JSON.parse(localStorage.getItem("academy.prompt.m1.batch1")||"null");
+ if(Array.isArray(saved) && saved.length===2) finished=saved.map(Boolean);
+} catch (_) {}
+function byId(id){ return document.getElementById(id); }
+function displayCompare(){
+ const c=comparisons[compareIndex];
+ byId("ap4e-novice").textContent=c.novice;
+ byId("ap4e-power").textContent=c.power;
+ byId("ap4e-novice-note").textContent=c.old;
+ byId("ap4e-power-note").textContent=c.good;
+ byId("ap4e-compare-why").textContent=c.why;
+ byId("ap4e-compare-step").textContent="对比 "+(compareIndex+1)+" / "+comparisons.length;
+ course.querySelectorAll("[data-ap4e-compare]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.ap4eCompare===compareIndex)));
+}
+function lesson(name){
+ const expert=name==="expert";
+ byId("ap4e-expert").hidden=!expert;
+ byId("ap4e-info").hidden=expert;
+ course.querySelectorAll("[data-ap4e-lesson]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.ap4eLesson===name)));
+ course.querySelectorAll('[role="tab"]').forEach(b=>b.tabIndex=b.dataset.ap4eLesson===name?0:-1);
+ course.querySelector(".ap4e-rail").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function finish(i){
+ finished[i]=true;
+ try { localStorage.setItem("academy.prompt.m1.batch1",JSON.stringify(finished)); } catch (_) {}
+ byId("ap4e-done-count").textContent=finished.filter(Boolean).length+" / 2";
+ byId("ap4e-track-fill").style.width=50*finished.filter(Boolean).length+"%";
+ byId("ap4e-complete-expert").textContent=finished[0]?"✓ 已学本节 · 进入信息获取 →":"学完本节，进入信息获取 →";
+ byId("ap4e-complete-info").textContent=finished[1]?"✓ 第一批已完成":"完成本批课程 ✓";
+}
+function showQuestion(){
+ const q=questions[questionIndex];
+ choiceIndex=-1;
+ byId("ap4e-question-count").textContent="第 "+(questionIndex+1)+" / "+questions.length+" 题";
+ byId("ap4e-question-title").textContent=q.title;
+ byId("ap4e-answer-feedback").hidden=true;
+ byId("ap4e-check-answer").disabled=true;
+ course.querySelectorAll("[data-ap4e-answer]").forEach(b=>b.setAttribute("aria-pressed","false"));
+ byId("ap4e-next-question").textContent=questionIndex===questions.length-1?"返回第一题 ↻":"下一题 →";
+}
+function showStage(i){
+ byId("ap4e-stage-detail").textContent=stages[i];
+ course.querySelectorAll("[data-ap4e-stage]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.ap4eStage===i)));
+}
+function copyValue(value){
+ if(typeof window.copyText==="function"){ window.copyText(value); return; }
+ if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(value).then(()=>alert("已复制"),()=>fallbackCopy(value));
+ else fallbackCopy(value);
+}
+function fallbackCopy(value){
+ const t=document.createElement("textarea");t.value=value;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();alert("已复制到剪贴板");
+}
+course.addEventListener("click",event=>{
+ const b=event.target.closest("button"); if(!b) return;
+ if(b.dataset.ap4eLesson){lesson(b.dataset.ap4eLesson);return;}
+ if(b.dataset.ap4eCompare!==undefined){compareIndex=+b.dataset.ap4eCompare;displayCompare();return;}
+ if(b.id==="ap4e-next-compare"){compareIndex=(compareIndex+1)%comparisons.length;displayCompare();return;}
+ if(b.id==="ap4e-copy-expert"){copyValue(comparisons[compareIndex].power);return;}
+ if(b.id==="ap4e-complete-expert"){finish(0);lesson("info");return;}
+ if(b.dataset.ap4eAnswer!==undefined){choiceIndex=+b.dataset.ap4eAnswer;course.querySelectorAll("[data-ap4e-answer]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));byId("ap4e-check-answer").disabled=false;byId("ap4e-answer-feedback").hidden=true;return;}
+ if(b.id==="ap4e-check-answer"){
+   if(choiceIndex<0)return;
+   const q=questions[questionIndex], right=choiceIndex===q.correct, box=byId("ap4e-answer-feedback");
+   box.hidden=false;box.classList.toggle("is-wrong",!right);
+   box.textContent=(right?"✓ 判断正确。":"建议再比较。推荐选择 "+["模型已有知识","联网搜索","Deep Research"][q.correct]+"。")+" "+q.reason;
+   return;
+ }
+ if(b.id==="ap4e-next-question"){questionIndex=(questionIndex+1)%questions.length;showQuestion();return;}
+ if(b.dataset.ap4eSource!==undefined){
+   const i=+b.dataset.ap4eSource,box=byId("ap4e-source-feedback");
+   course.querySelectorAll("[data-ap4e-source]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+   box.hidden=false;box.classList.toggle("is-wrong",i!==2);
+   box.textContent=i===2?"✓ 优先查原始官方资料，并继续核查版本、型号、发布时间与现场适用性。官方来源也不意味着无需验证。":"作为线索可以参考，但正式技术选型优先查制造商原始技术文档，并核对日期、型号、版本和实际适用条件。";
+   return;
+ }
+ if(b.dataset.ap4eStage!==undefined){showStage(+b.dataset.ap4eStage);return;}
+ if(b.id==="ap4e-copy-research"){copyValue(researchPrompt);return;}
+ if(b.id==="ap4e-complete-info"){finish(1);return;}
+});
+course.querySelectorAll('[role="tab"]').forEach(tab=>{
+ tab.addEventListener("keydown",e=>{
+   if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
+   e.preventDefault();const target=tab.dataset.ap4eLesson==="expert"?"info":"expert";lesson(target);byId("ap4e-tab-"+target).focus();
+ });
+});
+displayCompare(); showQuestion(); showStage(0);
+function refreshProgress(){
+ const count=finished.filter(Boolean).length;
+ byId("ap4e-done-count").textContent=count+" / 2";
+ byId("ap4e-track-fill").style.width=(count*50)+"%";
+ byId("ap4e-complete-expert").textContent=finished[0]?"✓ 已学本节 · 进入信息获取 →":"学完本节，进入信息获取 →";
+ byId("ap4e-complete-info").textContent=finished[1]?"✓ 第一批已完成":"完成本批课程 ✓";
+}
+refreshProgress();
+})();
+
+</script>
+</body>
+</html>
