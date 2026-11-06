@@ -72,6 +72,11 @@ async function run(){
   assert.ok(d.querySelector('#codexTaskGrid [data-task="workbench"]').getAttribute('aria-pressed')==='true','当前任务卡应有选中状态');
   assert.ok(d.querySelector('a[href="https://github.com/obra/superpowers"]'),'应提供Superpowers官方仓库');
   assert.ok(d.querySelector('a[href="https://github.com/garrytan/gstack"]'),'应提供GStack官方仓库');
+  assert.ok(d.querySelector('a[href="https://github.com/cursor/plugins/tree/main/pstack"]'),'应提供Lauren原版pstack仓库');
+  assert.ok(d.querySelector('a[href="https://github.com/michael-denyer/pstack-claude"]'),'应提供Codex社区移植版');
+  assert.ok(d.querySelector('#page')===null || d.querySelector('#codexTaskGrid'),'Codex任务区域应存在');
+  assert.ok(d.body.textContent.includes('并非 OpenAI 或 Lauren 发布的官方 Codex 插件'),'应明确区分原版与社区移植版');
+  assert.ok(d.body.textContent.includes('codex plugin marketplace add michael-denyer/pstack-claude'),'应提供Codex安装命令');
   d.querySelector('#loadSample').click();
   d.querySelector('#runMerge').click();
   assert.ok(d.querySelector('#mergeResults h3').textContent.includes('9行记录，2行有异常'));
