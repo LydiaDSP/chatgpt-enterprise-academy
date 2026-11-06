@@ -50,9 +50,9 @@ $('record-filter').value='all';$('record-filter').dispatchEvent(new w.Event('cha
 $('device').value=' <script>alert(1)</script> ';$('inspection-date').value='2026-11-06';$('inspector').value='测试人员';$('check-result').value='正常';$('symptom').value='';$('add-record').click();
 assert.equal(d.querySelector('#records script'),null);
 assert.ok([...d.querySelectorAll('#records li')].some(x=>x.textContent.includes('<script>alert(1)</script>')));
-$('run-tests').click();assert.match($('test-result').textContent,/9\\/9/);
+$('run-tests').click();assert.match($('test-result').textContent,/9\/9/);
 $('project-question').value='怎样减少点检遗漏？';$('project-question').dispatchEvent(new w.Event('input'));assert.match($('project-output').textContent,/怎样减少点检遗漏/);
-$('complete').click();assert.match($('progress').textContent,/1 \\/ 5/);
+$('complete').click();assert.match($('progress').textContent,/1 \/ 5/);
 assert.equal(JSON.parse(w.localStorage.getItem('academy.m3.v1')).done.length,1);
 assert.equal(JSON.parse(w.localStorage.getItem('academy.m3.v1')).records.length,3);
 assert.deepEqual(errors,[]);console.log('PASS M3 source attribution, five blocks, prompting modes, iteration prompts, inspection prototype, validation, filtering, XSS, persistence');
@@ -74,13 +74,13 @@ for(const mode of ['restore','corrupt','denied']){
  const q=id=>v.document.getElementById(id);
  if(mode==='restore'){
   assert.equal(q('records').querySelectorAll('li.inspection-abnormal').length,1);
-  assert.equal(q('project-question').value,'问题');assert.match(q('progress').textContent,/1 \\/ 5/);
+  assert.equal(q('project-question').value,'问题');assert.match(q('progress').textContent,/1 \/ 5/);
   assert.match(q('records').textContent,/历史记录/,'旧版异常记录应迁移为可见历史记录');
   let blob;v.URL.createObjectURL=b=>(blob=b,'blob:test');v.URL.revokeObjectURL=()=>{};v.HTMLAnchorElement.prototype.click=()=>{};
   q('export-records').click();
   const readBlob=b=>new Promise(resolve=>{const reader=new v.FileReader();reader.onload=()=>resolve(reader.result);reader.readAsText(b);});
   const exported=JSON.parse(await readBlob(blob));assert.equal(exported[0].device,'D1');assert.equal(exported[0].result,'异常');
-  q('export-project').click();assert.match(await readBlob(blob),/## 2. 证据\\n证据/);
+  q('export-project').click();assert.match(await readBlob(blob),/## 2. 证据\n证据/);
  }else{
   q('device').value='D2';q('inspection-date').value='2026-11-06';q('inspector').value='测试';q('check-result').value='异常';q('symptom').value='离线';q('add-record').click();
   assert.equal(q('records').querySelectorAll('li.inspection-abnormal').length,1);
@@ -90,6 +90,6 @@ for(const mode of ['restore','corrupt','denied']){
 }
 
 // Keep the copied teaching table aligned with the downloadable source.
-const csv=readFileSync('samples/MES_生产日报_模拟.csv','utf8').trim().split(/\\r?\\n/).slice(1).map(r=>r.split(',').slice(0,6).map((v,i)=>i<2?v:Number(v)));
-const code=readFileSync('labs/multimedia.js','utf8');const vm=await import('node:vm');assert.deepEqual(JSON.parse(JSON.stringify(vm.runInNewContext(code.match(/const rows=(\\[[\\s\\S]*?\\]);/)[1]))),csv);
+const csv=readFileSync('samples/MES_生产日报_模拟.csv','utf8').trim().split(/\r?\n/).slice(1).map(r=>r.split(',').slice(0,6).map((v,i)=>i<2?v:Number(v)));
+const code=readFileSync('labs/multimedia.js','utf8');const vm=await import('node:vm');assert.deepEqual(JSON.parse(JSON.stringify(vm.runInNewContext(code.match(/const rows=(\[[\s\S]*?\]);/)[1]))),csv);
 console.log('PASS legacy restore, corrupted/denied storage, JSON/Markdown export, CSV parity');
