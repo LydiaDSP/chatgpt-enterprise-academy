@@ -24,7 +24,7 @@
 .codex-method-step h3{font-size:14px;margin:6px 0}
 .codex-method-step p{font-size:12px;color:var(--muted);margin:0;line-height:1.65}
 .codex-method-step .human{border-top:1px solid var(--line);padding-top:8px;margin-top:9px;font-size:11px;color:#76545b}
-.codex-framework-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:15px 0}
+.codex-framework-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:15px 0}
 .codex-framework{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px;min-width:0}
 .codex-framework.superpowers{border-top:4px solid #b23b4a}
 .codex-framework.gstack{border-top:4px solid #64748b}
@@ -122,6 +122,24 @@
     <div class="info">适合：没有成熟开发流程、希望AI一步一步带着做的学员。安装后仍需确认每个阶段的产出。</div>
     <p><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">查看 Superpowers 官方 GitHub 仓库 ↗</a></p>
   </article>
+  <article class="codex-framework pstack">
+    <span class="tag">进阶推荐 · Codex 有社区移植版</span>
+    <h3>pstack</h3>
+    <p>由 Lauren Tan（@poteto）创建，原版收录于 Cursor 官方插件仓库。它把工程经验沉淀成 Skills、Playbooks 和 Agent 协作方式，让 AI 根据任务选择调查、功能开发、Bug 修复、重构、性能优化和代码验证等流程。</p>
+    <p><strong>最值得了解的能力</strong></p>
+    <ul>
+      <li><code>poteto-mode</code>：作为统一入口，识别任务并选择适合的开发流程。</li>
+      <li>工程原则：强调小步修改、代码简洁、测试行为和验证结果。</li>
+      <li>专业技能：包括架构设计、TDD、多 Agent 协作、代码审查和交付。</li>
+    </ul>
+    <p><strong>如何在 Codex 中尝试？</strong></p>
+    <pre>codex plugin marketplace add michael-denyer/pstack-claude
+codex plugin add pstack@pstack-claude</pre>
+    <p>安装后可在 Codex 中输入 <code>$poteto-mode</code>，例如：“帮我开发一个设备故障分析工具，先梳理需求和开发计划，再分步实现并验证。”</p>
+    <div class="info warn">注意：Lauren 的原版是 Cursor 插件；上面的 Codex 安装方式来自社区移植项目 michael-denyer/pstack-claude，并非 OpenAI 或 Lauren 发布的官方 Codex 插件。安装前请检查插件权限、Hook 和项目访问范围。</div>
+    <p><a href="https://github.com/cursor/plugins/tree/main/pstack" target="_blank" rel="noopener">Lauren 的原版 pstack ↗</a></p>
+    <p><a href="https://github.com/michael-denyer/pstack-claude" target="_blank" rel="noopener">Codex 社区移植版及安装说明 ↗</a></p>
+  </article>
   <article class="codex-framework gstack">
     <span class="tag advanced">进阶拓展 · Codex CLI 适配为实验性</span>
     <h3>GStack</h3>
@@ -148,15 +166,15 @@ cd ~/gstack
 <div class="card">
   <h3>两者怎么选？</h3>
   <div class="table-wrap"><table class="codex-compare">
-    <thead><tr><th>对比维度</th><th>Superpowers</th><th>GStack</th></tr></thead>
+    <thead><tr><th>对比维度</th><th>Superpowers</th><th>pstack</th><th>GStack</th></tr></thead>
     <tbody>
-      <tr><td>核心思路</td><td>规范开发生命周期</td><td>模拟专业团队角色与评审视角</td></tr>
-      <tr><td>重点解决</td><td>先规划、再开发、测试和验证</td><td>从产品、工程、设计、QA等视角审视项目</td></tr>
-      <tr><td>入门建议</td><td>先安装体验，适合初学者了解</td><td>先看案例和角色分工，有开发基础后再尝试</td></tr>
-      <tr><td>Codex 适配</td><td>官方提供 Codex App / CLI 安装路径</td><td>Codex CLI 适配为实验性支持</td></tr>
+      <tr><td>核心思路</td><td>规范开发生命周期</td><td>工程工作流、原则与验证体系</td><td>模拟专业团队角色与评审视角</td></tr>
+      <tr><td>重点解决</td><td>先规划、再开发、测试和验证</td><td>按任务选择工程流程，提升代码质量和可验证性</td><td>从产品、工程、设计、QA等视角审视项目</td></tr>
+      <tr><td>入门建议</td><td>先安装体验，适合初学者了解</td><td>先了解 poteto-mode 主入口，再按任务使用专项技能</td><td>先看案例和角色分工，有开发基础后再尝试</td></tr>
+      <tr><td>Codex 适配</td><td>提供 Codex App / CLI 使用路径</td><td>社区移植版支持 Codex 插件安装</td><td>Codex CLI 适配为实验性支持</td></tr>
     </tbody>
   </table></div>
-  <p class="small muted">不需要同时安装两个项目。先用原生 Codex 学会基本开发流程，再根据项目复杂度选择辅助工作流。</p>
+  <p class="small muted">不需要同时安装三个项目。先用原生 Codex 学会基本开发流程；初学者可先体验 Superpowers，想系统化工程质量和 Agent 工作流时再了解 pstack，GStack 作为多角色协作的进阶案例。</p>
 </div>
 </section>
 <section class="codex-section">
