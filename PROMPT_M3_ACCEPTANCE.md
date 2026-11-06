@@ -1,6 +1,6 @@
 # Prompt Lab 第三批 · M3 验收
 
-分支：feat/prompt-lab-m3-batch3；以已合并M1/M2的main为基础。未合并Work/IE/IT的独立第三批。
+本次改造分支：`feat/prompt-lab-m3-app-building-blocks`；基于 `main`（起始提交 `99b69f6`），只扩展 M3 应用开发单元。
 
 ## 如何打开
 
@@ -34,12 +34,12 @@
 - `node tests/inline-course.mjs`：验证主站 Shadow DOM 内嵌 M3 同步显示五要素、两种开发方式与点检原型，确保 M1/M2、部门导航和原有案例不回归。
 - 独立代码审查发现并修复：Prompt入口被M1收进旧版折叠区。已先复现失败再补修复及回归。
 
-## 真实浏览器已走查
+## 验证状态
 
-- Prompt入口可见，点击进入M3。
-- 图片回答切换；数据计算显示5110/5400=94.63%，5056/5265=96.03%。
-- 登记空值拦截、正常添加、刷新保留；6项逻辑自检。
-- 桌面页面初步视觉检查。
+- 已完成源码语法检查：`labs/multimedia.js` 与 `prompt-lab-m3.js` 均可解析。
+- 已重新生成并逐字比对 `inline-content.js`，确认与独立实验室 HTML/CSS 源文件一致。
+- 本次新增的 JSDOM 自动化测试已补齐，等待 GitHub Actions 执行。
+- 本次新增交互尚未完成真实浏览器人工走查；需在 PR 验收阶段检查桌面、375px 手机和投屏大字模式。
 
 ## 请讲师验收
 
