@@ -33,9 +33,23 @@ try {
 
   win.location.hash='#home'; await tick();
   doc.getElementById('nextChapter').click();
-  assert.ok(doc.querySelector('#page-desktop').classList.contains('active'),'下一章点击后应跳转');
+  assert.ok(doc.querySelector('#page-desktop').classList.contains('active'),'首页下一章应进入ChatGPT基础使用');
+  doc.getElementById('nextChapter').click();
+  assert.ok(doc.querySelector('#page-prompt').classList.contains('active'),'第二章应进入Prompt Lab');
+  doc.getElementById('nextChapter').click();
+  assert.ok(doc.querySelector('#page-work').classList.contains('active'),'第三章应进入Work');
+  doc.getElementById('nextChapter').click();
+  assert.ok(doc.querySelector('#page-codex').classList.contains('active'),'第四章应进入Codex');
+  doc.getElementById('nextChapter').click();
+  assert.ok(doc.querySelector('#page-tools').classList.contains('active'),'第五章应进入AI工具与能力扩展');
   doc.getElementById('prevChapter').click();
-  assert.ok(doc.querySelector('#page-home').classList.contains('active'),'上一章点击后应跳回');
+  assert.ok(doc.querySelector('#page-codex').classList.contains('active'),'上一章应返回Codex');
+  win.location.hash='#home';await tick();
+  for(const [key,id] of [['desktop','page-desktop'],['prompt','page-prompt'],['work','page-work'],['codex','page-codex'],['tools','page-tools'],['cases','page-cases']]){
+    doc.querySelector('[data-learning-path="'+key+'"]').click();await tick();
+    assert.ok(doc.getElementById(id).classList.contains('active'),'首页学习卡片应跳转：'+key);
+    win.location.hash='#home';await tick();
+  }
   assert.ok(doc.getElementById('prevChapter').disabled,'首页上一章应禁用');
   console.log('PASS 讲师前后章节按钮');
 
