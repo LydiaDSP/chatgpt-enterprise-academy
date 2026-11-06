@@ -9,9 +9,11 @@ const base=join(dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>readFileSync(join(base,p),'utf8');
 const index=read('index.html');
 for(const [name,path] of [['Deep Research','labs/research.html'],['Codex','labs/codex.html'],['Skill','labs/skill.html']]){
- assert.ok(index.includes('href="'+path+'"'),'主页缺少'+name+'入口');
+ const entry=name==='Deep Research'?read('prompt-lab-m1.js'):index;
+ assert.ok(entry.includes('href="'+path+'"'),(name==='Deep Research'?'Prompt M1':'主页')+'缺少'+name+'入口');
  assert.ok(existsSync(join(base,path)),name+'实验页面缺失');
 }
+assert.ok(read('labs/research.html').includes('#prompt-m1-info'),'研究实验室返回链接应指向M1信息获取');
 for(const path of ['labs/research.js','labs/codex.js','labs/skill.js'])new vm.Script(read(path),{filename:path});
 console.log('PASS 3个专题入口与脚本语法');
 

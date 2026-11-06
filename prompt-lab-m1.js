@@ -190,7 +190,7 @@ course.innerHTML = `
       <button type="button" data-ap4e-stage="3" aria-pressed="false"><span>STEP 04</span>综合与引用</button>
     </div>
     <div class="ap4e-stage" id="ap4e-stage-detail"></div>
-    <div class="ap4e-action"><span class="ap4e-counter">课堂演示用模拟研究流程，不会自动联网</span><button type="button" class="ap4e-btn secondary" id="ap4e-copy-research">复制 Deep Research 示范任务</button></div>
+    <div class="ap4e-action"><span class="ap4e-counter">课堂演示用模拟研究流程，不会自动联网</span><button type="button" class="ap4e-btn secondary" id="ap4e-copy-research">复制 Deep Research 示范任务</button><a class="ap4e-btn secondary" href="labs/research.html" target="_blank" rel="noopener">进入 Deep Research 实验室 ↗</a></div>
   </div>
   <div class="ap4e-teacher-notes"><strong>讲师提示：</strong>先请学员判断 OQ、最新设备手册和多方案选型；不要先显示答案。强调 Web Search 可能只扫描页面局部，须打开原链接确认。深度研究是“计划→搜索/阅读→评价来源→综合附引用”的循环过程，不等于任何报告都可靠。来源：M1 p10–41，尤其 p23–32、p39–41。</div>
   <div class="ap4e-bottom"><small>来源：AP4E_M1 · Pretrained knowledge / Web Search / Web Search sources / Using deep research（第10–41页）</small><button type="button" class="ap4e-btn" id="ap4e-complete-info">完成本批课程 ✓</button></div>

@@ -1,6 +1,6 @@
 # ChatGPT Enterprise Academy · 企业AI实战学习平台
 
-> **产品需求文档**：[完整 PRD（docs/PRD.md）](docs/PRD.md)｜2026-11-05，覆盖课程定位、10章120分钟主线、Prompt M1/M2/M3、6个教学实验室、30+12岗位案例、交互与测试验收。
+> **产品需求文档**：[完整 PRD（docs/PRD.md）](docs/PRD.md)｜2026-11-05，覆盖课程定位、9个导航节点（含首页）与120分钟主线、Prompt M1/M2/M3、6个教学实验室、30+12岗位案例、交互与测试验收。
 >
 > **当前 main 状态说明（2026-11-05）**：Prompt M1/M2/M3、Research/Codex/Skill、Work/Computer Use 和 IE/IT 第三批代码均已合并。下文若出现“某批尚未合并”，属于原验收阶段的历史记录；以 [PRD 第11–13节](docs/PRD.md#11-已实现资产与验收映射基于-2026-11-05-main) 和 main 代码为准。自动化合并不代表真实账号、投影、移动端和企业信息安全验收已完成。
 
@@ -16,10 +16,16 @@
 - 课程其他功能模块（包括Prompt Lab M1/M2/M3）不在本批修改范围内。
 - 校验：`node tests/verify.mjs`、`node tests/scenario-playbooks.mjs`、`node tests/inline-course.mjs`（浏览器模拟测试需预装jsdom）。
 
+## 2026-11-06 课程精简
+
+本轮移除“文件与数据分析”主导航与冗余面板。主站现在为 **9 个导航节点（含学习首页）**、9 段连续授课时段，总时长仍为120分钟。MES模拟CSV数据分析保留在 Prompt M3（`#prompt-m3-data`），Deep Research实验室从 Prompt M1 信息获取进入。旧`#files`链接兼容跳转到M3，旧完成记录不再将退役章节计数。以下旧验收批次的10章表述属于历史记录。
+
+整体框架的后续改造建议见 `docs/COURSE_ARCHITECTURE_PROPOSAL_2026-11-06.md`，其他章节顺序尚未按建议重排。
+
 ## 快速使用
 
 1. 解压整个站点文件夹，双击 `index.html` 可查看课程主体。
-2. 通过左侧导航进入Prompt Lab、文件与数据分析、Skill/MCP/Plugin、Work、Codex、AI技巧或业务场景指南。
+2. 通过左侧导航进入Prompt Lab、Skill/MCP/Plugin、Work、Codex、AI技巧或业务场景指南。
 3. 右上角可切换**讲师模式**（额外显示授课提示）和自学模式；顶部提供“上一章/下一章”和“投影大字”按钮。讲师模式支持 `Shift + PageUp` / `Shift + PageDown` 切换章节（避开浏览器默认返回快捷键）。
 4. 可复制Prompt、下载 `samples` 里的模拟CSV文件。在Codex部分可点击“载入内置模拟订单”并运行真正的浏览器本地CSV合并/检查工具。
 5. “完成本章”和“课前检查”会使用当前浏览器的`localStorage`保存，不跨设备同步，不作为后台学员记录。
@@ -39,10 +45,10 @@
 
 ## 已实现的核心功能
 
-- **10个课程章节**：桌面端/企业版、Prompt Lab、文件与数据、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI使用小技巧、部门未来场景、学习资源。
+- **9个导航节点（含首页）**：桌面端/企业版、Prompt Lab、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI效率技巧、部门业务场景、学习资源。
 - **120分钟授课路线**：可从主页直接跳转课堂章节。
 - **Prompt Lab 2.0（M1 / M2 已合并）**：六节互动课，涵盖新手与高手、模型知识/联网搜索/Deep Research、上下文管理、三轮头脑风暴、避免迎合与Rubric客观评价、渐进式写作；支持讲师提示、课堂互动和本地学习进度。原有三种业务Prompt练习仍保留在可展开区。所有演示为本地模拟，不代表AI实时运行结果。
-- **文件分析**：内置MES模拟日报数据，可本地计算产量、达成率、直通率和异常分布；提供CSV和真实ChatGPT课堂分析Prompt。
+- **M3数据分析**：MES模拟日报数据、CSV与指标复核仍在Prompt Lab M3；文件分析独立导航和重复面板已移除。
 - **Codex Lab**：提供3份模拟采购订单CSV、Codex自然语言开发Prompt和可运行的CSV合并工具。检查“订单号+料号”重复、缺失交期、非数字数量等，下载结果和异常清单。此工具**是网站内的JavaScript程序**，不代表网页直接调用或控制Codex。
 - **AI效率技巧**：15张卡片，包含场景、可复制指令与注意事项。
 - **30个未来业务场景**：与上传的《部門AIAgent适用場景盤點表.xlsx》一一对应，按原表顺序和优先级组织为6个部门章节。每个场景均提供“现在用Chat怎么做”和“未来Agent如何升级”，以及验证与权限说明。
@@ -69,7 +75,7 @@
 
 | 入口章节 | 新页面 | 能做什么 |
 | --- | --- | --- |
-| 文件与数据 | `labs/research.html` | Deep Research任务单编辑、4步研究计划、3项模拟证据判断、5项报告验收 |
+| Prompt Lab M1（现行入口，历史属于文件模块） | `labs/research.html` | Deep Research任务单编辑、4步研究计划、3项模拟证据判断、5项报告验收 |
 | Skill/MCP/Plugin | `labs/skill.html` | 完整 `SKILL.md` 与输出规范、虚构SOP对比、5项变化实操 |
 | Codex | `labs/codex.html` | 5轮Codex指令、带异常的CSV批处理、6项真实执行测试 |
 

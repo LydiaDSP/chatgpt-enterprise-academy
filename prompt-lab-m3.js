@@ -94,6 +94,7 @@ new ResizeObserver(offsets).observe(document.querySelector('.topbar'));new Resiz
 window.routeInlineCourse=hash=>{
  let target;
  if(hash.startsWith('prompt-m3-')){go('prompt',{updateHash:false});const name=hash.slice('prompt-m3-'.length);showStage('m3',groups.m3.includes(name)?name:'vision');target=nav;}
+ else if(hash==='prompt-m1-info'){go('prompt',{updateHash:false});showStage('m1','info');target=nav;}
  else if(hash==='prompt-m1'||hash==='prompt-m2'){go('prompt',{updateHash:false});const stage=hash.slice(7);showStage(stage,groups[stage][0]);target=nav;}
  else return false;
  offsets();requestAnimationFrame(()=>target?.scrollIntoView({block:'start',behavior:'instant'}));return true;
