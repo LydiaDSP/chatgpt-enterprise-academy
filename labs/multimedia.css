@@ -1,1 +1,60 @@
 [hidden]{display:none!important}.toolbar{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:20px 0}.toolbar label{margin:0}.steps{position:sticky;top:0;z-index:2;background:#faf8f7;padding:12px 0;flex-wrap:wrap}.step[aria-current=step]{background:#a3263d;color:white}input:not([type=checkbox]),textarea,select{width:100%;box-sizing:border-box;margin:8px 0 16px;padding:12px;border:1px solid #d8cdd1;border-radius:8px;font:inherit}label{display:block;font-weight:600}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}.mock-screen{background:#17252c;color:#ecf4f3;padding:24px;border-radius:12px;margin:15px 0;line-height:2}.mock-screen h3{color:white}.mock-screen span{color:#ffbc7c}.mock-screen .uncertain{background:#586169;padding:0 10px}section>.card,.grid+.card{margin-top:18px}.teacher{margin:16px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #eee}.large{font-size:20px}.large .micro,.large .muted,.large .output{font-size:18px}.chart-row{margin-top:14px}.chart-bar{height:12px;background:#a3263d;border-radius:4px;margin-top:6px}#records{max-height:240px;overflow:auto;overflow-wrap:anywhere}#records li{padding:8px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #186f92;outline-offset:3px}@media(max-width:640px){.steps{position:static}.toolbar{gap:12px}.top{flex-wrap:wrap}.step{flex:1 1 130px}.wrap{padding:16px}h1{font-size:30px}}
+
+/* M3 app-building lesson: original three blocks + clearly sourced two-block extension. */
+.build-source-note{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.build-source-note>div{padding:16px;border:1px solid #e9e1e3;border-left:4px solid #aa2737;border-radius:12px;background:#fff}
+.build-source-note>div:nth-child(2){border-left-color:#527c94;background:#f7fafb}
+.build-source-note strong{display:block;margin:7px 0 4px;color:#30333b}
+.build-source-note p{margin:4px 0 8px;color:#65707a;font-size:13px}
+.build-source-note a{font-size:12px;color:#8e2738;text-decoration:underline;text-underline-offset:3px}
+.source-tag{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.3px}
+.source-tag.original{background:#fbecef;color:#96283b}
+.source-tag.extension{background:#eaf2f6;color:#42677c}
+.source-tag.vague{background:#fff2df;color:#8a5a1f}
+.source-tag.specific{background:#e8f5ed;color:#246548}
+.build-block-groups{display:grid;gap:14px;margin:16px 0}
+.build-block-group{padding:16px;border:1px solid #e8e1e3;border-radius:14px;background:#fff}
+.build-block-group.extension{background:#f9fbfc;border-color:#dce7eb}
+.build-group-heading{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px}
+.build-group-heading h3{margin:5px 0 0}
+.build-block-grid{display:grid;gap:12px}
+.build-block-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.build-block-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.build-block{position:relative;min-width:0;padding:13px;border:1px solid #ece7e8;border-radius:11px;background:#fff}
+.build-block .block-number{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#f8e9ec;color:#9a293b;font-size:11px;font-weight:800;margin-bottom:8px}
+.build-block label{font-size:12px;color:#6f2838}
+.build-block p{font-size:12px;color:#75808a;margin:4px 0 8px}
+.build-block textarea{min-height:94px;margin:4px 0 0;font-size:12px;line-height:1.65}
+.build-block-group.extension .block-number{background:#eaf2f6;color:#456b80}
+.build-block-group.extension label{color:#456b80}
+.build-prompt-card{margin:16px 0}
+.build-mode-tabs{flex-wrap:nowrap}
+.build-prompt-card .info{margin:14px 0}
+.build-prompt-card pre{max-height:440px;overflow:auto}
+.build-practice-grid{align-items:start}
+.specificity-pair{display:grid;grid-template-columns:1fr 1.25fr;gap:10px;margin:12px 0}
+.specificity-pair>div{padding:12px;border:1px solid #e8e2e3;border-radius:10px;background:#fff}
+.specificity-pair p{margin:8px 0 0;font-size:13px;line-height:1.7}
+.iteration-list{display:grid;gap:10px;margin-top:12px}
+.iteration-item{padding:12px;border:1px solid #e9e3e4;border-radius:10px;background:#fff}
+.iteration-item strong{font-size:13px}
+.iteration-item pre{margin:8px 0;font-size:12px;max-height:150px;overflow:auto}
+.inspection-summary{padding:12px 14px;margin:12px 0;border-radius:10px;background:#f9eef0;color:#84283a;font-weight:700;font-size:13px}
+.inspection-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.inspection-form>div{min-width:0}
+.inspection-form label{font-size:12px}
+.inspection-form input,.inspection-form textarea,.inspection-form select{margin-bottom:10px}
+.inspection-description{grid-column:1/-1}
+.filter-label{display:inline-block;margin:0 0 0 8px;font-size:12px}
+.filter-select{width:auto;min-width:125px;margin:0;padding:8px 10px;border:1px solid #d8cdd1;border-radius:8px;background:#fff;font:inherit;font-size:12px}
+#records{display:grid;gap:6px;padding-left:0;list-style:none}
+#records li{padding:9px 11px;border-radius:8px;font-size:12px;overflow-wrap:anywhere}
+#records li.inspection-abnormal{border-left:3px solid #bd4652;background:#fff1f1;color:#8b2938}
+#records li.inspection-normal{border-left:3px solid #4b9a70;background:#f0f8f3;color:#286347}
+#records li.empty-record{background:#f7f5f4;color:#78818a}
+.acceptance-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.acceptance-grid>div{padding:12px;border-radius:10px;background:#faf8f7}
+.acceptance-grid strong{font-size:13px}
+.acceptance-grid ul{padding-left:19px;margin:8px 0 0;font-size:12px;color:#5e6872}
+@media(max-width:820px){.build-block-grid.three{grid-template-columns:1fr}.build-block-grid.two,.build-source-note,.build-practice-grid,.acceptance-grid{grid-template-columns:1fr}.build-group-heading{align-items:start;flex-direction:column}.build-mode-tabs{width:100%}.build-mode-tabs button{flex:1 1 0;padding:8px 9px}.specificity-pair{grid-template-columns:1fr}}
+@media(max-width:640px){.inspection-form{grid-template-columns:1fr}.inspection-description{grid-column:auto}.filter-label{margin-left:0}.filter-select{min-width:110px}.build-block-group{padding:12px}}
