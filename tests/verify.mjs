@@ -37,7 +37,8 @@ const csvPaths=['samples/MES_生产日报_模拟.csv','samples/采购订单_模�
 for(const path of csvPaths) {
   const data=read(path);
   assert.ok(data.trim().split(/\r?\n/).length>=2,'模拟CSV内容缺失: '+path);
-  assert.ok(html.includes('href="'+path+'"'),'页面缺少CSV下载入口: '+path);
+  if(path==='samples/MES_生产日报_模拟.csv')assert.ok(read('labs/multimedia.html').includes('href="../'+path+'"'),'M3应保留MES下载');
+  else assert.ok(html.includes('href="'+path+'"'),'页面缺少CSV下载入口: '+path);
 }
 const orders=csvPaths.slice(1).flatMap(path=>read(path).trim().split(/\r?\n/).slice(1).map(x=>x.split(',')));
 assert.equal(orders.length,9);
@@ -48,9 +49,14 @@ console.log('PASS 模拟CSV文件、9条订单及预设异常');
 const chapterBlock=block[1].match(/const LESSONS=(\[[\s\S]*?\]);\s*const /);
 assert.ok(chapterBlock,'缺少课程计划');
 const lessonData=vm.runInNewContext('('+chapterBlock[1]+')');
-assert.equal(lessonData.length,10);
+assert.equal(lessonData.length,9);
 assert.ok(lessonData[0][0].startsWith('00')&&lessonData.at(-1)[0].endsWith('120'));
-console.log('PASS 120分钟10段课程结构');
+for(let i=1;i<lessonData.length;i++)assert.equal(Number(lessonData[i-1][0].split('–')[1]),Number(lessonData[i][0].split('–')[0]),'时段必须衔接');
+assert.ok(!html.includes('id="page-files"')&&!html.includes('data-page="files"'),'文件模块不应独立存在');
+assert.ok(read('prompt-lab-m1.js').includes('href="labs/research.html"'),'Research需要M1入口');
+assert.ok(read('labs/research.html').includes('#prompt-m1-info'),'返回M1信息获取');
+assert.ok(read('labs/multimedia.html').includes('#prompt-m3-data'),'保留M3数据分析');
+console.log('PASS 120分钟9段课程、内容归属和路由');
 const toolsView = html.match(/<section class="view" id="page-tools">([\s\S]*?)<\/section>/);
 assert.ok(toolsView, '缺少 Skill/MCP/Plugin 课程区块');
 const course = toolsView[1];
