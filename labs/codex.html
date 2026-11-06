@@ -1,12 +1,198 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Codex制造业AI Coding实操：从需求说明到开发、测试与交付。"><title>Codex AI Coding 实操 | 企业AI学院</title><link rel="stylesheet" href="lab.css"><script src="codex.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Codex制造业AI Coding实操：从需求说明到开发、测试与交付。"><title>Codex AI Coding 实操 | 企业AI学院</title><link rel="stylesheet" href="lab.css"><script src="codex.js" defer></script>
+<style>
+.codex-section{margin-top:34px}
+.codex-lead{max-width:900px;color:var(--muted);font-size:14px;margin:0 0 16px}
+.codex-task-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:16px 0}
+.codex-task-card{min-width:0;min-height:145px;text-align:left;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#fff 0%,#fff9fa 100%);padding:15px;color:var(--ink);display:flex;flex-direction:column;align-items:flex-start;gap:8px;transition:border-color .18s,transform .18s,box-shadow .18s}
+.codex-task-card:hover{border-color:#d9aab3;transform:translateY(-2px);box-shadow:0 8px 22px #4a1e2a10}
+.codex-task-card[aria-pressed="true"]{border:2px solid var(--red);background:#fff5f7;box-shadow:0 5px 18px #9c24321a;padding:14px}
+.codex-task-icon{width:34px;height:34px;border-radius:10px;background:#f8e9ec;color:var(--red);display:grid;place-items:center;font-size:17px;font-weight:800}
+.codex-task-title{font-weight:800;font-size:14px;line-height:1.35}
+.codex-task-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.codex-task-kicker{font-size:10px;color:var(--red);font-weight:800;letter-spacing:.7px}
+.codex-task-detail{margin-top:12px}
+.codex-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}
+.codex-detail-box{border:1px solid var(--line);border-radius:11px;background:#fcfbfa;padding:13px 15px;min-width:0}
+.codex-detail-box strong{display:block;font-size:12px;color:var(--red);margin-bottom:5px}
+.codex-detail-box p{font-size:13px;margin:0;line-height:1.7}
+.codex-copy-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.codex-method-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0}
+.codex-method-step{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;min-width:0}
+.codex-method-step .num{font-size:11px;font-weight:800;color:var(--red);letter-spacing:1px}
+.codex-method-step h3{font-size:14px;margin:6px 0}
+.codex-method-step p{font-size:12px;color:var(--muted);margin:0;line-height:1.65}
+.codex-method-step .human{border-top:1px solid var(--line);padding-top:8px;margin-top:9px;font-size:11px;color:#76545b}
+.codex-framework-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:15px 0}
+.codex-framework{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px;min-width:0}
+.codex-framework.superpowers{border-top:4px solid #b23b4a}
+.codex-framework.pstack{border-top:4px solid #7c3aed}
+.codex-framework.gstack{border-top:4px solid #64748b}
+.codex-framework h3{margin:0 0 5px;font-size:18px}
+.codex-framework p,.codex-framework li{font-size:13px;line-height:1.7}
+.codex-framework ul,.codex-framework ol{padding-left:20px}
+.codex-framework .tag{display:inline-block;border-radius:99px;padding:4px 9px;background:#f8edf0;color:#8a2938;font-size:10px;font-weight:800;margin-bottom:9px}
+.codex-framework .tag.advanced{background:#eef1f5;color:#42526a}
+.codex-framework pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#26232a;color:#f7f3f4;border-radius:9px;padding:12px;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.codex-compare{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.codex-compare th,.codex-compare td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.codex-compare th{background:#f7f1f2;color:#62313b}
+.codex-callout{border:1px solid #ead5d9;background:#fff8f9;border-radius:12px;padding:15px 17px;font-size:13px;line-height:1.75}
+.codex-prompt{margin-top:10px}
+@media(max-width:1000px){.codex-task-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.codex-method-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.codex-task-grid,.codex-method-grid,.codex-framework-grid,.codex-detail-grid{grid-template-columns:1fr}.codex-task-card{min-height:0}.codex-compare{font-size:12px}.codex-compare th,.codex-compare td{padding:8px}}
+</style>
+</head>
 <body>
 <header class="top"><a href="../index.html#codex">← 返回课程 · Codex</a><span class="version">ACADEMY LAB · V1.1 · 浏览器本地运行</span></header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">CODEX LAB · NO-CODE TO AI CODING</div><h1>不会写代码，也能提出可验收的开发任务</h1><p>围绕采购订单CSV合并，把真实软件开发拆解为：需求定义 → 安全检查 → 编写工具 → 测试修复 → 交付复用。这里的CSV工具是网页现成代码；真实Codex开发需切换到授权环境执行。</p><span class="label">课堂建议 15–20 分钟 · 5步示范 + 本地真实运行</span></section>
+<section class="hero"><div class="eyebrow">CODEX LAB · NO-CODE TO AI CODING</div><h1>不会写代码，也能提出可验收的开发任务</h1><p>Codex 不只是补几行代码：它可以协助你开发Python分析脚本、办公小工具、网页应用和业务工作台，也能参与现有系统重构、自动化测试与Agent开发。本页先看任务地图和开发方法，再用采购订单CSV工具完成一次真实演示。这里的浏览器工具是预置教学程序，不会伪装成Codex即时生成。</p><span class="label">课堂建议 20–25 分钟 · 任务地图 + 开发方法 + 现场演示</span></section>
+
+<section class="codex-section">
+<h2>一、Codex 能帮我们做什么？</h2>
+<p class="codex-lead">先从任务出发，而不是从编程语言出发。点击下面的任务卡片，查看典型业务场景、交付成果和可以直接交给 Codex 的起步指令。</p>
+<div id="codexTaskGrid" class="codex-task-grid" role="group" aria-label="Codex应用任务类型"></div>
+<div class="card codex-task-detail">
+  <div class="row between"><div><span class="pill">任务示例</span><h3 id="codexTaskTitle" style="margin:8px 0 5px">Python 数据分析</h3><p id="codexTaskDescription" class="small muted" style="margin:0"></p></div></div>
+  <div class="codex-detail-grid">
+    <div class="codex-detail-box"><strong>典型业务任务</strong><p id="codexTaskExample"></p></div>
+    <div class="codex-detail-box"><strong>可以交付什么</strong><p id="codexTaskDeliverable"></p></div>
+  </div>
+  <h4 style="margin:16px 0 8px">可以这样向 Codex 提需求</h4>
+  <div class="code" id="codexTaskPrompt"></div>
+  <div class="codex-copy-row"><button class="btn primary" id="copyCodexTaskPrompt">复制这条开发指令</button><span class="status" id="codexTaskCopyStatus" aria-live="polite"></span></div>
+</div>
+<div class="info" style="margin-top:13px">提醒：Codex 可以生成和运行代码，但不会自动知道企业的业务口径。你需要提供字段定义、业务规则、预期结果和验收条件；真实数据、系统账号和生产环境必须遵守公司授权与安全要求。</div>
+</section>
+<section class="codex-section">
+<h2>二、不会编程，如何把需求变成软件？</h2>
+<p class="codex-lead">你不必先学会一门编程语言，但要学会把业务问题讲清楚，并在关键节点确认需求、检查结果和验收成果。</p>
+<div class="codex-method-grid">
+  <article class="codex-method-step"><div class="num">STEP 01</div><h3>说清问题</h3><p>谁在什么场景遇到什么问题？现在怎么做？最想减少哪一步工作？</p><div class="human">你要确认：真实需求与使用者</div></article>
+  <article class="codex-method-step"><div class="num">STEP 02</div><h3>定义需求</h3><p>让AI整理功能清单、输入输出、页面草图、业务规则和验收标准。</p><div class="human">你要确认：范围、优先级和规则</div></article>
+  <article class="codex-method-step"><div class="num">STEP 03</div><h3>制定计划</h3><p>先阅读现有文件，给出技术方案和分步计划；确认后再开始修改。</p><div class="human">你要确认：方案与修改范围</div></article>
+  <article class="codex-method-step"><div class="num">STEP 04</div><h3>分步开发</h3><p>先做最小可用版本，每次完成一个小功能，避免一次性开发过多内容。</p><div class="human">你要确认：每个阶段的实际结果</div></article>
+  <article class="codex-method-step"><div class="num">STEP 05</div><h3>测试验证</h3><p>用正常、异常和边界数据测试，查看运行结果、报错信息和修复记录。</p><div class="human">你要确认：测试证据，而非AI口头承诺</div></article>
+  <article class="codex-method-step"><div class="num">STEP 06</div><h3>审查优化</h3><p>检查功能是否符合需求，界面是否易用，是否存在数据、安全和权限风险。</p><div class="human">你要确认：业务、IT与安全要求</div></article>
+  <article class="codex-method-step"><div class="num">STEP 07</div><h3>交付维护</h3><p>整理运行说明、依赖环境、版本记录、备份与回滚方式，再决定是否部署。</p><div class="human">你要确认：谁使用、谁维护、谁批准</div></article>
+  <article class="codex-method-step"><div class="num">关键原则</div><h3>先小后大</h3><p>先完成一个能运行、能测试的小版本，再根据真实反馈逐步增加功能。</p><div class="human">不要一开始就要求AI开发完整系统</div></article>
+</div>
+<div class="card">
+  <h3>不会写代码，可以先复制这段“开发搭档指令”</h3>
+  <p class="small muted">把方括号中的内容替换成自己的业务需求。先让Codex理解与规划，不要一上来就修改文件。</p>
+  <div class="code codex-prompt" id="codexBeginnerPrompt">我不是专业软件开发人员，请作为我的AI开发搭档，用业务人员能理解的语言带我完成这个项目。
+
+我的目标：[描述希望解决的业务问题]
+实际使用者：[谁会使用]
+目前的做法：[现在如何处理、哪里耗时或容易出错]
+期望结果：[希望得到什么工具、页面或自动化能力]
+
+请按以下方式协助我：
+1. 先向我提出必要的澄清问题，不要自行猜测业务规则。
+2. 将需求整理成功能清单、输入输出、页面/操作流程和验收标准。
+3. 先检查当前工作目录和已有项目，说明拟采用的方案、会新增或修改哪些文件；此阶段不要修改文件。
+4. 等我确认后，再拆成小任务逐步开发，每完成一项就展示结果。
+5. 实际运行程序和测试，提供测试输入、运行命令、结果与未通过项；不要只说“已经完成”。
+6. 用非技术语言解释我需要知道的操作方法、限制和风险。
+7. 未经我确认，不删除原文件、不覆盖业务数据、不连接生产系统、不部署或对外发布。</div>
+  <div class="codex-copy-row"><button class="btn primary" id="copyCodexBeginnerPrompt">复制通用开发指令</button><span id="codexBeginnerCopyStatus" class="status" aria-live="polite"></span></div>
+</div>
+</section>
+<section class="codex-section">
+<h2>三、借助辅助项目，让 AI 按专业流程开发</h2>
+<p class="codex-lead">这些项目不是新的编程语言，而是给 AI Coding Agent 增加开发方法、工作规范和专业角色。它们能帮助初学者少走弯路，但不能替代人的业务判断和最终验收。</p>
+<div class="codex-framework-grid">
+  <article class="codex-framework superpowers">
+    <span class="tag">优先了解 · Codex App / CLI 可用</span>
+    <h3>Superpowers</h3>
+    <p>一套面向 AI Coding Agent 的开发方法论和技能集合。核心是先讨论需求和设计，再形成细化计划，之后按步骤开发、测试和验证，减少AI跳过规划直接写代码的问题。</p>
+    <p><strong>它会辅助哪些环节？</strong></p>
+    <ul>
+      <li>Brainstorming：通过提问澄清需求，形成设计说明。</li>
+      <li>Writing Plans：把工作拆成小任务，明确文件和验证步骤。</li>
+      <li>Test-Driven Development：先写测试，再实现和重构。</li>
+      <li>Code Review / Verification：检查改动并验证结果。</li>
+    </ul>
+    <p><strong>如何在 Codex 中使用？</strong></p>
+    <ol>
+      <li>Codex App：打开左侧 Plugins，在 Coding 分类找到 Superpowers，点击添加。</li>
+      <li>Codex CLI：输入 <code>/plugins</code>，搜索 <code>superpowers</code>，选择安装。</li>
+      <li>重新开始一个开发任务，先描述目标，让它带你完成需求梳理与设计，不要直接要求写代码。</li>
+    </ol>
+    <div class="info">适合：没有成熟开发流程、希望AI一步一步带着做的学员。安装后仍需确认每个阶段的产出。</div>
+    <p><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">查看 Superpowers 官方 GitHub 仓库 ↗</a></p>
+  </article>
+  <article class="codex-framework pstack">
+    <span class="tag">进阶推荐 · Codex 有社区移植版</span>
+    <h3>pstack</h3>
+    <p>由 Lauren Tan（@poteto）创建，原版收录于 Cursor 官方插件仓库。它把工程经验沉淀成 Skills、Playbooks 和 Agent 协作方式，让 AI 根据任务选择调查、功能开发、Bug 修复、重构、性能优化和代码验证等流程。</p>
+    <p><strong>最值得了解的能力</strong></p>
+    <ul>
+      <li><code>poteto-mode</code>：作为统一入口，识别任务并选择适合的开发流程。</li>
+      <li>工程原则：强调小步修改、代码简洁、测试行为和验证结果。</li>
+      <li>专业技能：包括架构设计、TDD、多 Agent 协作、代码审查和交付。</li>
+    </ul>
+    <p><strong>如何在 Codex 中尝试？</strong></p>
+    <pre>codex plugin marketplace add michael-denyer/pstack-claude
+codex plugin add pstack@pstack-claude</pre>
+    <p>安装后可在 Codex 中输入 <code>$poteto-mode</code>，例如：“帮我开发一个设备故障分析工具，先梳理需求和开发计划，再分步实现并验证。”</p>
+    <div class="info warn">注意：Lauren 的原版是 Cursor 插件；上面的 Codex 安装方式来自社区移植项目 michael-denyer/pstack-claude，并非 OpenAI 或 Lauren 发布的官方 Codex 插件。安装前请检查插件权限、Hook 和项目访问范围。</div>
+    <p><a href="https://github.com/cursor/plugins/tree/main/pstack" target="_blank" rel="noopener">Lauren 的原版 pstack ↗</a></p>
+    <p><a href="https://github.com/michael-denyer/pstack-claude" target="_blank" rel="noopener">Codex 社区移植版及安装说明 ↗</a></p>
+  </article>
+  <article class="codex-framework gstack">
+    <span class="tag advanced">进阶拓展 · Codex CLI 适配为实验性</span>
+    <h3>GStack</h3>
+    <p>Garry Tan 开源的虚拟软件团队工作流。它将产品、工程、设计、代码审查、QA和发布等视角组织成可调用的技能，让AI不只从“程序员”一个角度看问题。</p>
+    <p><strong>可以体验的角色视角</strong></p>
+    <ul>
+      <li>产品/CEO视角：重新审视用户问题和产品价值。</li>
+      <li>工程负责人视角：梳理架构、数据流和技术风险。</li>
+      <li>设计视角：检查交互流程和视觉体验。</li>
+      <li>Review / QA视角：检查代码改动、运行应用、复现问题。</li>
+      <li>发布视角：整理测试、变更和交付步骤。</li>
+    </ul>
+    <p><strong>如何在 Codex CLI 中尝试？</strong></p>
+    <pre>git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/gstack
+cd ~/gstack
+./setup --host codex
+./setup --status</pre>
+    <p class="small muted">以上命令以 macOS / Linux / Git Bash 环境为例。Windows 使用前应先确认 Git、Bun 和 Node.js 等依赖，并按仓库当前安装文档操作；不要在不熟悉的终端中直接复制执行。</p>
+    <p>安装后可尝试调用 <code>gstack-office-hours</code>，让AI先把一个业务想法梳理成设计方案，再体验工程评审、Review和QA等技能。具体技能名称以当前安装版本为准。</p>
+    <div class="info warn">注意：GStack 对 Codex CLI 的支持目前标记为 experimental。需要 Git、Bun 等运行环境；Windows 还涉及 Node.js 等依赖。部分安全约束在该环境中是提示而非强制，不建议初学者直接用于生产项目。</div>
+    <p><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">查看 GStack 官方 GitHub 仓库 ↗</a></p>
+  </article>
+</div>
+<div class="card">
+  <h3>两者怎么选？</h3>
+  <div class="table-wrap"><table class="codex-compare">
+    <thead><tr><th>对比维度</th><th>Superpowers</th><th>pstack</th><th>GStack</th></tr></thead>
+    <tbody>
+      <tr><td>核心思路</td><td>规范开发生命周期</td><td>工程工作流、原则与验证体系</td><td>模拟专业团队角色与评审视角</td></tr>
+      <tr><td>重点解决</td><td>先规划、再开发、测试和验证</td><td>按任务选择工程流程，提升代码质量和可验证性</td><td>从产品、工程、设计、QA等视角审视项目</td></tr>
+      <tr><td>入门建议</td><td>先安装体验，适合初学者了解</td><td>先了解 poteto-mode 主入口，再按任务使用专项技能</td><td>先看案例和角色分工，有开发基础后再尝试</td></tr>
+      <tr><td>Codex 适配</td><td>提供 Codex App / CLI 使用路径</td><td>社区移植版支持 Codex 插件安装</td><td>Codex CLI 适配为实验性支持</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small muted">不需要同时安装三个项目。先用原生 Codex 学会基本开发流程；初学者可先体验 Superpowers，想系统化工程质量和 Agent 工作流时再了解 pstack，GStack 作为多角色协作的进阶案例。</p>
+</div>
+</section>
+<section class="codex-section">
+<h2>四、什么时候用 Chat、Work，什么时候用 Codex？</h2>
+<div class="table-wrap"><table class="codex-compare">
+<thead><tr><th>工具</th><th>适合处理</th><th>典型任务</th></tr></thead>
+<tbody>
+<tr><td><strong>Chat</strong></td><td>讨论、分析、生成代码片段或解释技术概念</td><td>解释Python报错、设计分析思路、生成一段公式或脚本供人工使用</td></tr>
+<tr><td><strong>Work</strong></td><td>跨文件、网页和应用的多步骤任务执行与交付</td><td>整理多份文件、研究资料、生成报告、在授权应用中完成工作流程</td></tr>
+<tr><td><strong>Codex</strong></td><td>围绕项目目录和代码库进行软件开发</td><td>创建脚本/应用、运行代码、测试、修复Bug、重构和维护项目</td></tr>
+</tbody>
+</table></div>
+<div class="codex-callout" style="margin-top:13px"><strong>简单判断：</strong>只需要一次分析或一段代码，用Chat；需要跨文件和应用完成多步骤工作，用Work；需要持续创建、修改、运行和测试代码项目，用Codex。三者能力有交集，具体取决于工作区和授权配置。</div>
+</section>
+
 <section>
-<h2>一、5步Codex现场教学脚本</h2>
+<h2>五、5步Codex现场教学脚本</h2>
 <p class="small muted">依次切换阶段，可复制适合在Codex中逐轮输入的简短工作指令。不要把下面本地程序误称为Codex即时生成。</p>
 <div id="codexStages" class="steps" role="group" aria-label="开发阶段选择">
 <button class="step active" data-stage="0">1 说需求</button>
@@ -21,7 +207,7 @@
 </div>
 </section>
 <section>
-<h2>二、真实可运行：浏览器CSV批处理</h2>
+<h2>六、真实可运行：浏览器CSV批处理</h2>
 <p class="muted small">支持相同表头的UTF-8 CSV，读取与合并在当前浏览器完成，不上传服务器；不直接运行Codex。正式处理Excel（.xlsx）或机密数据必须在企业批准的环境中另行验证。</p>
 <div class="grid">
 <div class="card">
@@ -51,14 +237,14 @@
 <div id="mergeResults" aria-live="polite" style="margin-top:16px"></div>
 </section>
 <section>
-<h2>三、运行真正的本地测试（非演示文字）</h2>
+<h2>七、运行真正的本地测试（非演示文字）</h2>
 <div class="card">
 <div class="row between"><p class="small muted">测试会调用与页面合并器相同的解析、合并和导出函数，不访问外部系统。</p><button class="btn primary" id="runTests">运行6项测试</button></div>
 <div id="testResults" class="stack" aria-live="polite"><p class="muted">尚未测试。点击右上方按钮。</p></div>
 </div>
 </section>
 <section>
-<h2>四、讲师与学员练习安排</h2>
+<h2>八、讲师与学员练习安排</h2>
 <div class="grid">
 <div class="card"><h3>讲师真实Codex演示</h3><ol><li>提前准备空白练习目录和3份模拟CSV。</li><li>依次复制上面的5轮指令，展示实际文件、测试执行与修复记录。</li><li>在Codex实际环境中验证输出，而不只展示它的说明。</li><li>真实操作失败时，使用本页可运行的浏览器工具作为备用说明。</li></ol><a class="btn" href="../samples/采购订单_模拟_1.csv" download>下载订单1</a> <a class="btn" href="../samples/采购订单_模拟_2.csv" download>下载订单2</a> <a class="btn" href="../samples/采购订单_模拟_3.csv" download>下载订单3</a></div>
 <div class="card"><h3>真实开发不应忽视</h3><ol><li>在独立工作目录创建工具，先读取而非覆盖业务文件。</li><li>注明字段规则和异常处理。相同订单号不同料号不应误判为重复。</li><li>让Codex展示执行过的测试以及失败和修复的证据。</li><li>未经安全审查，不可直接处理真实订单或接入ERP/MES。</li></ol><p class="small"><a href="https://developers.openai.com/learn/codex" target="_blank" rel="noopener">OpenAI官方Codex教学资源 ↗</a></p><p class="small"><a href="../tests/CODEX-LAB-ACCEPTANCE.md">本实验详细验收与讲师彩排说明</a></p></div>
