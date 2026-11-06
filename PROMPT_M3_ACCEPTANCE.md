@@ -25,13 +25,14 @@
 - **制造业实操**：设备点检记录小工具是本项目原创教学示例，不是吴恩达原课案例。页面内预制原型只使用虚构数据和浏览器本地存储，不连接 MES 或真实设备。
 - **实践方法**：补充需求具体化、分轮实现、功能增量、基于“操作/预期/实际/报错”的问题反馈、先 brainstorm 再选功能，以及运行测试和回归验证。
 
-## 自动检查（本次分支 CI 待执行）
+## 自动检查（GitHub Actions 已通过）
 
 - `node tests/verify.mjs`：原站结构、30案例、模拟资料。
 - `node tests/browser-smoke.mjs`：原站导航与CSV工具回归（JSDOM）。
 - `node tests/labs-smoke.mjs`：Research/Codex/Skill实验室回归（JSDOM）。
 - `node tests/m3-smoke.mjs`：M3导航/指标/项目单/进度；三要素与五要素来源标注、五个字段的动态提示词、两种提示方式、迭代/排错/创意指令；点检原型必填校验、正常/异常记录、异常筛选、特殊字符安全显示、旧记录迁移、存储与导出；MES表与原CSV一致。
 - `node tests/inline-course.mjs`：验证主站 Shadow DOM 内嵌 M3 同步显示五要素、两种开发方式与点检原型，确保 M1/M2、部门导航和原有案例不回归。
+- GitHub Actions 全量验收通过：[Run #149](https://github.com/LydiaDSP/chatgpt-enterprise-academy/actions/runs/42145816198)，包括原站、30个部门案例、内嵌课程、专项实验室、M3、Work/IE/IT 自动化测试。
 - 独立代码审查发现并修复：Prompt入口被M1收进旧版折叠区。已先复现失败再补修复及回归。
 
 ## 验证状态
