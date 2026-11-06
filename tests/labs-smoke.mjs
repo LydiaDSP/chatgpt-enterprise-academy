@@ -64,6 +64,14 @@ async function run(){
   const {dom,d,errors}=await mount('labs/codex.html','labs/codex.js');
   d.querySelector('[data-stage="4"]').click();
   assert.ok(d.querySelector('#stageTitle').textContent.includes('交付'));
+  assert.equal(d.querySelectorAll('#codexTaskGrid [data-task]').length,8,'Codex任务地图应包含8类开发任务');
+  assert.ok(d.querySelector('#codexBeginnerPrompt').textContent.includes('我不是专业软件开发人员'),'应提供面向非开发人员的通用开发指令');
+  d.querySelector('[data-task="workbench"]').click();
+  assert.ok(d.querySelector('#codexTaskTitle').textContent.includes('业务工作台'),'点击任务卡应切换详情');
+  assert.ok(d.querySelector('#codexTaskPrompt').textContent.includes('质量异常工作台'),'任务详情应提供可复制的业务开发指令');
+  assert.ok(d.querySelector('#codexTaskGrid [data-task="workbench"]').getAttribute('aria-pressed')==='true','当前任务卡应有选中状态');
+  assert.ok(d.querySelector('a[href="https://github.com/obra/superpowers"]'),'应提供Superpowers官方仓库');
+  assert.ok(d.querySelector('a[href="https://github.com/garrytan/gstack"]'),'应提供GStack官方仓库');
   d.querySelector('#loadSample').click();
   d.querySelector('#runMerge').click();
   assert.ok(d.querySelector('#mergeResults h3').textContent.includes('9行记录，2行有异常'));
