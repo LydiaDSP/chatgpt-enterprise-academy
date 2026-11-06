@@ -100,3 +100,19 @@ Codex新增验收至少包括：
 - [GStack GitHub](https://github.com/garrytan/gstack)
 
 > 本模块的目标是让普通业务人员学会提出可验收的开发任务，并借助AI完成小步迭代；不是要求所有学员成为专业软件工程师。
+
+
+## 7. pstack 辅助项目补充（2026-11-06）
+
+在“Superpowers / pstack / GStack”辅助项目区新增 pstack 卡片：
+- 说明 Lauren Tan（@poteto）创建的原版 pstack 位于 Cursor 官方插件仓库。
+- 介绍 poteto-mode 任务路由、工程原则、Playbooks、Skills、Agent协作和验证能力。
+- 提供 Codex 社区移植版 `michael-denyer/pstack-claude` 的仓库链接和官方 README 中的 Codex 安装命令。
+- 明确社区移植版不是 OpenAI 或 Lauren 发布的官方 Codex 插件；提醒检查插件权限、Hook 和文件访问范围。
+- 对比表更新为三个项目，并在桌面端采用三列布局，窄屏自动降列。
+
+新增浏览器验收：
+- Lauren 原版仓库链接存在。
+- Codex 社区移植版链接存在。
+- Codex marketplace / plugin add 命令存在。
+- 页面明确区分原版 pstack 与社区移植版。
