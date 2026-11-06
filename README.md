@@ -45,7 +45,7 @@
 
 ## 已实现的核心功能
 
-- **9个导航节点（含首页）**：桌面端/企业版、Prompt Lab、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI效率技巧、部门业务场景、学习资源。
+- **9个导航节点（含首页）**：桌面端/企业版、Prompt Lab、Skill/MCP/Plugin、Work/Computer Use、Codex AI Coding、AI效率技巧、部门业务场景、学习资源。最后一个模块的导航、页面标题与面包屑统一为“学习资源”。
 - **120分钟授课路线**：可从主页直接跳转课堂章节。
 - **Prompt Lab 2.0（M1 / M2 已合并）**：六节互动课，涵盖新手与高手、模型知识/联网搜索/Deep Research、上下文管理、三轮头脑风暴、避免迎合与Rubric客观评价、渐进式写作；支持讲师提示、课堂互动和本地学习进度。原有三种业务Prompt练习仍保留在可展开区。所有演示为本地模拟，不代表AI实时运行结果。
 - **M3数据分析**：MES模拟日报数据、CSV与指标复核仍在Prompt Lab M3；文件分析独立导航和重复面板已移除。
