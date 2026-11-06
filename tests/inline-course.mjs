@@ -107,9 +107,15 @@ try{
  m.getElementById('calculate').click();assert.match(m.getElementById('data-result').textContent,/5110/);
  m.querySelector('[data-step="build"]').click();await tick();
  assert.equal(w.location.hash,'#prompt-m3-build');assert.equal(m.querySelector('[data-panel="build"]').hidden,false);
- m.getElementById('device').value='DEMO';m.getElementById('symptom').value='offline';m.getElementById('add-record').click();
+ assert.equal(m.querySelectorAll('[data-build-mode]').length,2);
+ assert.ok(m.getElementById('goal')&&m.getElementById('input')&&m.getElementById('layout')&&m.getElementById('features')&&m.getElementById('output'));
+ assert.match(m.querySelector('[data-panel="build"]').textContent,/M3 原课/);
+ assert.match(m.querySelector('[data-panel="build"]').textContent,/扩展课程/);
+ m.querySelector('[data-build-mode="incremental"]').click();assert.match(m.getElementById('build-prompt').textContent,/渐进式方式开发/);
+ m.querySelector('[data-build-mode="single"]').click();assert.match(m.getElementById('build-prompt').textContent,/Goal｜目标/);
+ m.getElementById('device').value='DEMO';m.getElementById('inspection-date').value='2026-11-06';m.getElementById('inspector').value='测试人员';m.getElementById('check-result').value='正常';m.getElementById('symptom').value='';m.getElementById('add-record').click();
  assert.match(w.localStorage.getItem('academy.m3.v1'),/DEMO/);
- m.getElementById('run-tests').click();assert.match(m.getElementById('test-result').textContent,/6\/6/);
+ m.getElementById('run-tests').click();assert.match(m.getElementById('test-result').textContent,/9\/9/);
  m.querySelector('[data-copy="build-prompt"]').click();await tick();assert.match(w.copied,/Goal/);
  w.location.hash='#dept-QA';await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));
  for(const code of ['FIN','RD','QA','SCM','MFG','HR']){w.location.hash='#dept-'+code;await tick();assert.ok(d.getElementById('page-cases').classList.contains('active'));}
